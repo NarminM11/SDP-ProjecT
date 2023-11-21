@@ -1,24 +1,15 @@
 // import logo from './logo.svg';
 import "./App.css";
 // import Home from'./components/home'
-// import navbar from '../src/components/navbar';
 // import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import CardMember from "./components/member-card";
+import Footer from "./components/footer";
+import Navbar from  "./components/navbar";
+
 function App() {
   return (
     <div>
-      <nav className="navbar">
-        <div className="logo" />
-        <div className="home">Home</div>
-        <div className="aboutus">About us</div>
-        <div className="dictionary">Dictionary</div>
-        <div className="news">News</div>
-        <div className="contactus">Contact us</div>
-        <div className="az-en-ru">AZ</div>
-        <div className="signup">Sign up</div>
-        <div className="login">Log in</div>
-      </nav>
-
+      <Navbar  />
       {/* Welcome Section */}
       <section className="welcome-section">
         {/* <img className="welcome-board-slider" alt="Welcome board slider" src="welcome-board-slider-gallery.png" /> */}
@@ -86,34 +77,8 @@ function App() {
         </div>
       </section>
 
-      {/* Footer Section */}
-      <footer className="footer">
-        <div className="footer">
-          <img className="facebook" alt="Facebook" src="facebook.png" />
-          <img className="wikipedia" alt="Wikipedia" src="wikipedia.png" />
-          <img className="social" alt="Social" src="social.png" />
-          <img className="instagram" alt="Instagram" src="instagram.png" />
-          <p className="copyright">
-            © All rights reserved
-            <br />
-            2023 - Azərbaycan jest dili lüğəti
-          </p>
-          {/* <div className="collab">Collaborations</div> */}
-          <div className="profile">Profile</div>
-          <div className="copy">Copyright</div>
-          <div className="faq">F.A.Q</div>
-          <div className="blog">Blog</div>
-          <div className="news">News</div>
-          <div className="dictionary">Dictionary</div>
-          <div className="aboutus">About us</div>
-          <div className="home">Home</div>
-          <p className="lorem-ipsum-dolor">
-            Lorem ipsum dolor sit amet,
-            <br />
-            consectetur adipiscing.
-          </p>
-        </div>
-      </footer>
+     <Footer />
+
     </div>
   );
 }
