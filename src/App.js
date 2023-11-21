@@ -3,7 +3,7 @@ import "./App.css";
 // import Home from'./components/home'
 // import navbar from '../src/components/navbar';
 // import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-
+import CardMember from "./components/member-card";
 function App() {
   return (
     <div>
@@ -46,6 +46,23 @@ function App() {
         <img className="gallery2" alt="Gallery" src="https://media.licdn.com/dms/image/D4E03AQGEWTtc7szViQ/profile-displayphoto-shrink_800_800/0/1682504135792?e=2147483647&v=beta&t=4oH5VR3591dQVuHmWbv8hY2-R26eOeWb9doCxo19chk" />
         <img className="gallery3" alt="Gallery" src="https://media.licdn.com/dms/image/D4E03AQF_VXbJLHzC6Q/profile-displayphoto-shrink_800_800/0/1697469213341?e=2147483647&v=beta&t=HoBEValn76ZoX9UONveP81V5RRTVC_7SINduz5yxULU" />
 </div>
+      </section>
+      {/*Meet our team*/}
+      <section className="MeetourTeam">
+        <div>
+          <div className="meet">
+             <h1>Meet our Team</h1>
+        <p className="about-team">lorem</p></div>
+        <div className="card-container">
+        <CardMember info="nermin" text="men"
+         imgSrc="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960" 
+         fullName="Murshudova"
+         />
+        <CardMember info="nermin" />
+        <CardMember info="nermin" />
+        </div>
+        </div>
+
       </section>
       {/* SubscribeForBlog  */}
       <section className="SubscribeForBlog">

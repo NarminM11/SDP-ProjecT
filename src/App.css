@@ -115,12 +115,12 @@
 }
 
 .gallery1 {
-height: 200px;
-left: 104px;
-object-fit: cover;
-position: absolute;
-top: 900px;
-width: 200px;
+  height: 200px;
+  left: 104px;
+  object-fit: cover;
+  position: absolute;
+  top: 900px;
+  width: 200px;
 }
 .gallery2 {
   height: 450px;
@@ -128,7 +128,7 @@ width: 200px;
   position: absolute;
   /* top: 750px; */
   width: auto;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -418,4 +418,76 @@ width: 200px;
   line-height: normal;
   position: absolute;
   top: 53px;
+}
+
+.member-card {
+  position: relative;
+  width: 408px;
+  height: 480px;
+  background-color: #808080;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.member-card .brief-info {
+  position: absolute;
+  top: 323px;
+  left: 40px;
+  font-family: "Inter-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+.card-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.member-card .text-wrapper {
+  position: absolute;
+  top: 278px;
+  left: 167px;
+  font-family: "Inter-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.member-card .div {
+  position: absolute;
+  top: 230px;
+  left: 109px;
+  font-family: "Inter-Bold", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.member-card .profile-user {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  top: 50px;
+  left: 124px;
+  object-fit: cover;
+}
+
+.meet{
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 150px;
 }
