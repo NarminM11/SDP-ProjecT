@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import FAQ from './pages/faq';
 import reportWebVitals from './reportWebVitals';
+import DictionaryAlphabet from './pages/dictionaryAlphabet';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <FAQ />
+   <DictionaryAlphabet/>
   </React.StrictMode>
 );
 

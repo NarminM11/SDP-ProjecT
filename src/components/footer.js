@@ -1,4 +1,4 @@
-function footer(props){
+function Footer(props){
     return(
 <div className="footer">
   <img className="facebook" alt="Facebook" src="facebook.png" />
@@ -28,5 +28,5 @@ function footer(props){
     )
 }
 
-export default footer;
+export default Footer;
 

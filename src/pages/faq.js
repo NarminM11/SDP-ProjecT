@@ -2,13 +2,14 @@ import React from 'react';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import '../App.css';
-// import './style.css'; // Import your local style file
+import Layout from '../components/Layout/layout';
+
 
 export const FAQ = () => {
+  
   return (
-    <div>
-      <Navbar />
-      <div className='container'>
+ <Layout >
+ <div className='container'>
         <h1 className='heading'>Frequently Asked Questions</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut labore et dolore magna aliqua.
@@ -33,8 +34,9 @@ export const FAQ = () => {
           <img className="question-mark-5" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Icon-round-Question_mark.jpg/1200px-Icon-round-Question_mark.jpg" alt="Image" />
         </div>
       </div>
-      <Footer />
-    </div>
+      
+ </Layout>
+   
   );
 };
 
