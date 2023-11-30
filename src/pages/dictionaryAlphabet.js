@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../components/Layout/layout'
-import AlphabetTab from '../dictionary-alphabet/alphabetTab'
+import AlphabetTab from '../components/dictionary-alphabet/alphabetTab'
 
 const DictionaryAlphabet = () => {
   return (
