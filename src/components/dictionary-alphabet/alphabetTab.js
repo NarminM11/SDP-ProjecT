@@ -4,12 +4,30 @@ import { Button, Flex, Radio, Slider } from 'antd';
 import { Col, Row } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import '../dictionary-alphabet/alphabet.css'
 const { TabPane } = Tabs;
 
 
 const CustomCard = ({ title, content }) => (
-  <Card title={title} style={{ width: 300 }}>
-    <p>{content}</p>
+  <Card className='custom-card' title={title} style={{ width: 300 }}>
+    <p className="custom-card-text">{content}</p>
+  </Card>
+);
+
+
+
+const CustomCountriesCard = ({  content }) => (
+  <Card className='countries-custom-card' content={content} style={{ width: 300 }}>
+    <p  style={{ color: 'black' }}>{content}</p>
+  </Card>
+);
+
+const CustomAllCategoryCard = ({ content, subcontent }) => (
+  <Card className='custom-card custom-all-category-card' content={content} subcontent={subcontent} style={{ width: 300 }}>
+    <p className="cusom-card-title">{content}</p>
+    <p className="cusom-card-subtitle">{subcontent}</p>
+    <FontAwesomeIcon icon="fa-solid fa-bag-shopping" />
+
   </Card>
 );
 
@@ -19,76 +37,55 @@ const AlphabetTab = () => {
     const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
   return (
-<div>
+<div className='body-margin'>
    
      
      
-      <Tabs defaultActiveKey="1">
-        <TabPane tab="All Categories" key="1">
-        <div style={{ height: '300px', overflowY: 'auto', overflowX: 'hidden' }}>
+      <Tabs  style={{ justifyContent: 'center' }} defaultActiveKey="1">
+        <TabPane id='all-categories-tab' tab="All Categories" key="1">
+        <div style={{ height: '400px', overflowY: 'auto', overflowX: 'hidden' }}>
             <Flex gap="small" vertical>
               <Row gutter={[16, 16]}>
               <Col key={1} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Card  bordered={false}>
-             <p> Shopping </p><faCoffee></faCoffee>
-                </Card>
+                 <CustomAllCategoryCard content={'Shopping'} subcontent={'240 jest'} />
               </Col>
                 
-              <Col key={1} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Card  bordered={false}>
-             <p> Countries</p>
-                </Card>
+              <Col key={2} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
+              <CustomAllCategoryCard content={'Countries'} subcontent={'240 jest'} />
               </Col>
                 
-              <Col key={1} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Card  bordered={false}>
-             <p> Numbers</p>
-                </Card>
+              <Col key={3} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
+              <CustomAllCategoryCard content={'Numbers'} subcontent={'240 jest'} />
               </Col>
                 
 
-              <Col key={1} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Card  bordered={false}>
-             <p> Transportation</p>
-                </Card>
+              <Col key={4} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
+              <CustomAllCategoryCard content={'Transportation'} subcontent={'240 jest'} />
               </Col>
                 
 
-              <Col key={1} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Card  bordered={false}>
-             <p> Food</p>
-                </Card>
+              <Col key={5} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
+              <CustomAllCategoryCard content={'Food'} subcontent={'240 jest'} />
               </Col>
 
-              <Col key={1} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Card  bordered={false}>
-             <p> Technology</p>
-                </Card>
+              <Col key={5} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
+              <CustomAllCategoryCard content={'Technology'} subcontent={'240 jest'} />
               </Col>
 
-              <Col key={1} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Card  bordered={false}>
-             <p> Work</p>
-                </Card>
+              <Col key={6} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
+              <CustomAllCategoryCard content={'Work'} subcontent={'240 jest'} />
               </Col>
 
-              <Col key={1} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Card  bordered={false}>
-                <p> Animals</p>
-
-                </Card>
+              <Col key={7} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
+              <CustomAllCategoryCard content={'Animals'} subcontent={'240 jest'} />
               </Col>
 
-              <Col key={1} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Card  bordered={false}>
-             <p> Professions</p>
-                </Card>
+              <Col key={8} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
+              <CustomAllCategoryCard content={'Professions'} subcontent={'240 jest'} />
               </Col>
 
-              <Col key={1} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-              <Card  bordered={false}>
-             <p> Time</p>
-                </Card>
+              <Col key={9} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
+              <CustomAllCategoryCard content={'Time'} subcontent={'240 jest'} />
               </Col>
                 
               </Row>
@@ -97,13 +94,13 @@ const AlphabetTab = () => {
 
         </TabPane>
         
-        <TabPane tab="Alphabet" key="2">
-          <div style={{ height: '300px', overflowY: 'auto', overflowX: 'hidden' }}>
+        <TabPane id='alphabet-tab' tab="Alphabet" key="2">
+          <div style={{ height: '400px', overflowY: 'auto', overflowX: 'hidden' }}>
             <Flex gap="small" vertical>
               <Row gutter={[16, 16]}>
                 {alphabet.map((letter, index) => (
                   <Col key={index} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-                    <CustomCard content={letter} />
+                    <CustomCard  content={letter} />
                   </Col>
                 ))}
               </Row>
@@ -112,25 +109,60 @@ const AlphabetTab = () => {
         </TabPane>
        
 
-        <TabPane tab="Countries" key="3">
-        <Flex gap="small" vertical>
-            <Flex gap={gapSize !== 'customize' ? gapSize : customGapSize}>
-            <CustomCard  content="I" />
-                <CustomCard  content="G" />
-                <CustomCard  content="K" />
-                <CustomCard  content="L" />
-              
+        <TabPane id='countries-tab' tab="Countries" key="3">
+        <div style={{ height: '400px', overflowY: 'auto', overflowX: 'hidden' }}>
+            <Flex gap="small" vertical>
+              <Row justify="center"  gutter={[16, 16]}>
+              <Col  className='card-col' key={1} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 8 }}>
+            <CustomCountriesCard content={'word'} />
+              </Col>
+                
+              <Col  className='card-col' key={2} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 8 }}>
+              <CustomCountriesCard content={'word'} />
+              </Col>
+                
+              <Col  className='card-col' key={3} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 8 }}>
+              <CustomCountriesCard content={'word'} />
+              </Col>
+                
 
-             </Flex>
-        </Flex>
+              <Col className='card-col' key={4} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 8 }}>
+              <CustomCountriesCard content={'word'} />
+              </Col>
+                
+
+              <Col className='card-col' key={5} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 8 }}>
+              <CustomCountriesCard content={'word'} />
+              </Col>
+
+              <Col className='card-col' key={5} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 8 }}>
+              <CustomCountriesCard content={'word'} />
+              </Col>
+
+              <Col className='card-col' key={6} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 8 }}>
+              <CustomCountriesCard content={'word'} />
+              </Col>
+
+              <Col className='card-col' key={7} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 8 }}>
+              <CustomCountriesCard content={'word'} />
+              </Col>
+
+              <Col className='card-col' key={8} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 8 }}>
+              <CustomCountriesCard content={'word'} />
+              </Col>
+
+              <Col className='card-col' key={9} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 8 }}>
+              <CustomCountriesCard content={'word'} />
+              </Col>
+                
+              </Row>
+            </Flex>
+          </div>
+
         </TabPane>
 
         <TabPane tab="Numbers" key="4">
-        <CustomCard  content="M" />
-                <CustomCard  content="N" />
-                <CustomCard  content="O" />
-                <CustomCard  content="P" />
-                <CustomCard  content="S" />
+        <CustomCard  content="Content for Tab 6" />
 
 
         </TabPane>
