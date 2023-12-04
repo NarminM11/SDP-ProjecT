@@ -94,3 +94,9 @@
 .body-margin{
     margin:0px 50px;
 }
+
+:where(.css-dev-only-do-not-override-2q8sxy).ant-tabs .ant-tabs-tab-btn {
+    outline: none;
+    transition: all 0.3s;
+    font-size: 18px !important;
+}

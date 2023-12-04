@@ -4,11 +4,13 @@ import './index.css';
 import FAQ from './pages/faq';
 import reportWebVitals from './reportWebVitals';
 import DictionaryAlphabet from './pages/dictionaryAlphabet';
+import word from './components/unique-word/word';
+import UniquePage from './pages/uniquePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-   <DictionaryAlphabet/>
+   <UniquePage/>
   </React.StrictMode>
 );
 
