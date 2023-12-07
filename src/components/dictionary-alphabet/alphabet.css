@@ -102,54 +102,28 @@
 }
 
 
-
-/* 
-
 @media screen and (min-width: 991px) and (max-width: 1100px) {
-  
     .custom-card {
         padding: 8px !important;
         width: 140px !important;
     }
   }
-
-
-
   
 @media screen and (min-width: 1100px) and (max-width: 1300px) {
-    
-    body {
-      font-size: 16px;
-
-    
-    }
-
- 
     .custom-card {
         padding: 8px !important;
         width: 170px !important;
     }
   }
   
-   */
+  
 @media screen and (min-width: 570px) and (max-width: 690px) {
-    
-    body {
-      font-size: 16px;
-
-    
-    }
-
- 
     .custom-card {
         width: 160px !important;
     }
   }
-
   
 @media screen and (min-width: 760px) and (max-width: 990px) {
-    
-  
     .custom-card {
         width: 170px !important;
     }

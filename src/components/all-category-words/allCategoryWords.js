@@ -1,21 +1,16 @@
 import React from 'react'
-
-import { Tabs, Card} from 'antd'
-import { Button, Flex, Radio, Slider } from 'antd';
+import { Card} from 'antd'
+import { Flex } from 'antd';
 import { Col, Row } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-
 import '../dictionary-alphabet/alphabet.css'
-
-
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 const CustomCountriesCard = ({  content }) => (
     <Card className='countries-custom-card' content={content} style={{ width: 300 }}>
       <p  style={{ color: 'black' }}>{content}</p>
     </Card>
   );
-  
 
 const AllCategoryWords = () => {
   return (

@@ -1,22 +1,19 @@
 import React from 'react'
 import { Tabs, Card} from 'antd'
-import { Button, Flex, Radio, Slider } from 'antd';
+import { Flex } from 'antd';
 import { Col, Row } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import AllCategoryWords from '../all-category-words/allCategoryWords';
-import { Link } from 'react';
 import '../dictionary-alphabet/alphabet.css'
 const { TabPane } = Tabs;
 
-
+// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+// import AllCategoryWords from '../all-category-words/allCategoryWords';
+// import { Link } from 'react';
 const CustomCard = ({ title, content }) => (
   <Card className='custom-card' title={title} style={{ width: 300 }}>
     <p className="custom-card-text">{content}</p>
   </Card>
 );
-
-
 
 const CustomAllCategoryCard = ({ content, subcontent }) => (
   <Card className='custom-card custom-all-category-card' content={content} subcontent={subcontent} style={{ width: 200 }}>
@@ -27,10 +24,8 @@ const CustomAllCategoryCard = ({ content, subcontent }) => (
   </Card>
 );
 
-
 const AlphabetTab = () => {
-    const [gapSize, setGapSize] = React.useState('small');
-    const [customGapSize, setCustomGapSize] = React.useState(0);
+
     const alphabet = ['A', 'B', 'C', 'Ç', 'D', 'E', 'Ə', 'F', 'G', 'Ğ', 'H', 'X', 'I', 'İ', 'J', 'K', 'Q', 'L', 'M', 'N', 'O','Ö', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
   return (
@@ -42,12 +37,12 @@ const AlphabetTab = () => {
               <Row gutter={[16, 16]}>
 
               <Col key={1} xs={{ span: 12 }} sm={{ span: 8 }} md={{span: 8 }} lg={{ span: 4 }}>
-                <a href={<AllCategoryWords/>}>
+                <a href="">
                
                 </a>
-                <Link to={<AllCategoryWords/>}>
+                <a to="">
                 <CustomAllCategoryCard content={'Shopping'} subcontent={'240 jest'} />
-              </Link>
+              </a>
               </Col>
                
               <Col key={2} xs={{ span:12 }} sm={{ span: 8 }} md={{ span: 8 }} lg={{ span: 4 }}>
