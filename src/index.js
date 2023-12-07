@@ -2,12 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import FAQ from './pages/faq';
+import Profile from './pages/profile';
+import LogIn from './pages/login';
+
+
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <FAQ />
+    {/* <FAQ /> */}
+    {/* <Profile /> */}
+    <LogIn />
+
+
   </React.StrictMode>
 );
 
