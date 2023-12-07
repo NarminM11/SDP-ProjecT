@@ -10,7 +10,7 @@ import UniquePage from './pages/uniquePage';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-   <UniquePage/>
+   <DictionaryAlphabet/>
   </React.StrictMode>
 );
 
