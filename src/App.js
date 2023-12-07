@@ -1,13 +1,12 @@
-// import logo from './logo.svg';
 import "./App.css";
-// import Home from'./components/home'
-// import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import CardMember from "./components/member-card";
 import Footer from "./components/footer";
 import Navbar from  "./components/navbar";
 
 function App() {
   return (
+
+    
     <div>
       <Navbar  />
       {/* Welcome Section */}

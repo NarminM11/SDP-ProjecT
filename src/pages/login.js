@@ -11,11 +11,11 @@ export const LogIn = () => {
           <div className="form">
             <form>
               <label>Email address</label>
-              <input type="text" name="name" className="text-input" />
+              <input type="text" id="inputID" placeholder="Email address" className="text-input" />
             </form>
             <form>
               <label>Password</label>
-              <input type="text" name="name" className="text-input" />
+              <input type="text" id="inputID" placeholder="*****" className="text-input" />
             </form>
           </div>
 

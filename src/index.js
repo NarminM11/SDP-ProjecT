@@ -1,21 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import FAQ from './pages/faq';
-import Profile from './pages/profile';
+// import FAQ from './pages/faq';
+// import Profile from './pages/profile';
 import LogIn from './pages/login';
 
 
 import reportWebVitals from './reportWebVitals';
+// import DictionaryAlphabet from './pages/dictionaryAlphabet';
+// import word from './components/unique-word/word';
+// import UniquePage from './pages/uniquePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <FAQ /> */}
-    {/* <Profile /> */}
     <LogIn />
-
-
   </React.StrictMode>
 );
 
