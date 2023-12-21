@@ -3,8 +3,16 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 // // import FAQ from './pages/faq';
 // import Profile from './pages/profile';
+// <<<<<<< HEAD
 // import LogIn from './pages/login'
 // import reportWebVitals from './reportWebVitals';
+// =======
+// import LogIn from './pages/login';
+import SignUp from './pages/signUp';
+
+
+import reportWebVitals from './reportWebVitals';
+// >>>>>>> 84ae7079c5d8fc3024ebf47dbe9490a01064014e
 // import DictionaryAlphabet from './pages/dictionaryAlphabet';
 // import word from './components/unique-word/word';
 // import UniquePage from './pages/uniquePage';
@@ -12,7 +20,13 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+{/* <<<<<<< HEAD */}
     <App />
+=======
+    {/* <LogIn /> */}
+    <SignUp />
+
+{/* >>>>>>> 84ae7079c5d8fc3024ebf47dbe9490a01064014e */}
   </React.StrictMode>
 );
 
