@@ -65,13 +65,12 @@ const word = () => {
             cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
         >
            <div style={{display:"flex"}}>
-           <Button type="primary"><DownloadOutlined /> Download File </Button>
+           <Button type="primary" style={{ marginRight: "34px" }}><DownloadOutlined /> Download File </Button>
             <Space>
-            <Button type="default" icon={<HeartOutlined />} /> {/* Like (Heart) */}
             <Button type="default" icon={<SaveOutlined />} /> {/* Save */}
+            <Button type="default" icon={<HeartOutlined />} /> {/* Like (Heart) */}
            
         
-        <Button id='speed-dropdown' type="default" icon={<RocketOutlined />} /> {/* Speed */}
    
                   
         </Space>
@@ -85,7 +84,7 @@ const word = () => {
       </Col>
       <Col span={6}>
 
-       <p style={{textAlign:"center"}}><b >Relevant Words</b></p> 
+       <p style={{textAlign:"center", fontSize:"15px", color: "#2b2676"}}><b >Relevant Words</b></p> 
          <div style={{ height: '400px', overflowY: 'auto', overflowX: 'hidden' }}>
             <Flex gap="small" vertical>
               <Row justify="center"  gutter={[16, 16]}>

@@ -1,6 +1,6 @@
 
 #unique-word-def{
-    background-color: #808080;
+    background-color:  #9492ba;
     padding:20px !important;
 }
 
@@ -19,4 +19,46 @@
     background: transparent;
     border-bottom: none !important;
     border-radius: 8px 8px 0 0;
+}
+:where(.css-dev-only-do-not-override-2q8sxy).ant-btn-primary {
+    color: #fff;
+    background-color:  #2b2676;
+    box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
+}
+:where(.css-dev-only-do-not-override-2q8sxy).ant-card .ant-card-body {
+    padding: 26px;
+    color:white     !important;
+    border-radius: 0 0 8px 8px;
+}
+
+.countries-custom-card {
+    border: 2px solid #2b2676 !important;
+    background-color: white !important;
+    color: #2b2676 !important;
+    border-radius: 15px !important;
+    text-align: center;
+}
+
+ /* Add these styles to your CSS or style sheet */
+ ::-webkit-scrollbar {
+    width: 12px; /* Set the width of the scrollbar */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color:  #2b2676; /* Set the color of the scrollbar thumb */
+    border-radius: 6px; /* Set the border radius of the scrollbar thumb */
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Set the color of the scrollbar track */
+  }
+  :where(.css-dev-only-do-not-override-2q8sxy).ant-card-hoverable {
+    cursor: pointer;
+    transition: none !important;
+}
+
+
+:where(.css-dev-only-do-not-override-2q8sxy).ant-card-hoverable:hover {
+    border-color:none !important;
+    box-shadow: none   !important;
 }

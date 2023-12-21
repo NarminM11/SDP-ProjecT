@@ -7,7 +7,9 @@ const DictionaryAlphabet = () => {
   <Layout>
   <AlphabetTab></AlphabetTab>
   </Layout>
-      )
+
+  )
 }
 
 export default DictionaryAlphabet
+

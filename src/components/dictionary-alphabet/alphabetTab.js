@@ -101,7 +101,7 @@ const AlphabetTab = () => {
             <Flex gap="small" vertical>
               <Row gutter={[16, 16]}>
                 {alphabet.map((letter, index) => (
-                  <Col key={index} xs={{ span: 24 }} sm={{ span: 12 }} md={{ span:  8}} lg={{ span: 6 }}>
+                  <Col key={index} xs={{ span: 12 }} sm={{ span: 8 }} md={{ span:  8}} lg={{ span: 3 }}>
                     <a href="">
                     <CustomCard  content={letter} />
                     </a>
@@ -111,10 +111,42 @@ const AlphabetTab = () => {
             </Flex>
           </div>
         </TabPane>
+
+        <TabPane id='configurations-tab' tab="Configurations" key="3">
+          <div >
+            <Flex gap="small" vertical>
+              <Row gutter={[16, 16]}>
+                {alphabet.map((letter, index) => (
+                  <Col key={index} xs={{ span: 12 }} sm={{ span: 12 }} md={{ span:  8}} lg={{ span: 6 }}>
+                    <a href="">
+                    <CustomCard className="configurations-card" content="word" />
+                    </a>
+                  </Col>
+                ))}
+              </Row>
+            </Flex>
+          </div>
+        </TabPane>
+
+        <TabPane id='sentences-tab' tab="Sentences" key="4">
+          <div >
+            <Flex gap="small" vertical>
+              <Row gutter={[16, 16]}>
+                {alphabet.map((letter, index) => (
+                  <Col key={index} xs={{ span: 12 }} sm={{ span: 12 }} md={{ span:  8}} lg={{ span: 6 }}>
+                    <a href="">
+                    <CustomCard className="sentences-card" content="word"/>
+                    </a>
+                  </Col>
+                ))}
+              </Row>
+            </Flex>
+          </div>
+        </TabPane>
       </Tabs>
     </div>
+
   )
 }
 
 export default AlphabetTab;
-
