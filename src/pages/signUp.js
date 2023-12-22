@@ -35,15 +35,15 @@ const SignUp = () => {
           </div>
 
           <div className="checkbox-row">
-            <div className="check-remember">
+            
               <input type="checkbox" id="termsCheckbox" />
-              <label htmlFor="termsCheckbox">I agree to the Terms & Conditions!</label>
-            </div>
+              <p>I agree to the Terms & Conditions!</p>
+            
           </div>
         </div>
 
         <div className="login-button">
-          <button>Sign up</button>
+          <button style={{ backgroundColor: "#2B2676" }}>Sign up</button>
         </div>
 
         <p>Already a user? Log in</p>

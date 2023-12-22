@@ -1,22 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-// import FAQ from './pages/faq';
-// import Profile from './pages/profile';
-// import LogIn from './pages/login';
+import FAQ from './pages/faq';
+import Profile from './pages/profile';
+import LogIn from './pages/login';
 import SignUp from './pages/signUp';
-
+import App from './App'
 
 import reportWebVitals from './reportWebVitals';
-// import DictionaryAlphabet from './pages/dictionaryAlphabet';
+import DictionaryAlphabet from './pages/dictionaryAlphabet';
 // import word from './components/unique-word/word';
 // import UniquePage from './pages/uniquePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+{/* <App /> */}
     {/* <LogIn /> */}
-    <SignUp />
+    {/* <SignUp /> */}
+    <DictionaryAlphabet />
+    {/* <Profile /> */}
 
   </React.StrictMode>
 );

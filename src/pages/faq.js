@@ -1,74 +1,108 @@
-<<<<<<< HEAD
-import React from "react";
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
-import "../App.css";
+import React, { useState } from "react";
 import FaqElements from "../components/faqElements";
-=======
-import React from 'react';
-import '../App.css';
-import Layout from '../components/Layout/layout';
+import "../assets/faq.css";
+import { Col, Row } from 'antd';
+import { Collapse } from 'antd';
 
->>>>>>> cc0ad957d07b9fbe78f378883a9544eb28fe42cc
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
+const items = [
+  {
+    key: '1',
+    label: 'This is panel header 1',
+    children: <p>{text}</p>,
+  },
+  {
+    key: '2',
+    label: 'This is panel header 2',
+    children: <p>{text}</p>,
+  },
+  {
+    key: '3',
+    label: 'This is panel header 3',
+    children: <p>{text}</p>,
+  },
+  {
+    key: '4',
+    label: 'This is panel header 1',
+    children: <p>{text}</p>,
+  },
+  {
+    key: '5',
+    label: 'This is panel header 2',
+    children: <p>{text}</p>,
+  },
+  {
+    key: '6',
+    label: 'This is panel header 3',
+    children: <p>{text}</p>,
+  }
+];
 
-export const FAQ = () => {
-  
+const FAQ = () => {
+
+  const [activeKey, setActiveKey] = useState(null);
+
+  const handlePanelChange = (key) => {
+    setActiveKey(key === activeKey ? null : key);
+  };
   return (
-<<<<<<< HEAD
     <>
-    <Navbar />
-    <div className="head">
-      <h1>Frequently Asked Questions</h1>
-    </div>
-    <div className="faqPage">
 
-      <div className="elementsContainer">
-        <div className="questions">
-          <FaqElements question="Question1" answer="answer" />
-          <FaqElements question="Question1" answer="answer" />
-          <FaqElements question="Question1" answer="answer" />
-        </div>
-        <div className="questions">
-          <FaqElements question="Question1" answer="answer" />
-          <FaqElements question="Question1" answer="answer" />
-          <FaqElements question="Question1" answer="answer" />
-        </div>
-      </div>
-      
-      <Footer />
-    </div>
-    </>
-=======
- <Layout >
- <div className='container'>
-        <h1 className='heading'>Frequently Asked Questions</h1>
+    
+      <div className="head">
+        <h1 className="title">Frequently Asked Questions</h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut labore et dolore magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut
+          labore et dolore magna aliqua.
         </p>
-        <div className="frame">
-          <p className="text-wrapper">Lorem ipsum dolor sit amet</p>
-          <p className="div">Lorem ipsum dolor sit amet</p>
-          <p className="p">Lorem ipsum dolor sit amet</p>
-          <p className="text-wrapper-2">Lorem ipsum dolor sit amet</p>
-          <p className="text-wrapper-3">Lorem ipsum dolor sit amet</p>
-          <p className="text-wrapper-4">Lorem ipsum dolor sit amet</p>
-          <p className="lorem-ipsum-dolor">
-            Lorem ipsum dolor sit amet, consectetur elit, <br />sed do eiusmod tempor&nbsp;&nbsp;ut labore et dolore magna
-            aliqua.
-          </p>
-          {/* Include the rest of your content */}
-          <img className="question-mark" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Icon-round-Question_mark.jpg/1200px-Icon-round-Question_mark.jpg" alt="Question Mark" />
-          <img className="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Icon-round-Question_mark.jpg/1200px-Icon-round-Question_mark.jpg" alt="Question Mark" />
-          <img className="question-mark-2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Icon-round-Question_mark.jpg/1200px-Icon-round-Question_mark.jpg" alt="Question Mark" />
-          <img className="question-mark-3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Icon-round-Question_mark.jpg/1200px-Icon-round-Question_mark.jpg" alt="Question Mark" />
-          <img className="question-mark-4" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Icon-round-Question_mark.jpg/1200px-Icon-round-Question_mark.jpg" alt="Question Mark" />
-          <img className="question-mark-5" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Icon-round-Question_mark.jpg/1200px-Icon-round-Question_mark.jpg" alt="Image" />
+      </div>
+
+
+        <div className="container">
+        <div className="faqPage">
+          <div className="elementsContainer">
+            <Row>
+              {/* Left side with the first three FAQ items */}
+              <Col span={12}>
+                <Collapse
+                  accordion
+                  activeKey={activeKey}
+                  onChange={(key) => handlePanelChange(key)}
+                >
+                  {items.slice(0, 3).map(item => (
+                    <Collapse.Panel header={item.label} key={item.key}>
+                      {item.children}
+                    </Collapse.Panel>
+                  ))}
+                </Collapse>
+              </Col>
+
+              {/* Right side with the remaining three FAQ items */}
+              <Col span={12}>
+                <Collapse
+                  accordion
+                  activeKey={activeKey}
+                  onChange={(key) => handlePanelChange(key)}
+                >
+                  {items.slice(3).map(item => (
+                    <Collapse.Panel header={item.label} key={item.key}>
+                      {item.children}
+                    </Collapse.Panel>
+                  ))}
+                </Collapse>
+              </Col>
+            </Row>
+          </div>
         </div>
       </div>
-      
- </Layout>
-   
->>>>>>> cc0ad957d07b9fbe78f378883a9544eb28fe42cc
+
+
+     
+    </>
   );
 };
 

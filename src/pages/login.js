@@ -11,34 +11,34 @@ export const LogIn = () => {
           <div className="form">
             <form>
               <label>Email address</label>
-              <input type="text" id="inputID" placeholder="Email address" className="text-input" />
+              <input type="text" id="inputEmail" placeholder="Email address" className="text-input" />
             </form>
             <form>
               <label>Password</label>
-              <input type="text" id="inputID" placeholder="*****" className="text-input" />
+              <input type="password" id="inputPassword" placeholder="*****" className="text-input" />
             </form>
           </div>
 
           <div className="checkbox-row">
             <div className="check-remember">
-              <input type="checkbox" />
-              <p>Remember me</p>
+              <input type="checkbox" id="rememberCheckbox" />
+              <label htmlFor="rememberCheckbox">Remember me</label>
             </div>
             <p>Forgot Password</p>
           </div>
           <p>OR</p>
 
           <div className="signIn-button">
-            <button>Sign in with Google</button>
+            <button style={{ backgroundColor: "#f0f0f0" }}> Sign in with Google</button>
             <button>Sign in with Facebook</button>
           </div>
-
         </div>
-        <div className="login-button">
-            <button>Log in</button>
-          </div>
-        <p>New User? Create an account</p>
 
+        <div className="login-button">
+          <button style={{ backgroundColor: "#2B2676" }}>Log in</button>
+        </div>
+
+        <p>New User? Create an account</p>
       </div>
     </div>
   );
