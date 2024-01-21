@@ -1,77 +1,80 @@
-body {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+ .login-container {
+  width: 100%;
   height: 100vh;
-  background-color: #f0f0f0;
-}
-
-.container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
 }
 
-.frame {
-  border: 2px solid #000000;
-  border-radius: 16px;
-  width: 700px;
+.login-frame {
+  width: 80%;
+  max-width: 600px;
   padding: 20px;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 650px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 10px #2b2676;
 }
 
-h2 {
-  padding: 15px;
-  margin-top: 5px;
+.row-login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.login-form-container {
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.form-container {
-  width: 90%;
-}
-
-.form {
+.login-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  width: 100%;
 }
 
-label {
-  margin-bottom: 15px;
+.login-heading {
+  color: #2b2676;
+  font-size: 32px;
+  font-weight: 400px;
+  word-wrap: break-word;
+  margin-bottom: 40px;
 }
 
-.text-input {
-  height: 40px;
-  width: 80%;
+.login-text-input {
+  padding: 8px;
+  width: 100%;
   border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  border: 1px solid #2b2676;
 }
 
 .signIn-button button,
 .login-button button {
-  width: 80%;
+  width: 100%;
+  height: 40px;
   padding: 10px;
   margin-bottom: 15px;
-  background-color: #3498db;
-  color: #2B2676;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  height: 40px;
-}
-.login-button button {
-  color: white;
 }
 
 .login-button {
-  margin-top: 45px;
-  width: 50%;
+  width: 30%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
 }
 
 .signIn-button button:hover,
@@ -79,25 +82,42 @@ label {
   background-color: #2980b9;
 }
 
-.checkbox-row {
+.login-checkbox-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 90%;
 }
 
-.check-remember {
+.login-check-remember {
   display: flex;
   align-items: center;
-  margin-left: 55px;
+  margin-left: 15px;
 }
-
-p {
-  text-decoration: underline;
-}
-
-#inputEmail::placeholder,
-#inputPassword::placeholder {
+.rememberCheckbox {
+  color: #2b2676;
   font-size: 16px;
-  text-indent: 20px;
+  font-weight: 400px;
+  word-wrap: break-word;
+}
+
+hr {
+  border: 1px solid #ccc;
+  width: 70%;
+  margin: 10px 0;
+}
+
+.forgot-password {
+  color: #2b2676;
+  font-size: 16px;
+  font-weight: 400px;
+  word-wrap: break-word;
+} 
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  text-align: center;
 }
