@@ -15,8 +15,7 @@ import axios from "axios";
 import "../assets/profile.css";
 
 const Profile = () => {
-  const regex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&()_+{}\[\]:;<>,.?~\\-]).{8,}$/;
+  const regex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/;
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [personalInfo, setPersonalInfo] = useState({
@@ -35,20 +34,39 @@ const Profile = () => {
   const [favoriteWords, setFavoriteWords] = useState([]);
   const [favoriteSentences, setFavoriteSentences] = useState([]);
   const [fileInputRef] = useState(createRef());
+  const [accessTokenValue, setAccessTokenValue] = useState("");
+  const [incorrectOldPassword, setIncorrectOldPassword] = useState(false);
+
+  const [profileImage, setProfileImage] = useState(null);
+  const [fileInput, setFileInput] = useState(null);
+
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   console.log("Selected File:", file);
+  //   setProfileImage(file);  
+  //   setSelectedFile(file);  
+  // };
+  
+
+
+  useEffect(() => {
+    console.log("Fetching personal info...");
+    fetchPersonalInfo();
+  }, []);
+
+
 
   const fetchPersonalInfo = async () => {
-    const token = localStorage.getItem("user-info");
-
-    const tokenObject = JSON.parse(token);
-    const accessTokenValue = tokenObject.access_token;
-    console.log(accessTokenValue);
-
-    if (!token) {
-      console.error("User token not found in localStorage");
-      return;
-    }
-
     try {
+      const token = localStorage.getItem("user-info");
+      const tokenObject = JSON.parse(token);
+      const accessTokenValue = tokenObject.access_token;
+
+      if (!token) {
+        console.error("User token not found in localStorage");
+        throw new Error("User token not found");
+      }
+
       const response = await axios.get(
         "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/info",
         {
@@ -65,19 +83,28 @@ const Profile = () => {
         username: response.data.user_info.user_username,
         emailAddress: response.data.user_info.user_email,
       });
+
+      return response.data; // Resolve the promise with the response data
     } catch (error) {
       console.error(
         "Error fetching personal info:",
-        error.response.data.message
+        error.response?.data.message || error.message
       );
-      // alert(`${error.response.data.message}`);
-
-      if (error.response && error.response.status === 422) {
-        console.error("Unprocessable Entity: ", error.response.data);
-      } else {
-      }
+      // Reject the promise with the error message
+      throw error;
     }
   };
+
+  useEffect(() => {
+    console.log("Fetching personal info...");
+    fetchPersonalInfo()
+      .then((data) => {
+        console.log("Data:", data);
+     })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
 
   useEffect(() => {
     console.log("Fetching personal info...");
@@ -104,136 +131,46 @@ const Profile = () => {
         });
 
         // Retrieve and set the cached photo from local storage
-        const cachedPhoto = localStorage.getItem("profilePhoto");
-        if (cachedPhoto) {
-          setSelectedFile(
-            new File([new Blob([cachedPhoto])], "profilePhoto.png", {
-              type: "image/png",
-            })
-          );
-        }
+      
       } catch (error) {
-        console.error("Error fetching personal info:", error.response);
+        // console.error("Error fetching personal info:", error.response);
         if (error.response && error.response.status === 422) {
           // Handle validation errors if needed
-        } else {
-          // Handle other errors
-        }
+        } 
       }
     };
 
     fetchPersonalInfo();
   }, []);
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
-  };
 
-  useEffect(() => {
-    // Call handleUpload when the selectedFile state changes
-    if (selectedFile) {
-      handleUpload();
-    }
-  }, [selectedFile]);
 
-  const handleUpload = async () => {
-    if (!selectedFile) {
-      console.error("No file selected for upload");
-      return;
-    }
-  
-    const token = localStorage.getItem("user-info");
-    const tokenObject = JSON.parse(token);
-    const accessTokenValue = tokenObject.access_token;
-  
-    const formData = new FormData();
-    formData.append("user_img", selectedFile);
-  
-    try {
-      const response = await axios.put(
-        "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/update_img",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${accessTokenValue}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-  
-      console.log("Axios Response:", response);
-  
-      // Save the uploaded file information in local storage
-      const imageUrl = response.data.url;
-      localStorage.setItem("profilePhoto", imageUrl);
-      console.log("File uploaded successfully. Image URL:", imageUrl);
-  
-      // Update the UI to reflect the changes
-      setSelectedFile(null); // Reset selectedFile after successful upload
-  
-      // Send the photo URL to the API
-      await axios.post(
-        "https://your-api-url/upload-photo-url",
-        { photoUrl: imageUrl },
-        {
-          headers: {
-            Authorization: `Bearer ${accessTokenValue}`,
-          },
-        }
-      );
-  
-      console.log("Photo URL sent to API successfully");
-    } catch (error) {
-      console.error("Error uploading file:", error);
-      // Handle error
-    }
-  };
-  
-  
 
-  useEffect(() => {
-    // Load photo from local storage
-    const cachedPhotoUrl = localStorage.getItem("profilePhoto");
-  
-    console.log("Cached Photo URL:", cachedPhotoUrl);
-  
-    if (cachedPhotoUrl) {
-      // Create a File object from the cached photo URL
-      const fileName = "profilePhoto.png";
-      fetch(cachedPhotoUrl)
-        .then((response) => response.blob())
-        .then((blob) => {
-          const file = new File([blob], fileName, { type: "image/png" });
-          setSelectedFile(file);
-        })
-        .catch((error) => {
-          console.error("Error creating File object:", error);
-        });
-    }
-  }, []);
-  
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+
+
+  // const handleEmailChange = (event) => {
+  //   setEmail(event.target.value);
+  // };
 
   const handleCurrentPasswordChange = (event) => {
     setCurrentPassword(event.target.value);
+    setIncorrectOldPassword(false);
   };
 
   const validateNewPassword = (value) => {
-    if (!regex.test(value)) {
-      setNewPasswordError(
-        "Şifrədə ən azı bir kiçik hərf, bir böyük hərf, bir xüsusi simvol və ən azı 8 simvol uzunluğunda olmalıdır"
-      );
-      console.log("password sehvdi");
-      return false;
-    } else {
-      setNewPasswordError("");
-      console.log("password duzdu");
-
-      return true;
-    }
+    return new Promise((resolve, reject) => {
+      if (!regex.test(value)) {
+        setNewPasswordError(
+          "Şifrədə ən azı bir kiçik hərf, bir böyük hərf, bir xüsusi simvol və ən azı 8 simvol uzunluğunda olmalıdır"
+        );
+        console.log("password sehvdi");
+        return false;
+      } else {
+        setNewPasswordError("");
+        console.log("password duzdu");
+        resolve();
+      }
+    });
   };
 
   const handleNewPasswordChange = (event) => {
@@ -256,113 +193,56 @@ const Profile = () => {
     setNewPasswordError("");
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (
-      !validateNewPassword(newPassword) ||
-      !validateConfirmPassword(confirmPassword)
-    ) {
-      return;
-    }
-
-    const token = localStorage.getItem("user-info");
-    const tokenObject = JSON.parse(token);
-    const accessTokenValue = tokenObject.access_token;
-
+  const handleSubmit = async (values) => {
     try {
-      const response = await axios.put(
+      const { currentPass, newPassword, confirmPassword } = values;
+
+      if (
+        !validateNewPassword(newPassword) ||
+        !validateConfirmPassword(confirmPassword)
+      ) {
+        return;
+      }
+
+      const token = localStorage.getItem("user-info");
+      const tokenObject = JSON.parse(token);
+      const accessTokenValue = tokenObject.access_token;
+
+      const response = await axios.post(
         "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/changePassword",
         {
-          old_password: currentPassword,
+          old_password: currentPass, // Use values.currentPass or values.old_password if needed
           new_password: newPassword,
           confirm_new_password: confirmPassword,
         },
         {
           headers: {
             Authorization: `Bearer ${accessTokenValue}`,
+            "Content-Type": "application/json",
           },
         }
       );
 
       console.log("Request:", response.config);
       console.log("Response:", response.data);
+
+      // If the password change is successful, redirect to the login page or show a success message
+      // You may also want to clear the password fields here
+      message.success("Password changed successfully");
     } catch (error) {
-      console.error("Error updating profile:", error);
-      message.error("Failed to update profile. Please try again.");
-    }
-
-    setCurrentPassword("");
-    setNewPassword("");
-    setNewPasswordError("");
-    message.success("Profile updated successfully");
-  };
-
-  // const handleChange = () => {
-  //   const inputElement = document.createElement("input");
-  //   inputElement.type = "file";
-  //   inputElement.style.display = "none";
-
-  //   inputElement.addEventListener("change", (event) => {
-  //     handleUpload(event);
-  //   });
-
-  //   document.body.appendChild(inputElement);
-  //   inputElement.click();
-  //   document.body.removeChild(inputElement);
-  // };
-
-  // const handleRemove = async () => {
-  //   // Existing code...
-
-  //   try {
-  //     // Add logic to send a request to remove the photo from the server
-  //     await axios.put(
-  //       "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/remove_img",
-  //       {}, // Pass an empty object or appropriate data for removal
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${accessTokenValue}`,
-  //         },
-  //       }
-  //     );
-
-  //     console.log("User image removed successfully");
-  //     // Handle any additional logic or UI changes after image removal
-
-  //     // Remove the profile photo from local storage
-  //     setSelectedFile(null);
-  //     localStorage.removeItem("profilePhoto");
-  //   } catch (error) {
-  //     console.error("Error removing user image:", error);
-  //     // Handle error
-  //   }
-  // };
-
-
-  const handleRemove = async () => {
-    const token = localStorage.getItem("user-info");
-    const tokenObject = JSON.parse(token);
-    const accessTokenValue = tokenObject.access_token;
-
-    try {
-      await axios.put(
-        "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/remove_img",
-        {}, // Pass an empty object or appropriate data for removal
-        {
-          headers: {
-            Authorization: `Bearer ${accessTokenValue}`,
-          },
-        }
-      );
-
-      console.log("User image removed successfully");
-      // Handle any additional logic or UI changes after image removal
-    } catch (error) {
-      console.error("Error removing user image:", error);
-      // Handle error
+      console.error("Error updating password:", error);
+      if (error.response && error.response.status === 401) {
+        // Incorrect old password
+        setIncorrectOldPassword(true);
+        console.log("Old password is incorrect");
+      } else {
+        // Handle other errors
+        message.error("Failed to update password. Please try again.");
+      }
     }
   };
+ 
+  
 
   // Fetch favorite words and sentences
   const fetchFavoriteWords = async () => {
@@ -403,9 +283,82 @@ const Profile = () => {
     fetchFavoriteWords();
   }, []);
 
-  const handleFileInputChange = () => {
-    fileInputRef.current.click();
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+  
+      const response = await axios.post(
+        'https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image',
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessTokenValue}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+  
+      console.log('Image Upload Response:', response.data);
+      // Update the profile image in the state or trigger a re-fetch of user data
+      // based on your application's structure
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
   };
+
+  const handleChangeProfileImage = async () => {
+    if (!selectedFile) {
+      return; // No file selected
+    }
+  
+    try {
+      const formData = new FormData();
+      formData.append('image', selectedFile);
+  
+      const response = await axios.post(
+        'https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image',
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessTokenValue}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+  
+      console.log('Change Image Response:', response.data);
+      // Update the profile image in the state or trigger a re-fetch of user data
+      // based on your application's structure
+    } catch (error) {
+      console.error('Error changing image:', error);
+    }
+  };
+  
+  // const handleRemoveProfileImage = async () => {
+  //   try {
+  //     const response = await axios.delete(
+  //       'https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/remove-image',
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessTokenValue}`,
+  //         },
+  //       }
+  //     );
+  
+  //     console.log('Remove Image Response:', response.data);
+  //     // Update the profile image in the state or trigger a re-fetch of user data
+  //     // based on your application's structure
+  //   } catch (error) {
+  //     console.error('Error removing image:', error);
+  //   }
+  // };
+
+  
 
   return (
     // <Layout>
@@ -431,10 +384,6 @@ const Profile = () => {
               backgroundImage: selectedFile
                 ? `url("${URL.createObjectURL(selectedFile)}")`
                 : 'url("https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg")',
-              backgroundColor: selectedFile
-                ? ""
-                : "/* default background color */",
-              backgroundSize: selectedFile ? "cover" : "",
             }}
           />
 
@@ -444,39 +393,25 @@ const Profile = () => {
         <Col>
           <div className="profile-photo-buttons">
             <Row>
-              {!selectedFile && (
-                <label className="button-profile-photo">
-                  Şəkil yükləyin{" "}
-                  <input
-                    type="file"
-                    style={{ display: "none" }}
-                    onChange={handleFileChange}
-                  />
-                </label>
-              )}
-              {selectedFile && (
-                <button
-                  className="change-button"
-                  onClick={handleFileInputChange}
-                >
-                  Şəkili dəyişdir
-                </button>
-              )}
-              <input
-                type="file"
-                style={{ display: "none" }}
-                ref={fileInputRef}
-                onChange={handleFileChange}
-              />
-            </Row>
-            {selectedFile && (
-              <Row>
-                <button className="button-profile-photo" 
-                onClick={handleRemove}>
-                  Şəkili silin
-                </button>
+            <label className="button-profile-photo">
+  Şəkil yükləyin
+  <input
+    type="file"
+    style={{ display: 'none' }}
+    onChange={handleFileChange}
+  />
+</label>
+<button className="change-button" onClick={handleChangeProfileImage}>
+  Şəkili dəyişdir
+</button>
+{/* <Button
+  className="button-profile-photo"
+  // onClick={handleRemoveProfileImage}
+>
+  Remove Profile Image
+</Button> */}
+
               </Row>
-            )}
           </div>
         </Col>
 
@@ -662,12 +597,9 @@ const Profile = () => {
                     <FontAwesomeIcon icon={faLock} /> Şifrəni dəyişmək
                   </p>{" "}
                   <Row>
-                  <Col xs={12} sm={12} md={16} lg={18} xl={18}>
                     <Form.Item
                       name="currentPass"
                       label="Köhnə şifrə"
-                      style={{ width: "100%" }}
-
                       rules={[
                         {
                           required: true,
@@ -676,29 +608,30 @@ const Profile = () => {
                       ]}
                     >
                       <Input.Password
-                        className="profile-input edit-input"
-                        style={{ width: "100%"}}
+                        className={`profile-input edit-input ${
+                          incorrectOldPassword ? "error-input" : ""
+                        }`}
+                        style={{ width: "100%", marginLeft: "10px" }}
                         placeholder="Köhnə şifrəni daxil edin!"
                         value={currentPassword}
                         onChange={handleCurrentPasswordChange}
                       />
                     </Form.Item>
-                    </Col>
+                    {incorrectOldPassword && (
+                      <div className="error-message">
+                        {incorrectOldPassword}
+                      </div>
+                    )}
                   </Row>
                 </div>
 
                 <div className="newPass" style={{ marginBottom: "20px" }}>
-                <Row>
-                  <Col xs={12} sm={12} md={16} lg={18} xl={18}>
                   <Form.Item
                     name="newPassword"
                     label="Yeni şifrə"
-                    style={{ width: "100%" }}
                     hasFeedback
-                    validateStatus={
-                      newPasswordError || confirmPasswordError ? "error" : ""
-                    }
-                    help={newPasswordError || confirmPasswordError}
+                    validateStatus={newPasswordError ? "error" : ""}
+                    help={newPasswordError}
                     rules={[
                       {
                         required: true,
@@ -706,30 +639,19 @@ const Profile = () => {
                       },
                       { validator: (_, value) => validateNewPassword(value) },
                     ]}
+                    dependencies={["newPassword", "confirmPassword"]}
                   >
                     <Input.Password
                       className="profile-input edit-input"
-                      style={{ width: "97%", marginLeft:"12px"}}
+                      style={{ width: "58%", marginLeft: "25px" }}
                       placeholder="Yeni şifrəni daxil edin!"
-                      value={newPassword}
                       onChange={handleNewPasswordChange}
-                      onBlur={() => {
-                        validateNewPassword(newPassword);
-                        validateConfirmPassword(confirmPassword);
-                      }}
                     />
                   </Form.Item>
-                  </Col>
-                  </Row>
-                  </div>
 
-                  <Row>
-                  <Col xs={12} sm={12} md={16} lg={18} xl={18}>
                   <Form.Item
                     name="confirmPassword"
                     label="Təsdiq şifrə"
-                    style={{ width: "100%" }}
-
                     hasFeedback
                     validateStatus={confirmPasswordError ? "error" : ""}
                     help={confirmPasswordError}
@@ -755,9 +677,8 @@ const Profile = () => {
                   >
                     <Input.Password
                       className="profile-input edit-input"
-                      style={{ width: "100%" }}
+                      style={{ width: "61%", marginLeft: "10px" }}
                       placeholder="Təsdiq şifrəni daxil edin"
-                      value={confirmPassword}
                       onChange={(e) => {
                         setConfirmPassword(e.target.value);
                         validateConfirmPassword(e.target.value);
@@ -765,8 +686,8 @@ const Profile = () => {
                       onBlur={() => validateConfirmPassword(confirmPassword)}
                     />
                   </Form.Item>
-                  </Col>
-                  </Row>
+                </div>
+
                 <Row>
                   <div className="profile-button">
                     <Space>
@@ -817,10 +738,10 @@ const Profile = () => {
         (!favoriteSentences || favoriteSentences.length === 0) ? (
           <Col
             className="first-frame empty-favorites"
-            xs={{ span: 24, offset: 0 }}
-            md={{ span: 24, offset: 0 }}
-            lg={{ span: 24, offset: 0 }}
-            xl={{ span: 12, offset: 0 }}
+            xs={24}
+            md={24}
+            lg={24}
+            xl={14}
           >
             <p className="edit-details">
               <FontAwesomeIcon icon={farHeart} /> My Favorite Words & Sentences
@@ -835,10 +756,10 @@ const Profile = () => {
             {favoriteWords && favoriteWords.length > 0 && (
               <Col
                 className="first-frame"
-                xs={{ span: 24, offset: 0 }}
-                md={{ span: 24, offset: 0 }}
-                lg={{ span: 24, offset: 0 }}
-                xl={{ span: 12, offset: 0 }}
+                xs={24}
+                md={24}
+                lg={12}
+                xl={14}
               ></Col>
             )}
 
@@ -846,10 +767,10 @@ const Profile = () => {
             {favoriteSentences && favoriteSentences.length > 0 && (
               <Col
                 className="second-frame"
-                xs={{ span: 24, offset: 0 }}
-                md={{ span: 24, offset: 0 }}
-                lg={{ span: 24, offset: 0 }}
-                xl={{ span: 12, offset: 0 }}
+                xs={24}
+                md={24}
+                lg={12}
+                xl={14}
               ></Col>
             )}
           </React.Fragment>
@@ -862,3 +783,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
