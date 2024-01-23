@@ -54,7 +54,6 @@ const LogIn = () => {
         let result = await response.json();
 
         if (rememberMe) {
-          // Store user credentials securely
           localStorage.setItem(
             "user-credentials",
             JSON.stringify({ username, password })

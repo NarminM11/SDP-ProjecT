@@ -5,6 +5,8 @@ import FAQ from './pages/faq';
 import Profile from './pages/profile';
 import LogIn from './pages/login';
 import App from './App';
+import Testing from '../src/pages/testing';
+
 // // import FAQ from './pages/faq';
 // import Profile from './pages/profile';
 // <<<<<<< HEAD
@@ -28,6 +30,8 @@ root.render(
     {/* <SignUp /> */}
     {/* <LogIn /> */}
     <Profile />
+    {/* <Testing /> */}
+
   </React.StrictMode>
 );
 
