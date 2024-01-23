@@ -39,15 +39,14 @@ const Profile = () => {
 
   const [profileImage, setProfileImage] = useState(null);
   const [fileInput, setFileInput] = useState(null);
+  const [isImageChanged, setIsImageChanged] = useState(false);
 
   // const handleFileChange = (event) => {
   //   const file = event.target.files[0];
   //   console.log("Selected File:", file);
-  //   setProfileImage(file);  
-  //   setSelectedFile(file);  
+  //   setProfileImage(file);
+  //   setSelectedFile(file);
   // };
-  
-
 
   useEffect(() => {
     console.log("Fetching personal info...");
@@ -59,14 +58,14 @@ const Profile = () => {
       const token = localStorage.getItem("user-info");
       const tokenObject = JSON.parse(token);
       const accessTokenValue = tokenObject.access_token;
-
+  
       setAccessTokenValue(accessTokenValue);
-
+  
       if (!token) {
         console.error("User token not found in localStorage");
         throw new Error("User token not found");
       }
-
+  
       const response = await axios.get(
         "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/info",
         {
@@ -75,16 +74,18 @@ const Profile = () => {
           },
         }
       );
-      
-
+  
       console.log("Response:", response);
-
+  
       setPersonalInfo({
         fullName: response.data.user_info.user_name,
         username: response.data.user_info.user_username,
         emailAddress: response.data.user_info.user_email,
       });
-
+  
+      // Set the user's profile image
+      setProfileImage(response.data.user_info.user_img);
+  
       return response.data; // Resolve the promise with the response data
     } catch (error) {
       console.error(
@@ -95,13 +96,14 @@ const Profile = () => {
       throw error;
     }
   };
+  
 
   useEffect(() => {
     console.log("Fetching personal info...");
     fetchPersonalInfo()
       .then((data) => {
         console.log("Data:", data);
-     })
+      })
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -129,7 +131,7 @@ const Profile = () => {
           username: response.data.user_info.user_username,
           emailAddress: response.data.user_info.user_email,
         });
-  
+
         // Retrieve and set the cached photo from local storage
       } catch (error) {
         if (error.response && error.response.status === 422) {
@@ -139,11 +141,9 @@ const Profile = () => {
         }
       }
     };
-  
-    fetchPersonalInfo();
-  }, []); 
-  
 
+    fetchPersonalInfo();
+  }, []);
 
   // const handleEmailChange = (event) => {
   //   setEmail(event.target.value);
@@ -215,7 +215,7 @@ const Profile = () => {
         {
           headers: {
             Authorization: `Bearer ${accessTokenValue}`,
-            'Content-Type': 'application/json; charset=utf-8',
+            "Content-Type": "application/json; charset=utf-8",
           },
         }
       );
@@ -234,8 +234,6 @@ const Profile = () => {
       }
     }
   };
- 
-  
 
   //favorite words and sentences
   const fetchFavoriteWords = async () => {
@@ -276,94 +274,76 @@ const Profile = () => {
     fetchFavoriteWords();
   }, []);
 
-
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
-  
+    setIsImageChanged(true);
+  };
+
+  const handleSaveImage = async () => {
+    if (!isImageChanged || !selectedFile) {
+      return;
+    }
+
     try {
       const formData = new FormData();
-      formData.append('image', file);
-  
+      formData.append("image", selectedFile);
+
       const response = await axios.post(
-        'https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image',
+        "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image",
         formData,
         {
           headers: {
             Authorization: `Bearer ${accessTokenValue}`,
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
-  
-      console.log('Image Upload Response:', response.data);
+
+      console.log("Image Upload Response:", response.data);
+
+      // Optionally update the profile image in the state or trigger a re-fetch of user data
+
+      message.success("Profile image saved successfully");
+      setIsImageChanged(false);
     } catch (error) {
-      console.error('Error uploading image:', error.response?.data || error.message);
+      console.error(
+        "Error saving image:",
+        error.response?.data || error.message
+      );
+      message.error("Failed to save profile image. Please try again.");
     }
   };
-  
 
   const handleChangeProfileImage = async () => {
     if (!selectedFile) {
-      return; 
+      return;
     }
-  
+
     try {
       const formData = new FormData();
-      formData.append('image', selectedFile);
-      
-  
+      formData.append("image", selectedFile);
+
       const response = await axios.post(
-        'https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image',
+        "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image",
         formData,
         {
           headers: {
             Authorization: `Bearer ${accessTokenValue}`,
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
-          
         }
       );
-  
-      console.log('Change Image Response:', response.data);
+
+      console.log("Change Image Response:", response.data);
       // Update the profile image in the state or trigger a re-fetch of user data
       // based on your application's structure
     } catch (error) {
-      console.error('Error changing image:', error);
+      console.error("Error changing image:", error);
     }
   };
-  useEffect(() => {
-    // Handle image upload when selectedFile changes
-    const handleImageUpload = async () => {
-      if (!selectedFile) {
-        return;
-      }
-  
-      try {
-        const formData = new FormData();
-        formData.append('image', selectedFile);
-  
-        const response = await axios.post(
-          'https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image',
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${accessTokenValue}`,
-              'Content-Type': 'multipart/form-data',
-            },
-          }
-        );
-  
-        console.log('Image Upload Response:', response.data);
-      } catch (error) {
-        console.error('Error uploading image:', error.response?.data || error.message);
-      }
-    };
-  
-    handleImageUpload();
-  }, [selectedFile, accessTokenValue]);
-  
-  
+ 
+
   // const handleRemoveProfileImage = async () => {
   //   try {
   //     const response = await axios.delete(
@@ -374,7 +354,7 @@ const Profile = () => {
   //         },
   //       }
   //     );
-  
+
   //     console.log('Remove Image Response:', response.data);
   //     // Update the profile image in the state or trigger a re-fetch of user data
   //     // based on your application's structure
@@ -382,8 +362,6 @@ const Profile = () => {
   //     console.error('Error removing image:', error);
   //   }
   // };
-
-  
 
   return (
     // <Layout>
@@ -406,14 +384,13 @@ const Profile = () => {
     width: "200px",
     height: "200px",
     borderRadius: "50%",
-    backgroundImage: selectedFile
-      ? `url("${URL.createObjectURL(selectedFile)}")`
+    backgroundImage: profileImage
+      ? `url("${profileImage}")`
       : 'url("https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg")',
-    backgroundSize: "cover", // Add this line
-    backgroundPosition: "center", // Add this line
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   }}
 />
-
 
           <div className="user_name">{personalInfo.fullName}</div>
         </div>
@@ -421,28 +398,53 @@ const Profile = () => {
         <Col>
           <div className="profile-photo-buttons">
             <Row>
-            <label className="button-profile-photo" htmlFor="fileInput">
-  Şəkil yükləyin
-</label>
-<input
-  id="fileInput"
-  type="file"
-  style={{ display: 'none' }}
-  onChange={handleFileChange}
-  ref={fileInputRef}
-/>
-
-<button className="change-button" onClick={handleChangeProfileImage}>
+              <label className="button-profile-photo" htmlFor="fileInput">
+                Şəkil yükləyin
+              </label>
+              <input
+                id="fileInput"
+                type="file"
+                style={{ display: "none",
+                width: "50%",
+                height: "40px",
+                fontSize: "16px",
+                fontFamily: "Inter",
+                fontWeight: "400",
+               }}
+                onChange={handleFileChange}
+                ref={fileInputRef}
+              />
+              {/* <label className="button-profile-photo" htmlFor="fileInput">
   Şəkili dəyişdir
-</button>
-{/* <Button
+  </label> */}
+              <Button
+              className="profile-save-image"
+                type="primary"
+                onClick={handleSaveImage}
+                disabled={!isImageChanged}
+                style={{
+                  width: "50%",
+                  height: "40px",
+                  fontSize: "16px",
+                  fontFamily: "Inter",
+                  fontWeight: "400",
+                }}
+              >
+                Save
+              </Button>
+              {/* <input
+  id="fileInput"
+  onClick={handleChangeProfileImage}
+  type="file"
+  ref={fileInputRef}
+  /> */}
+              {/* <Button
   className="button-profile-photo"
   // onClick={handleRemoveProfileImage}
 >
   Remove Profile Image
 </Button> */}
-
-              </Row>
+            </Row>
           </div>
         </Col>
 
@@ -814,5 +816,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-
