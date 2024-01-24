@@ -41,6 +41,8 @@ const Profile = () => {
   const [fileInput, setFileInput] = useState(null);
   const [isImageChanged, setIsImageChanged] = useState(false);
 
+  const [hasUploadedImage, setHasUploadedImage] = useState(false);
+
   // const handleFileChange = (event) => {
   //   const file = event.target.files[0];
   //   console.log("Selected File:", file);
@@ -58,14 +60,14 @@ const Profile = () => {
       const token = localStorage.getItem("user-info");
       const tokenObject = JSON.parse(token);
       const accessTokenValue = tokenObject.access_token;
-  
+
       setAccessTokenValue(accessTokenValue);
-  
+
       if (!token) {
         console.error("User token not found in localStorage");
         throw new Error("User token not found");
       }
-  
+
       const response = await axios.get(
         "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/info",
         {
@@ -74,18 +76,18 @@ const Profile = () => {
           },
         }
       );
-  
+
       console.log("Response:", response);
-  
+
       setPersonalInfo({
         fullName: response.data.user_info.user_name,
         username: response.data.user_info.user_username,
         emailAddress: response.data.user_info.user_email,
       });
-  
+
       // Set the user's profile image
       setProfileImage(response.data.user_info.user_img);
-  
+
       return response.data; // Resolve the promise with the response data
     } catch (error) {
       console.error(
@@ -96,7 +98,6 @@ const Profile = () => {
       throw error;
     }
   };
-  
 
   useEffect(() => {
     console.log("Fetching personal info...");
@@ -276,9 +277,20 @@ const Profile = () => {
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
+    console.log("Selected File:", file);
     setSelectedFile(file);
     setIsImageChanged(true);
+    setHasUploadedImage(true);
   };
+  
+  const handleImageChange = async (event) => {
+    const file = event.target.files[0];
+    console.log("Selected File:", file);
+    setSelectedFile(file);
+    setIsImageChanged(true);
+    setHasUploadedImage(true);
+  };
+
 
   const handleSaveImage = async () => {
     if (!isImageChanged || !selectedFile) {
@@ -286,9 +298,11 @@ const Profile = () => {
     }
 
     try {
+      // Create a FormData object
       const formData = new FormData();
       formData.append("image", selectedFile);
 
+      // Use the formData variable in the axios.post call
       const response = await axios.post(
         "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image",
         formData,
@@ -300,9 +314,9 @@ const Profile = () => {
         }
       );
 
-      console.log("Image Upload Response:", response.data);
+      setProfileImage(response.data.imageUrl);
 
-      // Optionally update the profile image in the state or trigger a re-fetch of user data
+      console.log("Image Upload Response:", response.data);
 
       message.success("Profile image saved successfully");
       setIsImageChanged(false);
@@ -315,34 +329,41 @@ const Profile = () => {
     }
   };
 
-  const handleChangeProfileImage = async () => {
-    if (!selectedFile) {
-      return;
-    }
+  // useEffect(() => {
+  //   if (isImageChanged) {
+  //     setProfileImage(selectedFile);
+  //   }
+  // }, [isImageChanged, selectedFile]);
 
-    try {
-      const formData = new FormData();
-      formData.append("image", selectedFile);
+  
+  // const handleChangeProfileImage = async () => {
+  //   if (!selectedFile) {
+  //     return;
+  //   }
 
-      const response = await axios.post(
-        "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${accessTokenValue}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("image", selectedFile);
 
-      console.log("Change Image Response:", response.data);
-      // Update the profile image in the state or trigger a re-fetch of user data
-      // based on your application's structure
-    } catch (error) {
-      console.error("Error changing image:", error);
-    }
-  };
- 
+  //     const response = await axios.post(
+  //       "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image",
+  //       formData,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessTokenValue}`,
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+
+  //     console.log("Change Image Response:", response.data);
+
+  //     // Update the profile image in the state
+  //     setProfileImage(response.data.imageUrl);
+  //   } catch (error) {
+  //     console.error("Error changing image:", error);
+  //   }
+  // };
 
   // const handleRemoveProfileImage = async () => {
   //   try {
@@ -378,19 +399,19 @@ const Profile = () => {
         }}
       >
         <div style={{ textAlign: "center" }} className="photo-box">
-        <div
-  className="circular"
-  style={{
-    width: "200px",
-    height: "200px",
-    borderRadius: "50%",
-    backgroundImage: profileImage
-      ? `url("${profileImage}")`
-      : 'url("https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg")',
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
-/>
+          <div
+            key={profileImage}
+            className="circular"
+            style={{
+              width: "200px",
+              height: "200px",
+              borderRadius: "50%",
+              backgroundImage: `url("${profileImage || 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2220431045.jpg'}")`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            
+          />
 
           <div className="user_name">{personalInfo.fullName}</div>
         </div>
@@ -404,21 +425,44 @@ const Profile = () => {
               <input
                 id="fileInput"
                 type="file"
-                style={{ display: "none",
-                width: "50%",
-                height: "40px",
-                fontSize: "16px",
-                fontFamily: "Inter",
-                fontWeight: "400",
-               }}
+                style={{
+                  display: "none",
+                  width: "50%",
+                  height: "40px",
+                  fontSize: "16px",
+                  fontFamily: "Inter",
+                  fontWeight: "400",
+                }}
                 onChange={handleFileChange}
                 ref={fileInputRef}
               />
               {/* <label className="button-profile-photo" htmlFor="fileInput">
   Şəkili dəyişdir
   </label> */}
+              {/* Add this block where you want to render the "Change Image" button */}
+              <label
+                className="button-profile-photo"
+                htmlFor="fileInput"
+                style={{
+                  cursor: "pointer",
+                }}
+                key={isImageChanged} // Add this key attribute
+              >
+                Change Image
+              </label>
+
+              <input
+                id="fileInput"
+                type="file"
+                style={{
+                  display: "none",
+                }}
+                onChange={handleImageChange}
+                ref={fileInputRef}
+              />
+
               <Button
-              className="profile-save-image"
+                className="profile-save-image"
                 type="primary"
                 onClick={handleSaveImage}
                 disabled={!isImageChanged}
