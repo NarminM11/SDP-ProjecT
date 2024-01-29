@@ -146,39 +146,34 @@ const Profile = () => {
   // const history = useHistory();
   const handleLogout = async () => {
     try {
-      // Check if "user-info" exists in localStorage
       const token = localStorage.getItem("user-info");
-
+  
       if (!token) {
         console.error("User token not found in localStorage");
-        // Redirect the user to the login page or another appropriate page
-        // history.push("/login"); // Replace "/login" with the path to your login page
         return;
       }
-
+  
       const tokenObject = JSON.parse(token);
       const accessTokenValue = tokenObject.access_token;
-
+  
       const response = await axios.delete(
         "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/logout",
         {
           headers: {
-            Authorization: `Bearer ${accessTokenValue}`,
+            Authorization:  `Bearer ${accessTokenValue}`,
           },
         }
       );
-
+  
       console.log("Logout Response:", response.data);
-
-      // Clear user information from local storage
+  
       localStorage.removeItem("user-info");
-
-      // Redirect the user to the login page or another appropriate page
-      // history.push("/login"); // Replace "/login" with the path to your login page
+  
+      window.location.href = "/login"; 
     } catch (error) {
       console.error("Error logging out:", error);
     }
-
+  
     setLogoutModalVisible(false);
   };
 
@@ -212,7 +207,7 @@ const Profile = () => {
             </div>
 
             <Modal
-        title="Çıxışı təsdiqlə"
+        title="Çıxışı tə"
         visible={logoutModalVisible}
         onCancel={() => setLogoutModalVisible(false)}
         footer={[

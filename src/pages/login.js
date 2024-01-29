@@ -1,38 +1,29 @@
 import React, { useEffect, useState } from "react";
-// import { useHistory } from "react-router-dom";
 import { Row, Col, Form, Input, Button, Checkbox } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import "react-toastify/dist/ReactToastify.css";
 import "../assets/login.css";
 
+import Profile from "./profile";
+
 const LogIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [resetEmailSent, setResetEmailSent] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false); 
 
-  // const history = useHistory();
-
   useEffect(() => {
     const storedCredentials = localStorage.getItem("user-credentials");
-    console.log("Stored Credentials:", storedCredentials);
-  
     if (storedCredentials) {
       const { username, password } = JSON.parse(storedCredentials);
-      console.log("Retrieved Username:", username);
-      console.log("Retrieved Password:", password);
       setUsername(username);
       setPassword(password);
     }
   }, []);
   
-
-
   async function login() {
     setLoading(true);
-    console.warn(username, password);
     let item = { username, password };
 
     try {
@@ -49,28 +40,22 @@ const LogIn = () => {
       );
 
       if (response.status === 401) {
-        setErrorMessage(
-          "Yanlış istifadəçi adı və ya şifrə. Zəhmət olmasa bir daha cəhd edin"
-        );
+        setErrorMessage("Yanlış istifadəçi adı və ya şifrə. Zəhmət olmasa bir daha cəhd edin");
       } else if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       } else {
         let result = await response.json();
 
         if (rememberMe) {
-          localStorage.setItem(
-            "user-credentials",
-            JSON.stringify({ username, password })
-          );
+          localStorage.setItem("user-credentials", JSON.stringify({ username, password }));
         }
 
         localStorage.setItem("user-info", JSON.stringify(result));
-        console.log("User token stored:", localStorage.getItem("user-info"));
-        // history.push("/home");
+        window.location.href = "/profile"; 
       }
     } catch (error) {
       console.error("Error during login:", error);
-    }finally {
+    } finally {
       setLoading(false);
     }
   }
@@ -82,10 +67,7 @@ const LogIn = () => {
         <Row className="row-login-form">
           <Col xs={24} sm={20} md={16} lg={12} xl={20}>
             <div className="login-form-container">
-              <Form
-                name="loginForm"
-                layout="vertical"
-              >
+              <Form name="loginForm" layout="vertical">
                 <Form.Item
                   label="İstifadəçi adı"
                   name="username"
@@ -140,9 +122,13 @@ const LogIn = () => {
                         wordWrap: "break-word",
                       }}
                       loading={loading}
-          icon={loading ? <LoadingOutlined style={{ fontSize: 24 }} /> : null}   
-                                       >
-          {loading ? 'Daxil olunur...' : 'Daxil ol'}
+                      icon={
+                        loading ? (
+                          <LoadingOutlined style={{ fontSize: 24 }} />
+                        ) : null
+                      }
+                    >
+                      {loading ? "Daxil olunur..." : "Daxil ol"}
                     </Button>
                   </div>
                 </Form.Item>
@@ -153,11 +139,13 @@ const LogIn = () => {
 
         <div className="login-checkbox-row">
           <div className="login-check-remember">
-          <Checkbox
-                        className="rememberCheckbox"
-                        checked={rememberMe}
-                        onChange={(e) => setRememberMe(e.target.checked)}
-                      >Məni xatırla</Checkbox>
+            <Checkbox
+              className="rememberCheckbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            >
+              Məni xatırla
+            </Checkbox>
           </div>
           <p className="forgot-password">
             {/* <Link to="/forgot-password"> */}

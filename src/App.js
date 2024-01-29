@@ -1,16 +1,18 @@
-// App.js
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LogIn from '../src/pages/login';
 import PasswordReset from "../src/pages/PasswordReset";
+import Profile from './pages/profile';
 
 function App() {
   return (
     <BrowserRouter>
-            <Routes>
-                <Route path="/login" element={<LogIn />} />
-                <Route path='/forgot-password' element={<PasswordReset />} />
-            </Routes>
+      <Routes>
+        <Route path="/" element={<LogIn />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path='/forgot-password' element={<PasswordReset />} />
+      </Routes>
     </BrowserRouter>
   );
 }
