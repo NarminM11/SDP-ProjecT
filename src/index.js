@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import FAQ from './pages/faq';
 import Profile from './pages/profile';
+import PersonalInfo from '../src/components/profile-page/personal-info';
+
 import LogIn from './pages/login';
 import App from './App';
-import Testing from '../src/pages/testing';
+import ImageUploadComponent from '../src/components/profile-page/imageUploadComponent';
 
 // // import FAQ from './pages/faq';
 // import Profile from './pages/profile';
@@ -30,7 +32,8 @@ root.render(
     {/* <SignUp /> */}
     {/* <LogIn /> */}
     <Profile />
-    {/* <Testing /> */}
+    {/* <PersonalInfo /> */}
+    {/* <ImageUploadComponent /> */}
 
   </React.StrictMode>
 );

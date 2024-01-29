@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
+// import { useHistory } from "react-router-dom";
 import { Row, Col, Form, Input, Button, Checkbox } from "antd";
-import { toast, ToastContainer } from "react-toastify";
+import { LoadingOutlined } from "@ant-design/icons";
 import "react-toastify/dist/ReactToastify.css";
 import "../assets/login.css";
 
 const LogIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [resetEmailSent, setResetEmailSent] = useState(false);
+  // const [resetEmailSent, setResetEmailSent] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
+  // const history = useHistory();
 
   useEffect(() => {
     const storedCredentials = localStorage.getItem("user-credentials");
@@ -28,6 +31,7 @@ const LogIn = () => {
 
 
   async function login() {
+    setLoading(true);
     console.warn(username, password);
     let item = { username, password };
 
@@ -66,6 +70,8 @@ const LogIn = () => {
       }
     } catch (error) {
       console.error("Error during login:", error);
+    }finally {
+      setLoading(false);
     }
   }
 
@@ -133,8 +139,10 @@ const LogIn = () => {
                         fontWeight: "400",
                         wordWrap: "break-word",
                       }}
-                    >
-                      Daxil ol
+                      loading={loading}
+          icon={loading ? <LoadingOutlined style={{ fontSize: 24 }} /> : null}   
+                                       >
+          {loading ? 'Daxil olunur...' : 'Daxil ol'}
                     </Button>
                   </div>
                 </Form.Item>
