@@ -310,3 +310,18 @@ width: 60%;  }
 }
 
 
+.revert-button {
+  background-color: #ff4d4f; /* Red color for danger type */
+  color: #fff; /* White text color */
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.revert-button:hover {
+  background-color: #d43838; /* Darker red color on hover */
+}
+

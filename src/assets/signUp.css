@@ -9,17 +9,14 @@
   text-align: center;
   color: #2b2676;
   font-size: 32px;
-  font-family: Inter;
   font-weight: 400px;
   word-wrap: break-word;
   margin-bottom: 40px;
 }
 .signUp-frame {
   margin-top: 50px;
-  /* margin-bottom: auto; */
-  width: 80%;
+  /* width: 80%; */
   max-width: 600px;
-  /* height: 90%; */
   padding: 20px;
   border-radius: 8px;
   background-color: #f5f5f5;
@@ -28,8 +25,8 @@
 
 .signUp-form-container {
   margin-left: auto;
-  width: 100%;
-  max-width: 600px;
+  /* width: 100%; */
+  /* max-width: 600px; */
 }
 
 .signUp-form-group {
@@ -37,7 +34,7 @@
 }
 
 .signUp-text-input {
-  width: 100%;
+  /* width: 100%; */
   padding: 10px 15px;
   box-sizing: border-box;
   border: 1px solid #ccc;

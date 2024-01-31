@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Form, Input, Button, Checkbox } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "../assets/login.css";
-
-import Profile from "./profile";
+import Layout from "../components/Layout/layout";
 
 const LogIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const storedCredentials = localStorage.getItem("user-credentials");
@@ -21,8 +21,13 @@ const LogIn = () => {
       setPassword(password);
     }
   }, []);
-  
+
   async function login() {
+    if (!username || !password) {
+      setErrorMessage("İstifadəçi adı və şifrəni daxil edin");
+      return;
+    }
+
     setLoading(true);
     let item = { username, password };
 
@@ -40,18 +45,26 @@ const LogIn = () => {
       );
 
       if (response.status === 401) {
-        setErrorMessage("Yanlış istifadəçi adı və ya şifrə. Zəhmət olmasa bir daha cəhd edin");
+        setErrorMessage(
+          "Yanlış istifadəçi adı və ya şifrə. Zəhmət olmasa bir daha cəhd edin"
+        );
       } else if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       } else {
         let result = await response.json();
 
         if (rememberMe) {
-          localStorage.setItem("user-credentials", JSON.stringify({ username, password }));
+          localStorage.setItem(
+            "user-credentials",
+            JSON.stringify({ username, password })
+          );
+        } else {
+          // Clear stored credentials if rememberMe is false
+          localStorage.removeItem("user-credentials");
         }
 
         localStorage.setItem("user-info", JSON.stringify(result));
-        window.location.href = "/profile"; 
+        window.location.href = "/profile";
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -61,13 +74,13 @@ const LogIn = () => {
   }
 
   return (
-    <div className="login-container">
-      <div className="login-frame">
-        <h2 className="login-heading">Daxil ol</h2>
-        <Row className="row-login-form">
-          <Col xs={24} sm={20} md={16} lg={12} xl={20}>
-            <div className="login-form-container">
-              <Form name="loginForm" layout="vertical">
+    <Layout>
+      <div className="login-container">
+        <div className="login-frame">
+          <h2 className="login-heading">Daxil ol</h2>
+          <Form className="loginForm" layout="vertical">
+            <Row gutter={16}>
+              <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }} xl={{ span: 24 }}>
                 <Form.Item
                   label="İstifadəçi adı"
                   name="username"
@@ -86,7 +99,8 @@ const LogIn = () => {
                     placeholder="sample@jestdili.az"
                   />
                 </Form.Item>
-
+              </Col>
+              <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }} xl={{ span: 24 }}>
                 <Form.Item
                   label="Şifrə"
                   name="password"
@@ -102,68 +116,67 @@ const LogIn = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="login-text-input"
+                    style={{borderRadius:"8px" }}
+
                     placeholder="*******"
                   />
                 </Form.Item>
-                {errorMessage && (
-                  <div className="error-message">{errorMessage}</div>
-                )}
-                <Form.Item>
-                  <div className="login-button">
-                    <Button
-                      onClick={login}
-                      type="submit"
-                      style={{
-                        color: "#fff",
-                        backgroundColor: "#2b2676",
-                        fontSize: 16,
-                        fontFamily: "Inter",
-                        fontWeight: "400",
-                        wordWrap: "break-word",
-                      }}
-                      loading={loading}
-                      icon={
-                        loading ? (
-                          <LoadingOutlined style={{ fontSize: 24 }} />
-                        ) : null
-                      }
-                    >
-                      {loading ? "Daxil olunur..." : "Daxil ol"}
-                    </Button>
-                  </div>
-                </Form.Item>
-              </Form>
-            </div>
-          </Col>
-        </Row>
+              </Col>
+            </Row>
+            {errorMessage && (
+              <div className="error-message">{errorMessage}</div>
+            )}
+            <Form.Item>
+              <div className="login-button">
+                <Button
+                  onClick={login}
+                  type="submit"
+                  style={{
+                    color: "#fff",
+                    backgroundColor: "#2b2676",
+                    fontSize: 16,
+                    // fontFamily: "Inter",
+                    fontWeight: "400",
+                    wordWrap: "break-word",
+                  }}
+                  loading={loading}
+                  icon={
+                    loading ? (
+                      <LoadingOutlined style={{ fontSize: 24 }} />
+                    ) : null
+                  }
+                >
+                  {loading ? "Daxil olunur..." : "Daxil ol"}
+                </Button>
+              </div>
+            </Form.Item>
+          </Form>
 
-        <div className="login-checkbox-row">
+          <div className="login-checkbox-row">
           <div className="login-check-remember">
-            <Checkbox
-              className="rememberCheckbox"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-            >
-              Məni xatırla
-            </Checkbox>
-          </div>
+              <Checkbox
+                className="rememberCheckbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              >
+                Məni xatırla
+              </Checkbox>
+            </div>
+            <p className="forgot-password">
+              {/* <Link to="/forgot-password"> */}
+              Şifrəni unutmusan?
+              {/* </Link> */}
+            </p>
+           </div>
+
+          <hr />
+          <p>Ya da</p>
           <p className="forgot-password">
-            {/* <Link to="/forgot-password"> */}
-            Şifrəni unutmusan?
-            {/* </Link> */}
+          <Link to="/signup">Yeni istifadəçisən? Qeydiyyatdan keçin</Link>
           </p>
         </div>
-
-        {/* {resetEmailSent && <div className="reset-email-sent-message"></div>} */}
-        <hr />
-        <p>Ya da</p>
-        <p className="forgot-password">
-          {/* <Link to="/forgot-password"> */}
-          Yeni istifadəçisən? Qeydiyyatdan keçin
-          {/* </Link> */}
-        </p>
       </div>
-    </div>
+    </Layout>
   );
 };
 

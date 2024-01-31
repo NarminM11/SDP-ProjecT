@@ -17,7 +17,7 @@ import axios from "axios";
 import ImageUploadComponent from "../components/profile-page/imageUploadComponent.js"; // Adjust the path based on your file structure
 import PasswordChangeComponent from "../components/profile-page/PasswordChangeComponent.js";
 import FavBox from "../components/profile-page/fav-box.js";
-// import Layout from "../components/Layout/layout";
+import Layout from "../components/Layout/layout.js";
 import "../assets/profile.css";
 
 const Profile = () => {
@@ -178,7 +178,7 @@ const Profile = () => {
   };
 
   return (
-    // <Layout>
+    <Layout>
     <Row justify="center">
       <Col
         xs={{ span: 24, offset: 0 }}
@@ -357,7 +357,7 @@ const Profile = () => {
       </Row>
     </Row>
 
-    // </Layout>
+     </Layout>
   );
 };
 

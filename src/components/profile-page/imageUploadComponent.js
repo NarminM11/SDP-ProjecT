@@ -10,6 +10,7 @@ const ImageUploadComponent = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [accessTokenValue, setAccessTokenValue] = useState("");
   const [error, setError] = useState(null);
+  const [showControls, setShowControls] = useState(true);
 
   const [personalInfo, setPersonalInfo] = useState({
     fullName: "",
@@ -113,8 +114,8 @@ const ImageUploadComponent = () => {
     setSelectedFile(file);
     setIsImageChanged(true);
     setHasUploadedImage(true);
-    setUploadedFileName(file.name); // Update the uploaded file name
-
+    setUploadedFileName(file.name); 
+    setShowControls(true); 
   };
 
   const handleImageChange = async (event) => {
@@ -123,8 +124,8 @@ const ImageUploadComponent = () => {
     setSelectedFile(file);
     setIsImageChanged(true);
     setHasUploadedImage(true);
-    setUploadedFileName(file.name); // Update the uploaded file name
-
+    setUploadedFileName(file.name); 
+    setShowControls(true); 
   };
 
   const generateTimestamp = () => new Date().getTime();
@@ -136,14 +137,15 @@ const ImageUploadComponent = () => {
 
     try {
       const timestamp = generateTimestamp();
-      const imageUrl = `https://morning-plains-82582-f0e7c891044c.herokuapp.com/${profileImage}?timestamp=${timestamp}`;
-
-      setProfileImage(imageUrl);
+      const imageUrl = `https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image?timestamp=${timestamp}`;
 
       const formData = new FormData();
       formData.append("image", selectedFile);
+
+      setProfileImage(URL.createObjectURL(selectedFile));
+
       const response = await axios.post(
-        "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/upload-image",
+        imageUrl,
         formData,
         {
           headers: {
@@ -153,12 +155,12 @@ const ImageUploadComponent = () => {
         }
       );
 
-      setProfileImage(response.data.imageUrl);
-
       console.log("Image Upload Response:", response.data);
 
       message.success("Profile image saved successfully");
       setIsImageChanged(false);
+      setUploadedFileName(""); // Clear uploaded file name
+      setShowControls(false); // Hide controls after saving
     } catch (error) {
       console.error(
         "Error saving image:",
@@ -167,6 +169,8 @@ const ImageUploadComponent = () => {
       message.error("Failed to save profile image. Please try again.");
     }
   };
+  
+  
   
 
   const handleRemoveImage = async () => {
@@ -195,22 +199,24 @@ const ImageUploadComponent = () => {
 
   return (
 <div style={{ textAlign: "center" }} className="photo-box">
-          <div
-            key={profileImage}
-            className="circular"
-            style={{
-              
-              width: "200px",
-              height: "200px",
-              borderRadius: "50%",
-              backgroundImage: `url("${
-                profileImage ||
-                "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2220431045.jpg"
-              }")`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
+<div
+  key={isImageChanged && selectedFile ? selectedFile : profileImage}
+  className="circular"
+  style={{
+    width: "200px",
+    height: "200px",
+    borderRadius: "50%",
+    backgroundImage: `url("${
+      isImageChanged && selectedFile
+        ? URL.createObjectURL(selectedFile) // Use a local URL for the preview
+        : profileImage ||
+          "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2220431045.jpg"
+    }")`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+/>
+
 
                <div className="user_name">{personalInfo.fullName}</div>
 
@@ -219,39 +225,41 @@ const ImageUploadComponent = () => {
         <div className="uploaded-file-name">{uploadedFileName}</div>
       )}
 
-      {hasUploadedImage && (
-        <Row justify="center">
-          <Col>
-            <Button
-              className="revert-button"
-              type="danger"
-              onClick={() => {
-                setHasUploadedImage(false);
-                setUploadedFileName("");
-                setSelectedFile(null);
-              }}
-            >
-              X
-            </Button>
-          </Col>
-          <Col>
-            <Button
-              className="button-profile-photo"
-              type="primary"
-              onClick={handleSaveImage}
-              disabled={!isImageChanged}
-              style={{
-                height: "40px",
-                fontSize: "16px",
-                fontFamily: "Inter",
-                fontWeight: "400",
-              }}
-            >
-              Yadda saxla
-            </Button>
-          </Col>
-        </Row>
-      )}
+{showControls && hasUploadedImage && (
+  <Row justify="center" style={{ flexDirection: "column", alignItems: "center" }}>
+    <Col>
+      <Button
+        className="revert-button"
+        type="danger"
+        onClick={() => {
+          setHasUploadedImage(false);
+          setUploadedFileName("");
+          setSelectedFile(null);
+          setShowControls(false);
+        }}
+      >
+        X
+      </Button>
+    </Col>
+    <Col>
+      <Button
+        className="button-profile-photo"
+        type="primary"
+        onClick={handleSaveImage}
+        disabled={!isImageChanged}
+        style={{
+          height: "40px",
+          fontSize: "16px",
+          fontFamily: "Inter",
+          fontWeight: "400",
+          marginTop: "8px", // Adjust spacing between buttons if needed
+        }}
+      >
+        Yadda saxla
+      </Button>
+    </Col>
+  </Row>
+)}
 
       <Row className="profile-photo-buttons">
         <Row>

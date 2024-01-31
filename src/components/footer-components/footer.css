@@ -1,0 +1,121 @@
+/* ----------footer---------- */
+body {
+    overflow-x: hidden;
+  }
+  
+.footer {
+  width: 100%;
+  height: 130vh;
+  background-color: #222222;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 10rem;
+}
+.top-1 {
+  display: flex;
+  justify-content: space-between;
+  /* width: 100%; */
+  /* height: 25%; */
+  align-items: center;
+  /* flex-wrap: wrap; */
+  /* background-color: aqua; */
+  padding: 0 9rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.494);
+}
+.top-1 h2 {
+  color: #fcf7f7;
+  font-size: 3.5rem;
+  margin-bottom: 1.7rem;
+  font-weight: 400;
+}
+.top-1 p {
+  color: #fcf7f7;
+  font-size: 1.8rem;
+  width: 300px;
+  /* font-weight: bold; */
+  line-height: 25px;
+  margin-bottom: 2rem;
+}
+.footer-icon {
+  font-size: 3.5rem;
+  padding-left: 3rem;
+  margin-bottom: 1rem;
+}
+.footer-icon i {
+  margin-left: 1rem;
+  color: #727272;
+  transition: all 0.7s;
+  display: inline-block;
+}
+.footer-icon i:hover {
+  color: #2b2676;
+  transform: rotate(360deg);
+}
+.email {
+  display: flex;
+  font-family: "Roboto", sans-serif;
+}
+.email input {
+  width: 490px;
+  padding: 27px 30px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  border: none;
+  outline: none;
+}
+.bts {
+  width: 160px;
+  margin-left: 1rem;
+  padding: 27px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  color: #fff;
+  background-color: #2b2676;
+  cursor: pointer;
+}
+.top-2 {
+  width: 100%;
+  height: 45%;
+  /* background-color: salmon; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.494);
+}
+.top-2 h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffff;
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 3.5rem;
+  transition: all 0.8s;
+}
+.top-2 h2:hover {
+  color: #2b2676;
+}
+.top-2 p {
+  font-size: 1.9rem;
+  color: #70746b;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.top-2 p:hover {
+  color: #ffffff;
+}
+.top-3 {
+  display: flex;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+.top-3 p {
+  font-size: 2rem;
+  font-family: "Roboto", sans-serif;
+}
+.top-3 p i {
+  color: #2b2676;
+}
