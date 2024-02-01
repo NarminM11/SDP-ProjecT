@@ -68,7 +68,7 @@
 }
 
 .falock p {
-  margin: 0; /* Override margin for paragraphs within .falock */
+  margin: 0; 
 }
 
 
@@ -311,8 +311,8 @@ width: 60%;  }
 
 
 .revert-button {
-  background-color: #ff4d4f; /* Red color for danger type */
-  color: #fff; /* White text color */
+  background-color: #ff4d4f; 
+  color: #fff; 
   border: none;
   padding: 8px 16px;
   font-size: 16px;
@@ -322,6 +322,32 @@ width: 60%;  }
 }
 
 .revert-button:hover {
-  background-color: #d43838; /* Darker red color on hover */
+  background-color: #d43838; 
 }
 
+.fav-container {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.first-frame-empty-favorites {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.fav-edit-details {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #2b2676;
+}
+
+.fav-profile-heading {
+  font-size: 16px;
+  color: #555;
+}
+
+.fav-first-frame-all {
+  margin-top: 20px;
+}

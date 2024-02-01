@@ -21,7 +21,7 @@ import {
   MDBDropdownItem,
   MDBCollapse,
 } from "mdb-react-ui-kit";
-import "../nav-bar/navbar.css";
+import "./navbar.css";
 
 function Navbar() {
   const [profilePictureUrl, setProfilePictureUrl] = useState("");
@@ -69,6 +69,7 @@ function Navbar() {
           setProfilePictureUrl(
             response.data.user_info.user_img || '/media/pics/demo-user.jpg'
           );
+          console.log("dabase");
         
         } catch (error) {
           // console.error('Error decoding token:', error.message);

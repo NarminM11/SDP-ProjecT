@@ -154,13 +154,14 @@ const LogIn = () => {
 
           <div className="login-checkbox-row">
           <div className="login-check-remember">
-              <Checkbox
-                className="rememberCheckbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-              >
-                Məni xatırla
-              </Checkbox>
+          <Checkbox
+  className="rememberCheckbox"
+  checked={rememberMe}
+  onChange={(e) => setRememberMe(e.target.checked)}
+>
+  Məni xatırla
+</Checkbox>
+
             </div>
             <p className="forgot-password">
               {/* <Link to="/forgot-password"> */}

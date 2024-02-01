@@ -1,5 +1,5 @@
 import React from "react";
-import "../footer-components/footer.css";
+import "./footer.css";
 import {
   MDBFooter,
   MDBContainer,

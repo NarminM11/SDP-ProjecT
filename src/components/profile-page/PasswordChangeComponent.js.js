@@ -1,7 +1,5 @@
 import React, { useState, useEffect, createRef, useRef  } from "react";
 import axios from "axios";
-// Update the import statement in PasswordChangeComponent.js
-// import { validatePassword } from "./utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   // faPen,
