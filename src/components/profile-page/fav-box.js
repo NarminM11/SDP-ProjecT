@@ -29,29 +29,49 @@ const FavBox = () => {
     setIsDeleteModalVisible(true);
   };
 
-  const handleDeleteCard = (id, type) => {
-    const apiUrl =
-      type === "word"
-        ? `https://morning-plains-82582-f0e7c891044c.herokuapp.com/learnLaterWords/${id}`
-        : `https://morning-plains-82582-f0e7c891044c.herokuapp.com/learnLaterSentences/${id}`;
 
-    fetch(apiUrl, {
-      method: "DELETE",
-    })
-      .then(() => {
-        if (type === "word") {
-          setFavoriteWords((prevWords) =>
-            prevWords.filter((word) => word.id !== id)
-          );
-        } else if (type === "sentence") {
-          setFavoriteSentences((prevSentences) =>
-            prevSentences.filter((sentence) => sentence.id !== id)
-          );
-        }
-        setIsDeleteModalVisible(false); 
-      })
-      .catch((error) => console.error(error));
+  const deleteItem = async () => {
+    try {
+      if (deleteItemType === 'word') {
+        await axios.post(
+          `https://morning-plains-82582-f0e7c891044c.herokuapp.com/learnLaterWordToggle/${deleteItemId}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } else if (deleteItemType === 'sentence') {
+        await axios.post(
+          `https://morning-plains-82582-f0e7c891044c.herokuapp.com/learnLaterSentenceToggle/${deleteItemId}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      }
+
+      // Update the local state to remove the deleted item
+      if (deleteItemType === 'word') {
+        setFavoriteWords((prevWords) =>
+          prevWords.filter((word) => word.id !== deleteItemId)
+        );
+      } else if (deleteItemType === 'sentence') {
+        setFavoriteSentences((prevSentences) =>
+          prevSentences.filter((sentence) => sentence.id !== deleteItemId)
+        );
+      }
+
+      setIsDeleteModalVisible(false); // Close the modal after deletion
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
   };
+
+  
   
 
   const fetchFavoriteWords = async () => {
@@ -253,7 +273,7 @@ const FavBox = () => {
         title="Silməyi təsdiqləyin"
         visible={isDeleteModalVisible}
         onCancel={() => setIsDeleteModalVisible(false)}
-        onOk={() => handleDeleteCard(deleteItemId, deleteItemType)}
+        onOk={deleteItem} 
         okText="Sil"
         cancelText="Ləğv et"
       >
