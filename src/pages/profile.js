@@ -180,23 +180,14 @@ const Profile = () => {
   return (
     <Layout>
     <Row justify="center">
-      <Col
-        xs={{ span: 24, offset: 0 }}
-        lg={{ span: 7, offset: 0 }}
-        style={{
-          display: "flex",
-          margin: "10px",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+    <Col xs={24} lg={7} style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "start" }}>
+
         <ImageUploadComponent
           accessTokenValue={accessTokenValue}
           personalInfo={personalInfo}
         />
+        
         <Row justify="center">
-          <Col>{/*favbox*/}</Col>
           <Col>
             <div
               className="profile-exit-icon"
@@ -225,12 +216,8 @@ const Profile = () => {
           </Col>
         </Row>
       </Col>
-      <Col
-        xs={{ span: 24, offset: 0 }}
-        md={{ span: 24, offset: 0 }}
-        lg={{ span: 24, offset: 0 }}
-        xl={{ span: 12, offset: 0 }}
-      >
+      <Col xs={24} md={24} lg={24} xl={14}>
+
         <Row className="profile-box">
           <Col
             className="first-frame"
@@ -336,27 +323,26 @@ const Profile = () => {
               </Col>
             </Row>
           </Col>
-          <Col
-            xs={{ span: 24, offset: 0 }}
-            md={{ span: 24, offset: 0 }}
-            lg={{ span: 24, offset: 0 }}
-            xl={{ span: 12, offset: 0 }}
-            style={{}}
-          >
+          <Col xs={24} md={24} lg={24} xl={12}>
+
             <Row justify="center" align="middle" style={{ height: "100%" }}>
               <PasswordChangeComponent accessTokenValue={accessTokenValue} />
             </Row>
           </Col>
         </Row>
-      </Col>
-      <Row className="fav-box">
+        <Col xs={24} md={24} lg={24} xl={12}>
+
+                <Row className="fav-box">
+
         <FavBox
           favoriteWords={favoriteWords}
           favoriteSentences={favoriteSentences}
         />
-      </Row>
-    </Row>
+              </Row>
 
+</Col>
+      </Col>
+    </Row>
      </Layout>
   );
 };

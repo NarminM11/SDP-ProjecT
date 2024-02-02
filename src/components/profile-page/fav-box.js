@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart as farHeart,
@@ -6,7 +6,6 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { Col, Row, Button, Modal, Tabs, Card } from "antd";
 import axios from "axios";
-import { Table } from "antd";
 import { Link } from "react-router-dom";
 
 const { TabPane } = Tabs;
@@ -65,7 +64,7 @@ const FavBox = () => {
         );
       }
 
-      setIsDeleteModalVisible(false); // Close the modal after deletion
+      setIsDeleteModalVisible(false); 
     } catch (error) {
       console.error('Error deleting item:', error);
     }
@@ -114,7 +113,6 @@ const FavBox = () => {
   }, []);
 
   useEffect(() => {
-    // Save favoriteWords and favoriteSentences to local storage
     localStorage.setItem("favoriteWords", JSON.stringify(favoriteWords));
     localStorage.setItem("favoriteSentences", JSON.stringify(favoriteSentences));
   }, [favoriteWords, favoriteSentences]);
@@ -226,6 +224,7 @@ const FavBox = () => {
     </Card>
   );
   return (
+    <Row justify="center">
     <div className="fav-container" style={containerStyle}>
       {!favoriteWords.length && !favoriteSentences.length ? (
         <Col
@@ -268,7 +267,6 @@ const FavBox = () => {
         </Row>
       )}
 
-      {/* Delete Confirmation Modal */}
       <Modal
         title="Silməyi təsdiqləyin"
         visible={isDeleteModalVisible}
@@ -280,6 +278,7 @@ const FavBox = () => {
         <p>Bu elementi silmək istədiyinizə əminsiniz?</p>
       </Modal>
     </div>
+    </Row>
   );
 };
 

@@ -178,9 +178,6 @@
   font-weight: 400;
 }
 
-/* .lok{
-  margin-top: 10px;
-} */
 
 .profile-accountSettings {
   margin-top: 20px;
@@ -190,21 +187,19 @@
 }
 
 
-.photo-box {
+.photo-box{
   margin-top: 200px;
-}
-
-/* .profile-container{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 100%;
-} */
+  /* border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 10px #2b2676; */
+  
+  ;}
 
 
 .fav-box {
   margin-top: 40px;
-  margin-left: 180px;
+  /* margin-left: 190px; */
   /* margin-right: auto; */
   /* width: 100%;  */
   border: 1px solid #ccc;
@@ -214,6 +209,7 @@
   padding: 20px;
   
 }
+
 
 .empty-favorites {
   text-align: center;
@@ -239,7 +235,7 @@ width: 60%;  }
 
 
 .error-input {
-  border-color: red; /* Add your desired error state styling */
+  border-color: red; 
 }
 
 .error-message {
@@ -304,7 +300,6 @@ width: 60%;  }
 }
 
 
-
 .formacc{
   width: 100%;
 }
@@ -350,4 +345,11 @@ width: 60%;  }
 
 .fav-first-frame-all {
   margin-top: 20px;
+}
+
+
+@media (max-width: 768px) {
+  .profile-box {
+    margin-top: 20px; 
+  }
 }

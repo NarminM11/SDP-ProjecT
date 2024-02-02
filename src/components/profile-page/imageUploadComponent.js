@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef, useRef  } from "react";
+import React, { useState, useEffect, createRef, useRef } from "react";
 import axios from "axios";
 import { message, Button, Col, Row } from "antd";
 
@@ -23,14 +23,14 @@ const ImageUploadComponent = () => {
       const token = localStorage.getItem("user-info");
       const tokenObject = JSON.parse(token);
       const accessTokenValue = tokenObject.access_token;
-  
+
       setAccessTokenValue(accessTokenValue);
-  
+
       if (!token) {
         console.error("User token not found in localStorage");
         throw new Error("User token not found");
       }
-  
+
       const response = await axios.get(
         "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/info",
         {
@@ -39,18 +39,21 @@ const ImageUploadComponent = () => {
           },
         }
       );
-  
+
       console.log("Response:", response);
-  
+
       setPersonalInfo({
         fullName: response.data.user_info.user_name,
         username: response.data.user_info.user_username,
         emailAddress: response.data.user_info.user_email,
       });
-  
+
       // Ensure that profileImage is set here
-      setProfileImage(response.data.user_info.user_img || "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2220431045.jpg");
-  
+      setProfileImage(
+        response.data.user_info.user_img ||
+          "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2220431045.jpg"
+      );
+
       return response.data;
     } catch (error) {
       console.error(
@@ -60,23 +63,22 @@ const ImageUploadComponent = () => {
       throw error;
     }
   };
-  
 
   useEffect(() => {
     const fetchPersonalInfo = async () => {
       try {
         const token = localStorage.getItem("user-info");
-  
+
         if (!token) {
           console.error("User token not found in localStorage");
           throw new Error("User token not found");
         }
-  
+
         const tokenObject = JSON.parse(token);
         const accessTokenValue = tokenObject.access_token;
-  
+
         setAccessTokenValue(accessTokenValue);
-  
+
         const response = await axios.get(
           "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/info",
           {
@@ -85,26 +87,25 @@ const ImageUploadComponent = () => {
             },
           }
         );
-  
+
         console.log("Response:", response);
-  
+
         setPersonalInfo({
           fullName: response.data.user_info.user_name,
           username: response.data.user_info.user_username,
           emailAddress: response.data.user_info.user_email,
         });
-  
+
         setProfileImage(response.data.user_info.user_img);
-  
       } catch (error) {
         console.error("Error fetching personal info:", error);
         // You can handle the error here, for example, by setting an error state
         setError("Failed to fetch personal information");
       }
     };
-  
+
     fetchPersonalInfo();
-  }, []); 
+  }, []);
 
   const fileInputRef = createRef();
 
@@ -114,8 +115,8 @@ const ImageUploadComponent = () => {
     setSelectedFile(file);
     setIsImageChanged(true);
     setHasUploadedImage(true);
-    setUploadedFileName(file.name); 
-    setShowControls(true); 
+    setUploadedFileName(file.name);
+    setShowControls(true);
   };
 
   const handleImageChange = async (event) => {
@@ -124,8 +125,8 @@ const ImageUploadComponent = () => {
     setSelectedFile(file);
     setIsImageChanged(true);
     setHasUploadedImage(true);
-    setUploadedFileName(file.name); 
-    setShowControls(true); 
+    setUploadedFileName(file.name);
+    setShowControls(true);
   };
 
   const generateTimestamp = () => new Date().getTime();
@@ -144,16 +145,12 @@ const ImageUploadComponent = () => {
 
       setProfileImage(URL.createObjectURL(selectedFile));
 
-      const response = await axios.post(
-        imageUrl,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${accessTokenValue}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(imageUrl, formData, {
+        headers: {
+          Authorization: `Bearer ${accessTokenValue}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       console.log("Image Upload Response:", response.data);
 
@@ -169,9 +166,6 @@ const ImageUploadComponent = () => {
       message.error("Failed to save profile image. Please try again.");
     }
   };
-  
-  
-  
 
   const handleRemoveImage = async () => {
     try {
@@ -198,68 +192,69 @@ const ImageUploadComponent = () => {
   };
 
   return (
-<div style={{ textAlign: "center" }} className="photo-box">
-<div
-  key={isImageChanged && selectedFile ? selectedFile : profileImage}
-  className="circular"
-  style={{
-    width: "200px",
-    height: "200px",
-    borderRadius: "50%",
-    backgroundImage: `url("${
-      isImageChanged && selectedFile
-        ? URL.createObjectURL(selectedFile) // Use a local URL for the preview
-        : profileImage ||
-          "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2220431045.jpg"
-    }")`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
-/>
+    <div style={{ textAlign: "center" }} className="photo-box">
+      <div
+        key={isImageChanged && selectedFile ? selectedFile : profileImage}
+        className="circular"
+        style={{
+          width: "200px",
+          height: "200px",
+          borderRadius: "50%",
+          backgroundImage: `url("${
+            isImageChanged && selectedFile
+              ? URL.createObjectURL(selectedFile) // Use a local URL for the preview
+              : profileImage ||
+                "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2220431045.jpg"
+          }")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
 
-
-               <div className="user_name">{personalInfo.fullName}</div>
-
+      <div className="user_name">{personalInfo.fullName}</div>
 
       {uploadedFileName && (
         <div className="uploaded-file-name">{uploadedFileName}</div>
       )}
 
-{showControls && hasUploadedImage && (
-  <Row justify="center" style={{ flexDirection: "column", alignItems: "center" }}>
-    <Col>
-      <Button
-        className="revert-button"
-        type="danger"
-        onClick={() => {
-          setHasUploadedImage(false);
-          setUploadedFileName("");
-          setSelectedFile(null);
-          setShowControls(false);
-        }}
-      >
-        X
-      </Button>
-    </Col>
-    <Col>
-      <Button
-        className="button-profile-photo"
-        type="primary"
-        onClick={handleSaveImage}
-        disabled={!isImageChanged}
-        style={{
-          height: "40px",
-          fontSize: "16px",
-          fontFamily: "Inter",
-          fontWeight: "400",
-          marginTop: "8px", // Adjust spacing between buttons if needed
-        }}
-      >
-        Yadda saxla
-      </Button>
-    </Col>
-  </Row>
-)}
+      {showControls && hasUploadedImage && (
+        <Row
+          justify="center"
+          style={{ flexDirection: "column", alignItems: "center" }}
+        >
+          <Col>
+            <Button
+              className="revert-button"
+              type="danger"
+              onClick={() => {
+                setHasUploadedImage(false);
+                setUploadedFileName("");
+                setSelectedFile(null);
+                setShowControls(false);
+              }}
+            >
+              X
+            </Button>
+          </Col>
+          <Col>
+            <Button
+              className="button-profile-photo"
+              type="primary"
+              onClick={handleSaveImage}
+              disabled={!isImageChanged}
+              style={{
+                height: "40px",
+                fontSize: "16px",
+                fontFamily: "Inter",
+                fontWeight: "400",
+                marginTop: "8px", // Adjust spacing between buttons if needed
+              }}
+            >
+              Yadda saxla
+            </Button>
+          </Col>
+        </Row>
+      )}
 
       <Row className="profile-photo-buttons">
         <Row>
@@ -267,49 +262,49 @@ const ImageUploadComponent = () => {
             <></>
           ) : (
             <>
-               <label className="button-profile-photo" htmlFor="fileInput">
-              Şəkil yükləyin
-            </label>
-            <input
-              id="fileInput"
-              type="file"
-              style={{
-                display: "none",
-                width: "50%",
-                height: "40px",
-                fontSize: "16px",
-                fontFamily: "Inter",
-                fontWeight: "400",
-              }}
-              onChange={handleImageUpload}
-              ref={fileInputRef}
-            />
-          </>
+              <label className="button-profile-photo" htmlFor="fileInput">
+                Şəkil yükləyin
+              </label>
+              <input
+                id="fileInput"
+                type="file"
+                style={{
+                  display: "none",
+                  width: "50%",
+                  height: "40px",
+                  fontSize: "16px",
+                  fontFamily: "Inter",
+                  fontWeight: "400",
+                }}
+                onChange={handleImageUpload}
+                ref={fileInputRef}
+              />
+            </>
           )}
         </Row>
         <Row>
-        {hasUploadedImage && (
-          <>
-            <label
-              className="button-profile-photo"
-              htmlFor="fileInput"
-              style={{
-                cursor: "pointer",
-              }}
-              key={isImageChanged}
-            >
-              Şəkili dəyişin
-            </label>
-            <input
-              id="fileInput"
-              type="file"
-              style={{
-                display: "none",
-              }}
-              onChange={handleImageChange}
-              ref={fileInputRef}
-            />
-          </>
+          {hasUploadedImage && (
+            <>
+              <label
+                className="button-profile-photo"
+                htmlFor="fileInput"
+                style={{
+                  cursor: "pointer",
+                }}
+                key={isImageChanged}
+              >
+                Şəkili dəyişin
+              </label>
+              <input
+                id="fileInput"
+                type="file"
+                style={{
+                  display: "none",
+                }}
+                onChange={handleImageChange}
+                ref={fileInputRef}
+              />
+            </>
           )}
         </Row>
         <Row>
