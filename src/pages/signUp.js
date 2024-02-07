@@ -15,8 +15,8 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState(""); 
   const [loading, setLoading] = useState(false); 
   const passwordRegex = 
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; 
- 
+  /^(?=.[A-Z])(?!.[\W_]).{8,}$/;
+
   const validatePassword = (value, isRequired) => { 
     // Check if the password is required and not empty 
     if (isRequired && (!value || value.trim() === "")) { 
@@ -94,7 +94,7 @@ const Register = () => {
           error.response.data.message.includes("parol") 
         ) { 
           setPasswordError( 
-            "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character." 
+"Şifrəniz ən azı 8 simvol uzunluğunda olmalıdır, ən azı bir böyük hərf daxil edin"
           ); 
         } else { 
           setPasswordError(""); 

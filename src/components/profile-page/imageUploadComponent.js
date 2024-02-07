@@ -154,7 +154,7 @@ const ImageUploadComponent = () => {
 
       console.log("Image Upload Response:", response.data);
 
-      message.success("Profile image saved successfully");
+      message.success("Profil şəkli uğurla yadda saxlanıldı");
       setIsImageChanged(false);
       setUploadedFileName(""); // Clear uploaded file name
       setShowControls(false); // Hide controls after saving
@@ -163,7 +163,7 @@ const ImageUploadComponent = () => {
         "Error saving image:",
         error.response?.data || error.message
       );
-      message.error("Failed to save profile image. Please try again.");
+      message.error("Profil şəklini saxlamaq alınmadı. Zəhmət olmasa bir daha cəhd edin.");
     }
   };
 
@@ -184,86 +184,85 @@ const ImageUploadComponent = () => {
       );
       setHasUploadedImage(false);
       setUploadedFileName("");
-      message.success("Profile image removed successfully");
+      message.success("Profil şəkli uğurla silindi");
     } catch (error) {
       console.error("Error removing image:", error);
-      message.error("Failed to remove profile image. Please try again.");
+      message.error("Profil şəklini silmək alınmadı. Zəhmət olmasa bir daha cəhd edin.");
     }
   };
 
   return (
     <div style={{ textAlign: "center" }} className="photo-box">
-      <div
-        key={isImageChanged && selectedFile ? selectedFile : profileImage}
-        className="circular"
-        style={{
-          width: "200px",
-          height: "200px",
-          borderRadius: "50%",
-          backgroundImage: `url("${
-            isImageChanged && selectedFile
-              ? URL.createObjectURL(selectedFile) // Use a local URL for the preview
-              : profileImage ||
-                "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2220431045.jpg"
-          }")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+      <div className=" d-flex justify-content-center">
+        <div
+          key={isImageChanged && selectedFile ? selectedFile : profileImage}
+          className="circular position-relative"
+          style={{
+            width: "200px",
+            height: "200px",
+            borderRadius: "50%",
+            backgroundImage: `url("${
+              isImageChanged && selectedFile
+                ? URL.createObjectURL(selectedFile) // Use a local URL for the preview
+                : profileImage ||
+                  "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2220431045.jpg"
+            }")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {showControls && hasUploadedImage && (
+            <Row
+              justify="center"
+              style={{ flexDirection: "column", alignItems: "center" }}
+            >
+              <Col
+                className="position-absolute"
+                style={{ right: "0px", top: "5px" }}
+              >
+                <Button
+                  style={{ border: "none", backgroundColor: "transparent" }}
+                  // className="revert-button"
+                  // type="danger"
+                  onClick={() => {
+                    setHasUploadedImage(false);
+                    setUploadedFileName("");
+                    setSelectedFile(null);
+                    setShowControls(false);
+                  }}
+                >
+                  <img
+                    src="/media/pics/x-button.png"
+                    alt=""
+                    width="30px"
+                    height="30px"
+                  />
+                </Button>
+              </Col>
+            </Row>
+          )}
+        </div>
+      </div>
 
       <div className="user_name">{personalInfo.fullName}</div>
+     
 
-      {uploadedFileName && (
-        <div className="uploaded-file-name">{uploadedFileName}</div>
-      )}
-
-      {showControls && hasUploadedImage && (
-        <Row
-          justify="center"
-          style={{ flexDirection: "column", alignItems: "center" }}
-        >
-          <Col>
-            <Button
-              className="revert-button"
-              type="danger"
-              onClick={() => {
-                setHasUploadedImage(false);
-                setUploadedFileName("");
-                setSelectedFile(null);
-                setShowControls(false);
-              }}
-            >
-              X
-            </Button>
-          </Col>
-          <Col>
-            <Button
-              className="button-profile-photo"
-              type="primary"
-              onClick={handleSaveImage}
-              disabled={!isImageChanged}
-              style={{
-                height: "40px",
-                fontSize: "16px",
-                fontFamily: "Inter",
-                fontWeight: "400",
-                marginTop: "8px", // Adjust spacing between buttons if needed
-              }}
-            >
-              Yadda saxla
-            </Button>
-          </Col>
-        </Row>
-      )}
-
-      <Row className="profile-photo-buttons">
-        <Row>
+      <Row className=" d-flex justify-content-center align-items-center">
+        <Col>
           {hasUploadedImage ? (
-            <></>
+            <>
+
+            </>
           ) : (
             <>
-              <label className="button-profile-photo" htmlFor="fileInput">
-                Şəkil yükləyin
+              <label style={{ cursor:"pointer"}} htmlFor="fileInput">
+                <img
+                  src="/media/pics/image-gallery.png"
+                  alt=""
+                  width="30px"
+                  height="30px"
+                 
+                />
               </label>
               <input
                 id="fileInput"
@@ -281,19 +280,25 @@ const ImageUploadComponent = () => {
               />
             </>
           )}
-        </Row>
-        <Row>
+        </Col>
+        <Col>
           {hasUploadedImage && (
             <>
               <label
-                className="button-profile-photo"
+                
                 htmlFor="fileInput"
                 style={{
+                  padding:"0px 10px",
                   cursor: "pointer",
                 }}
                 key={isImageChanged}
               >
-                Şəkili dəyişin
+                <img
+                  src="/media/pics/change.png"
+                  alt=""
+                  width="30px"
+                  height="30px"
+                />
               </label>
               <input
                 id="fileInput"
@@ -306,22 +311,41 @@ const ImageUploadComponent = () => {
               />
             </>
           )}
-        </Row>
-        <Row>
-          <Button
-            className="button-profile-photo"
-            type="danger"
-            onClick={handleRemoveImage}
-            style={{
-              height: "40px",
-              fontSize: "16px",
-              fontFamily: "Inter",
-              fontWeight: "400",
-            }}
-          >
-            Şəkili silin
+        </Col>
+        <Col>
+          <Button className="button-profile-photo" onClick={handleRemoveImage}>
+            <img src="/media/pics/bin.png" alt="" width="30px" height="30px" />
           </Button>
+        </Col>
+        {showControls && hasUploadedImage && (
+        <Row
+          justify="center"
+          style={{ flexDirection: "column", alignItems: "center" }}
+        >
+          <Col>
+            <Button
+              className="button-profile-photo"
+              // type="primary"
+              onClick={handleSaveImage}
+              disabled={!isImageChanged}
+              // style={{
+              //   height: "40px",
+              //   fontSize: "16px",
+              //   fontFamily: "Inter",
+              //   fontWeight: "400",
+              //   marginTop: "8px", // Adjust spacing between buttons if needed
+              // }}
+            >
+              <img
+                src="/media/pics/check.png"
+                alt=""
+                width="30px"
+                height="30px"
+              />
+            </Button>
+          </Col>
         </Row>
+      )}
       </Row>
     </div>
   );

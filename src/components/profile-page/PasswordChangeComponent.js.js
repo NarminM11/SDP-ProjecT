@@ -22,7 +22,7 @@ const PasswordChangeComponent = () => {
 
 
   const regex =
-    /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])(?!.* ).{8,16}$/;
+  /^(?=.[A-Z])(?!.[\W_]).{8,}$/;
 
   const handleCurrentPasswordChange = (event) => {
     setCurrentPassword(event.target.value);
@@ -33,7 +33,7 @@ const PasswordChangeComponent = () => {
     return new Promise((resolve, reject) => {
       if (!regex.test(value)) {
         setNewPasswordError(
-          "Şifrədə ən azı bir kiçik hərf, bir böyük hərf, bir xüsusi simvol və ən azı 8 simvol uzunluğunda olmalıdır"
+"Şifrəniz ən azı 8 simvol uzunluğunda olmalıdır, ən azı bir böyük hərf daxil edin"
         );
         console.log("password sehvdi");
         return false;
@@ -139,11 +139,6 @@ const PasswordChangeComponent = () => {
 
   return (
 <>
-<div className="change-password-heading">
-  <p className="falock">
-    <FontAwesomeIcon icon={faLock} /> Şifrəni dəyişmək
-  </p>{" "}
-  </div>
 
     <Form
       name="accountSettingsForm"
@@ -152,7 +147,7 @@ const PasswordChangeComponent = () => {
     >
        
       <Row className="old-password">
-        <Col xs={{ span: 12 }} md={{ span: 12 }} lg={{ span: 12 }} xl={{ span: 24 }}>
+        <Col xs={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }} xl={{ span: 24 }}>
           <Form.Item
             name="currentPass"
             label="Köhnə şifrə"
@@ -179,7 +174,7 @@ const PasswordChangeComponent = () => {
       </Row>
 
       <Row className="new-password">
-        <Col xs={{ span: 12 }} md={{ span: 12 }} lg={{ span: 12 }} xl={{ span: 24 }}>
+        <Col xs={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }} xl={{ span: 24 }}>
           <Form.Item
             name="newPassword"
             label="Yeni şifrə"
@@ -205,7 +200,7 @@ const PasswordChangeComponent = () => {
       </Row>
 
       <Row className="confirm-password">
-        <Col xs={{ span: 12 }} md={{ span: 12 }} lg={{ span: 12 }} xl={{ span: 24 }}>
+        <Col xs={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }} xl={{ span: 24 }}>
           <Form.Item
             name="confirmPassword"
             label="Təsdiq şifrə"
@@ -240,10 +235,10 @@ const PasswordChangeComponent = () => {
         </Col>
       </Row>
 
-      <Row>
-        <div className="profile-button">
+      <Row className=" justify-content-center d-flex">
+        <div className="profile-button justify-content-center d-flex">
           <Space>
-            <Button
+            {/* <Button
               type="button"
               onClick={handleCancel}
               style={{
@@ -258,7 +253,7 @@ const PasswordChangeComponent = () => {
               }}
             >
               Ləğv etmək
-            </Button>
+            </Button> */}
 
             <Button
               type="primary"

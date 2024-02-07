@@ -80,7 +80,13 @@ const LogIn = () => {
           <h2 className="login-heading">Daxil ol</h2>
           <Form className="loginForm" layout="vertical">
             <Row gutter={16}>
-              <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }} xl={{ span: 24 }}>
+              <Col
+                xs={{ span: 24 }}
+                sm={{ span: 24 }}
+                md={{ span: 24 }}
+                lg={{ span: 24 }}
+                xl={{ span: 24 }}
+              >
                 <Form.Item
                   label="İstifadəçi adı"
                   name="username"
@@ -100,7 +106,13 @@ const LogIn = () => {
                   />
                 </Form.Item>
               </Col>
-              <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }} xl={{ span: 24 }}>
+              <Col
+                xs={{ span: 24 }}
+                sm={{ span: 24 }}
+                md={{ span: 24 }}
+                lg={{ span: 24 }}
+                xl={{ span: 24 }}
+              >
                 <Form.Item
                   label="Şifrə"
                   name="password"
@@ -116,8 +128,7 @@ const LogIn = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="login-text-input"
-                    style={{borderRadius:"8px" }}
-
+                    style={{ borderRadius: "8px" }}
                     placeholder="*******"
                   />
                 </Form.Item>
@@ -153,27 +164,26 @@ const LogIn = () => {
           </Form>
 
           <div className="login-checkbox-row">
-          <div className="login-check-remember">
-          <Checkbox
-  className="rememberCheckbox"
-  checked={rememberMe}
-  onChange={(e) => setRememberMe(e.target.checked)}
->
-  Məni xatırla
-</Checkbox>
-
+            <div className="login-check-remember">
+              <Checkbox
+                className="rememberCheckbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              >
+                Məni xatırla
+              </Checkbox>
             </div>
             <p className="forgot-password">
               {/* <Link to="/forgot-password"> */}
               Şifrəni unutmusan?
               {/* </Link> */}
             </p>
-           </div>
+          </div>
 
           <hr />
           <p>Ya da</p>
           <p className="forgot-password">
-          <Link to="/signup">Yeni istifadəçisən? Qeydiyyatdan keçin</Link>
+            <Link to="/signup">Yeni istifadəçisən? Qeydiyyatdan keçin</Link>
           </p>
         </div>
       </div>
