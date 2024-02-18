@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react"; 
+import { useTheme } from '@mui/system';
+
 // import { useNavigate } from 'react-router-dom'; 
 // import { Row, Col, Form, Input, Button, Checkbox, message } from "antd"; 
 import {
@@ -28,13 +30,13 @@ const Register = () => {
   const [loading, setLoading] = useState(false); 
   const [termsChecked, setTermsChecked] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const theme = useTheme(); 
 
-  // Function to toggle password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-  const passwordRegex = 
-    /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/; 
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
  
     const validatePassword = (value) => {
       let error = "";
@@ -42,7 +44,7 @@ const Register = () => {
         error = "Şifrə tələb olunur.";
       } else if (!passwordRegex.test(value)) {
         error = 
-          "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
+        "Şifrəniz ən azı 8 simvol uzunluğunda olmalıdır, ən azı bir böyük hərf daxil edin"
         
       } 
         setPasswordError(error);
@@ -52,7 +54,6 @@ const Register = () => {
 
     useEffect(() => {
       if (passwordError) {
-        // Handle error, return or show message
         return;
       }
     }, [passwordError]);
@@ -135,111 +136,104 @@ const Register = () => {
       <div className="signUp-container d-flex align-items-center justify-content-center"> 
      
         <form onSubmit={signUp}> 
-          <Grid container spacing={2} className="signUp-frame mt-5"> 
+        <Grid container justifyContent="center" alignItems="center" className="signUp-frame mt-5"> 
             <Grid item xs={12}  className="sign-heading"> 
-              <Typography variant="h4"> 
+              <Typography variant="h4"
+                      style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(3) }}>
+                      
                 Qeydiyyatdan keç 
               </Typography> 
             </Grid> 
    
-            <Grid item xs={12}> 
-              <TextField 
-                className="signUp-text-input" 
-                label="Ad Soyad" 
-                variant="outlined" 
-                sx={{width:"100%", '& fieldset': { borderColor: '#2b2676' } }}
-                value={name} 
-                onChange={(e) => setName(e.target.value)} 
-              /> 
-            </Grid> 
-   
-            <Grid item xs={12} > 
-              <TextField 
-                className="signUp-text-input" 
-                label="İstifadəçi adı" 
-                variant="outlined" 
-                InputProps={{ style: { color: '#2b2676' } }} 
-                sx={{width:"100%",'& fieldset': { borderColor: '#2b2676' } }}
-              
+            <Grid item xs={12} className="mb-4"> 
+  <TextField 
+    className="signUp-text-input" 
+    label="Ad Soyad" 
+    variant="outlined" 
+    sx={{ width: "100%", '& fieldset': { borderColor: '#2b2676' } }}
+    value={name} 
+    onChange={(e) => setName(e.target.value)} 
+  /> 
+</Grid>
 
-                value={username} 
-                onChange={(e) => setUsername(e.target.value)} 
-              /> 
-            </Grid> 
-   
-            <Grid item xs={12}> 
-              <TextField 
-                className="signUp-text-input" 
-                label="Epoçt adressi" 
-                variant="outlined" 
-                sx={{width:"100%", '& fieldset': { borderColor: '#2b2676' } }}
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-              /> 
-            </Grid> 
-   
-            <Grid item xs={12}> 
-              <TextField 
-                className="signUp-text-input" 
-                label="Şifrə"
+<Grid item xs={12} className="mb-4"> {/* Add margin-bottom */}
+  <TextField 
+    className="signUp-text-input" 
+    label="İstifadəçi adı" 
+    variant="outlined" 
+    InputProps={{ style: { color: '#2b2676' } }} 
+    sx={{ width: "100%", '& fieldset': { borderColor: '#2b2676' } }}
+    value={username} 
+    onChange={(e) => setUsername(e.target.value)} 
+  /> 
+</Grid>
 
-                                variant="outlined" 
-                sx={{width:"100%", '& fieldset': { borderColor: '#2b2676' } }}
-                type={passwordVisible ? "text" : "password"}  // Toggle visibility
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)}
-                // setPassword(e.target.value); 
-                //   // validatePassword(e.target.value); 
-                // }} 
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={togglePasswordVisibility}
-                        edge="end"
-                        style={{ color: '#2b2676' }}
-                      >
-                        {passwordVisible ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              /> 
-              {passwordError && ( 
-                <div className="signUp-error-message"> 
-                  <p>{passwordError}</p> 
-                </div> 
-              )} 
-              
-            </Grid> 
-   
-            <Grid item xs={12}> 
-              <TextField 
-                className="signUp-text-input" 
-                label="Şifrəni Təsdiqləyin" 
-                variant="outlined" 
-                sx={{width:"100%", '& fieldset': { borderColor: '#2b2676' } }}
-                type="password" 
-                value={confirm_password} 
-                onChange={(e) => setPassword(e.target.value)}
-                // setPassword(e.target.value); 
-                //   // validatePassword(e.target.value); 
-                // }} 
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={togglePasswordVisibility}
-                        edge="end"
-                        style={{ color: '#2b2676' }}
-                      >
-                        {passwordVisible ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}              /> 
-            </Grid> 
-   
+<Grid item xs={12} className="mb-4"> {/* Add margin-bottom */}
+  <TextField 
+    className="signUp-text-input" 
+    label="Epoçt adressi" 
+    variant="outlined" 
+    sx={{ width: "100%", '& fieldset': { borderColor: '#2b2676' } }}
+    value={email} 
+    onChange={(e) => setEmail(e.target.value)} 
+  /> 
+</Grid>
+
+<Grid item xs={12} className="mb-4"> {/* Add margin-bottom */}
+  <TextField 
+    className="signUp-text-input" 
+    label="Şifrə"
+    variant="outlined" 
+    sx={{ width: "100%", '& fieldset': { borderColor: '#2b2676' } }}
+    type={passwordVisible ? "text" : "password"}  // Toggle visibility
+    value={password} 
+    onChange={(e) => setPassword(e.target.value)}
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="end">
+          <IconButton
+            onClick={togglePasswordVisibility}
+            edge="end"
+            style={{ color: '#2b2676' }}
+          >
+            {passwordVisible ? <VisibilityOff /> : <Visibility />}
+          </IconButton>
+        </InputAdornment>
+      ),
+    }}
+  /> 
+  {passwordError && ( 
+    <div className="signUp-error-message"> 
+      <p>{passwordError}</p> 
+    </div> 
+  )} 
+</Grid>
+
+<Grid item xs={12} className="mb-4"> {/* Add margin-bottom */}
+  <TextField 
+    className="signUp-text-input" 
+    label="Şifrəni Təsdiqləyin" 
+    variant="outlined" 
+    sx={{ width: "100%", '& fieldset': { borderColor: '#2b2676' } }}
+    type="password" 
+    value={confirm_password} 
+    onChange={(e) => setPassword(e.target.value)}
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="end">
+          <IconButton
+            onClick={togglePasswordVisibility}
+            edge="end"
+            style={{ color: '#2b2676' }}
+          >
+            {passwordVisible ? <VisibilityOff /> : <Visibility />}
+          </IconButton>
+        </InputAdornment>
+      ),
+    }} 
+  /> 
+</Grid>
+
             <Grid container alignItems="center" className="check">
   <Grid item>
     <Checkbox

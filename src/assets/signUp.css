@@ -16,11 +16,12 @@
 }
 .signUp-frame {
   margin-top: 50px; 
+  padding: 20px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   max-width: 600px;

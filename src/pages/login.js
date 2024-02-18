@@ -92,12 +92,14 @@ const LogIn = () => {
             Daxil ol
           </Typography>
           <form className="loginForm">
+            
             <TextField
+            className="mb-4"
               label="İstifadəçi adı"
               variant="outlined"
               margin="normal"
               value={username}
-              sx={{ width: "90%", "& fieldset": { borderColor: "#2b2676" } }}
+              sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="sample@jestdili.az"
             />
@@ -106,7 +108,7 @@ const LogIn = () => {
               type="password"
               variant="outlined"
               InputProps={{ style: { color: "#2b2676" } }}
-              sx={{ width: "90%", "& fieldset": { borderColor: "#2b2676" } }}
+              sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
               margin="normal"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -150,31 +152,10 @@ const LogIn = () => {
             </Typography>
           </div>
 
-          {/* <div className="login-checkbox-row">
-  <Grid container alignItems="center" className="check">
-    <Grid item>
-      <Checkbox
-        className="rememberCheckbox"
-        checked={rememberMe}
-        onChange={(e) => setRememberMe(e.target.checked)}
-      />
-    </Grid>
-    <Grid item>
-      <Typography variant="body1" className="signUp-term">
-        Məni xatırla
-      </Typography>
-    </Grid>
-  </Grid>
-
-  <Grid container alignItems="center" className="forgot-password">
-    <Typography variant="body1">
-      Şifrəni unutmusan?
-    </Typography>
-  </Grid>
-</div> */}
+   
 
           <hr />
-          <Typography>Ya da</Typography>
+          <Typography className="mb-4">Ya da</Typography>
           <Typography className="forgot-password">
             <Link to="/signup">Yeni istifadəçisən? Qeydiyyatdan keçin</Link>
           </Typography>
