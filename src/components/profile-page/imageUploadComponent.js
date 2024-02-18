@@ -232,7 +232,7 @@ const ImageUploadComponent = () => {
                   }}
                 >
                   <img
-                    src="/media/pics/x-button.png"
+                    src="https://i.pinimg.com/736x/2f/b9/09/2fb909b74a854f0715e64dda5825990d.jpg"
                     alt=""
                     width="30px"
                     height="30px"
@@ -257,7 +257,7 @@ const ImageUploadComponent = () => {
             <>
               <label style={{ cursor:"pointer"}} htmlFor="fileInput">
                 <img
-                  src="/media/pics/image-gallery.png"
+                  src="https://w7.pngwing.com/pngs/348/219/png-transparent-gallery-image-picture-ui-photo-user-interface-outline-icon.png"
                   alt=""
                   width="30px"
                   height="30px"
@@ -294,7 +294,7 @@ const ImageUploadComponent = () => {
                 key={isImageChanged}
               >
                 <img
-                  src="/media/pics/change.png"
+                  src="https://images.unsplash.com/photo-1499244571948-7ccddb3583f1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hhbmdlfGVufDB8fDB8fHww"
                   alt=""
                   width="30px"
                   height="30px"
@@ -314,7 +314,7 @@ const ImageUploadComponent = () => {
         </Col>
         <Col>
           <Button className="button-profile-photo" onClick={handleRemoveImage}>
-            <img src="/media/pics/bin.png" alt="" width="30px" height="30px" />
+            <img src="" alt="" width="30px" height="30px" />
           </Button>
         </Col>
         {showControls && hasUploadedImage && (
@@ -337,7 +337,7 @@ const ImageUploadComponent = () => {
               // }}
             >
               <img
-                src="/media/pics/check.png"
+                src="https://w7.pngwing.com/pngs/860/512/png-transparent-instagram-social-media-save-instagram-instagram-save-social-media-logo-icon-thumbnail.png"
                 alt=""
                 width="30px"
                 height="30px"

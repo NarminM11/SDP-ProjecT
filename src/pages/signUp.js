@@ -1,7 +1,19 @@
-import React, { useState } from "react"; 
+import React, { useState, useEffect } from "react"; 
 // import { useNavigate } from 'react-router-dom'; 
-import { Row, Col, Form, Input, Button, Checkbox, message } from "antd"; 
-import { LoadingOutlined } from "@ant-design/icons"; 
+// import { Row, Col, Form, Input, Button, Checkbox, message } from "antd"; 
+import {
+  Button,
+  Checkbox,
+  TextField,
+  Grid,
+  Container,
+  Typography,
+} from "@mui/material";
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+// import { LoadingOutlined } from "@ant-design/icons"; 
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import { InputAdornment, IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axios from "axios"; 
 import "../assets/signUp.css"; 
 import Layout from "../components/Layout/layout"; 
@@ -14,27 +26,42 @@ const Register = () => {
   const [message, setMessage] = useState(""); 
   const [passwordError, setPasswordError] = useState(""); 
   const [loading, setLoading] = useState(false); 
+  const [termsChecked, setTermsChecked] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  // Function to toggle password visibility
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
   const passwordRegex = 
-   /^(?=.[A-Z])(?!.[\W_]).{8,}$/;
+    /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/; 
  
-  const validatePassword = (value, isRequired) => { 
-    // Check if the password is required and not empty 
-    if (isRequired && (!value || value.trim() === "")) { 
-      setPasswordError("Password is required."); 
-    } else if (!passwordRegex.test(value)) { 
-      setPasswordError( 
-        "Parol ən azı 8 simvoldan, bir böyük hərfdən, bir kiçik hərfdən, bir rəqəmdən və bir xüsusi simvoldan ibarət olmalıdır." 
-      ); 
-    } else { 
-      setPasswordError(""); 
-    } 
-  }; 
- 
+    const validatePassword = (value) => {
+      let error = "";
+      if (!value.trim()) {
+        error = "Şifrə tələb olunur.";
+      } else if (!passwordRegex.test(value)) {
+        error = 
+          "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
+        
+      } 
+        setPasswordError(error);
+      return error;
+      
+    };
+
+    useEffect(() => {
+      if (passwordError) {
+        // Handle error, return or show message
+        return;
+      }
+    }, [passwordError]);
+    
   async function signUp(event) { 
     try { 
       event.preventDefault(); // Prevent the default form submission 
  
-      if (!name  || !username || !email || !password || !confirm_password) { 
+      if (!name || !username  || !email || !password || !confirm_password) { 
         setMessage("Zəhmət olmasa bütün tələb olunan sahələri doldurun."); 
         return; 
       } 
@@ -45,13 +72,11 @@ const Register = () => {
       let item = { name, username, email, password, confirm_password }; 
       console.log("Payload being sent:", item); 
  
-      validatePassword(password, isPasswordRequired); 
+      validatePassword(password); 
  
       // Check if there is a password error before making the API call 
-      if (passwordError) { 
-        return; 
-      } 
- 
+    
+
       let result = await axios.post( 
         "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/register", 
         item, 
@@ -70,7 +95,7 @@ const Register = () => {
       } 
  
       setMessage("Qeydiyyat uğurlu oldu!"); 
-      window.location.href = "/profile"; 
+      window.location.href = "/login"; 
     } catch (error) { 
       console.error("Error during signup:", error); 
       if (error.response) { 
@@ -85,7 +110,7 @@ const Register = () => {
             "E-poçt artıq qeydiyyatdan keçib. Fərqli istifadə edin və ya daxil olun." 
           ); 
         } else { 
-          setMessage("Qeydiyyat zamanı xəta baş verdi."); 
+          setMessage("An error occurred during registration."); 
         } 
  
         // Check if the error includes a specific password-related message 
@@ -94,7 +119,8 @@ const Register = () => {
           error.response.data.message.includes("parol") 
         ) { 
           setPasswordError( 
-            "Şifrəniz ən azı 8 simvol uzunluğunda olmalıdır, ən azı bir böyük hərf daxil edin"          ); 
+            "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character." 
+          ); 
         } else { 
           setPasswordError(""); 
         } 
@@ -106,223 +132,163 @@ const Register = () => {
  
   return ( 
     <Layout> 
-      <div className="signUp-container"> 
-        <div className="signUp-frame"> 
-          <h2 className="sign-heading">Qeydiyyatdan keç</h2> 
-          <Form 
-            name="signUpForm" 
-            initialValues={{ 
-              remember: true, 
-            }} 
-            layout="vertical" 
-            noValidate
-> 
-            <Row gutter={16}> 
-              <Col xs={24} sm={24} md={12} lg={12} xl={24}> 
-                <Form.Item 
-                  label="Ad Soyad" 
-                  name="fullName" 
-                  rules={[ 
-                    { 
-                      required: true, 
-                      message: "Zəhmət olmasa tam adınızı daxil edin!", 
-                    }, 
-                  ]} 
-                > 
-                  <Input 
-                    value={name} 
-                    onChange={(e) => setName(e.target.value)} 
-                    type="text" 
-                    className="signUp-text-input" 
-                    placeholder="User user" 
-                    style={{ width: "100%" }} 
-                  /> 
-                </Form.Item> 
-              </Col> 
- 
-              <Col xs={24} sm={12} md={12} lg={12} xl={24}> 
-                <Form.Item 
-                  label="İstifadəçi adı" 
-                  name="username" 
-                  rules={[ 
-                    { 
-                      required: true, 
-                      message: "Zəhmət olmasa istifadəçi adınızı daxil edin!", 
-                    }, 
-                  ]} 
-                > 
-                  <Input 
-                    value={username} 
-                    onChange={(e) => setUsername(e.target.value)} 
-                    type="text" 
-                    className="signUp-text-input" 
-                    placeholder="user123" 
-                    style={{ width: "100%" }} 
-                  /> 
-                </Form.Item> 
-              </Col> 
- 
-              <Col xs={24} sm={12} md={12} lg={12} xl={24}> 
-                <Form.Item 
-                  label="Epoçt adressi" 
-                  name="email" 
-                  rules={[ 
-                    { 
-                      type: "email", 
-                      message: "Daxil edilən etibarlı e-poçt ünvanı deyil!", 
-                    }, 
-                    { 
-                      required: true, 
-                      message: "Zəhmət olmasa e-poçtunuzu daxil edin!", 
-                    }, 
-                  ]} 
-                > 
-                  <Input 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
-                    type="text" 
-                    className="signUp-text-input" 
-                    placeholder="user123@gamil.com" 
-                    style={{ width: "100%" }} 
-                  /> 
-                </Form.Item> 
-              </Col> 
- 
-              <Col xs={24} sm={12} md={12} lg={12} xl={24}> 
-                <Form.Item 
-                  label="Şifrə" 
-                  name="password" 
-                  rules={[ 
-                    { 
-                      required: true, 
-                      message: "Zəhmət olmasa şifrənizi daxil edin!", 
-                    }, 
-                    { 
-                      validator: (_, value) => { 
-                        validatePassword(value); 
-                        return Promise.resolve(); 
-                      }, 
-                    }, 
-                  ]} 
-                > 
-                  <Input.Password 
-                    value={password} 
-                    onChange={(e) => { 
-                      setPassword(e.target.value); 
-                      validatePassword(e.target.value); 
-                    }} 
-                    type="password" 
-                    className="signUp-text-input" 
-                    placeholder="***" 
-                  /> 
-                </Form.Item> 
- 
-                {passwordError && ( 
-                  <div className="signUp-error-message"> 
-                    <p>{passwordError}</p> 
-                  </div> 
-                )} 
-              </Col> 
- 
-              <Col xs={24} sm={12} md={12} lg={12} xl={24}> 
-                <Form.Item 
-                  label="Şifrəni Təsdiqləyin" 
-                  name="confirmPassword" 
-                  dependencies={["password"]} 
-                  rules={[ 
-                    { 
-                      required: true,
-message: "Zəhmət olmasa parolunuzu təsdiqləyin!", 
-                    }, 
-                    ({ getFieldValue }) => ({ 
-                      validator(_, value) { 
-                        if (!value || getFieldValue("password") === value) { 
-                          return Promise.resolve(); 
-                        } 
-                        return Promise.reject( 
-                          new Error("İki parol uyğun gəlmir!") 
-                        ); 
-                      }, 
-                    }), 
-                  ]} 
-                > 
-                  <Input.Password 
-                    value={confirm_password} 
-                    onChange={(e) => setConfirm_Password(e.target.value)} 
-                    type="password" 
-                    className="signUp-text-input" 
-                    placeholder="***" 
-                  /> 
-                </Form.Item> 
-              </Col> 
- 
-              <Col xs={24} sm={24} md={24} lg={24} xl={24}> 
-                <Form.Item 
-                  name="termsCheckbox" 
-                  valuePropName="checked" 
-                  rules={[ 
-                    { 
-                      validator: (_, value) => 
-                        value 
-                          ? Promise.resolve() 
-                          : Promise.reject( 
-                              "Zəhmət olmasa Qaydalar və Şərtlərlə razılaşın!" 
-                            ), 
-                    }, 
-                  ]} 
-                > 
-                  <Checkbox className="signUp-term"> 
-                    Mən Qaydalar və Şərtlərlə razıyam! 
-                  </Checkbox> 
-                </Form.Item> 
-              </Col> 
- 
-              <Col xs={24} sm={24} md={24} lg={24} xl={24}> 
-                {message && ( 
-                  <div className="signUp-error-message"> 
-                    <p>{message}</p> 
-                  </div> 
-                )} 
-              </Col> 
- 
-              <Col xs={24} sm={24} md={24} lg={24} xl={24}> 
-                <Form.Item> 
-                  <div className="signUp-button"> 
-                    <Button 
-                      onClick={signUp} 
-                      type="primary" 
-                      htmlType="submit" 
-                      style={{ 
-                        backgroundColor: "#2b2676", 
-                        fontSize: 16, 
-                        fontFamily: "Inter", 
-                        fontWeight: "400", 
-                        wordWrap: "break-word", 
-                      }} 
-                      loading={loading} 
-                      icon={ 
-                        loading ? ( 
-                          <LoadingOutlined style={{ fontSize: 24 }} /> 
-                        ) : null 
-                      } 
-                    > 
-                      {loading ? "Qeydiyyatdan keçilir..." : "Qeydiyyatdan keç"} 
-                    </Button> 
-                  </div> 
-                </Form.Item> 
-              </Col> 
-            </Row> 
-          </Form> 
- 
-          <div className="login-option"> 
-            <a href="/login" className="signUp-user"> 
-              Artıq hesabınız var? Daxil olun! 
-            </a> 
-          </div> 
-        </div> 
+      <div className="signUp-container d-flex align-items-center justify-content-center"> 
+     
+        <form onSubmit={signUp}> 
+          <Grid container spacing={2} className="signUp-frame mt-5"> 
+            <Grid item xs={12}  className="sign-heading"> 
+              <Typography variant="h4"> 
+                Qeydiyyatdan keç 
+              </Typography> 
+            </Grid> 
+   
+            <Grid item xs={12}> 
+              <TextField 
+                className="signUp-text-input" 
+                label="Ad Soyad" 
+                variant="outlined" 
+                sx={{width:"100%", '& fieldset': { borderColor: '#2b2676' } }}
+                value={name} 
+                onChange={(e) => setName(e.target.value)} 
+              /> 
+            </Grid> 
+   
+            <Grid item xs={12} > 
+              <TextField 
+                className="signUp-text-input" 
+                label="İstifadəçi adı" 
+                variant="outlined" 
+                InputProps={{ style: { color: '#2b2676' } }} 
+                sx={{width:"100%",'& fieldset': { borderColor: '#2b2676' } }}
+              
+
+                value={username} 
+                onChange={(e) => setUsername(e.target.value)} 
+              /> 
+            </Grid> 
+   
+            <Grid item xs={12}> 
+              <TextField 
+                className="signUp-text-input" 
+                label="Epoçt adressi" 
+                variant="outlined" 
+                sx={{width:"100%", '& fieldset': { borderColor: '#2b2676' } }}
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+              /> 
+            </Grid> 
+   
+            <Grid item xs={12}> 
+              <TextField 
+                className="signUp-text-input" 
+                label="Şifrə"
+
+                                variant="outlined" 
+                sx={{width:"100%", '& fieldset': { borderColor: '#2b2676' } }}
+                type={passwordVisible ? "text" : "password"}  // Toggle visibility
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)}
+                // setPassword(e.target.value); 
+                //   // validatePassword(e.target.value); 
+                // }} 
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={togglePasswordVisibility}
+                        edge="end"
+                        style={{ color: '#2b2676' }}
+                      >
+                        {passwordVisible ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              /> 
+              {passwordError && ( 
+                <div className="signUp-error-message"> 
+                  <p>{passwordError}</p> 
+                </div> 
+              )} 
+              
+            </Grid> 
+   
+            <Grid item xs={12}> 
+              <TextField 
+                className="signUp-text-input" 
+                label="Şifrəni Təsdiqləyin" 
+                variant="outlined" 
+                sx={{width:"100%", '& fieldset': { borderColor: '#2b2676' } }}
+                type="password" 
+                value={confirm_password} 
+                onChange={(e) => setPassword(e.target.value)}
+                // setPassword(e.target.value); 
+                //   // validatePassword(e.target.value); 
+                // }} 
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={togglePasswordVisibility}
+                        edge="end"
+                        style={{ color: '#2b2676' }}
+                      >
+                        {passwordVisible ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}              /> 
+            </Grid> 
+   
+            <Grid container alignItems="center" className="check">
+  <Grid item>
+    <Checkbox
+      checked={termsChecked}
+      onChange={(e) => setTermsChecked(e.target.checked)}
+      style={{ color: '#2b2676' }} 
+    />
+  </Grid>
+  <Grid item>
+    <Typography variant="body1" className="signUp-term">
+      Mən Qaydalar və Şərtlərlə razıyam!
+    </Typography>
+  </Grid>
+</Grid>
+
+   
+            <Grid item xs={12}> 
+              {message && ( 
+                <div className="signUp-error-message"> 
+                  <p>{message}</p> 
+                </div> 
+              )} 
+            </Grid> 
+   
+            <Grid item xs={12} className="sign-button"> 
+              <Button 
+                div 
+                type="submit" 
+                className="signUp-button" 
+                variant="contained" 
+                color="primary" 
+                disabled={loading} 
+              > 
+                {loading ? "Qeydiyyatdan keçilir..." : "Qeydiyyatdan keç"} 
+              </Button> 
+            </Grid> 
+   
+            <Grid item xs={12}> 
+              <Typography variant="body1"> 
+                <a href="/login" className="signUp-user"> 
+                  Artıq hesabınız var? Daxil olun! 
+                </a> 
+              </Typography> 
+            </Grid> 
+          </Grid> 
+        </form> 
       </div> 
     </Layout> 
-  ); 
+  );
 }; 
  
 export default Register;

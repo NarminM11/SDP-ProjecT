@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Form, Input, Button, Checkbox } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import { useTheme } from '@mui/system';
+
+import {
+  Grid,
+  Paper,
+  TextField,
+  Button,
+  Checkbox,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import { Link } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
-import "../assets/login.css";
 import Layout from "../components/Layout/layout";
+import "../assets/login.css";
 
 const LogIn = () => {
   const [username, setUsername] = useState("");
@@ -12,6 +20,7 @@ const LogIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
+  const theme = useTheme(); 
 
   useEffect(() => {
     const storedCredentials = localStorage.getItem("user-credentials");
@@ -22,7 +31,7 @@ const LogIn = () => {
     }
   }, []);
 
-  async function login() {
+  const login = async () => {
     if (!username || !password) {
       setErrorMessage("İstifadəçi adı və şifrəni daxil edin");
       return;
@@ -59,7 +68,6 @@ const LogIn = () => {
             JSON.stringify({ username, password })
           );
         } else {
-          // Clear stored credentials if rememberMe is false
           localStorage.removeItem("user-credentials");
         }
 
@@ -71,122 +79,109 @@ const LogIn = () => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <Layout>
-      <div className="login-container">
-        <div className="login-frame">
-          <h2 className="login-heading">Daxil ol</h2>
-          <Form className="loginForm" layout="vertical">
-            <Row gutter={16}>
-              <Col
-                xs={{ span: 24 }}
-                sm={{ span: 24 }}
-                md={{ span: 24 }}
-                lg={{ span: 24 }}
-                xl={{ span: 24 }}
-              >
-                <Form.Item
-                  label="İstifadəçi adı"
-                  name="username"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your username!",
-                    },
-                  ]}
-                >
-                  <Input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="login-text-input"
-                    placeholder="sample@jestdili.az"
-                  />
-                </Form.Item>
-              </Col>
-              <Col
-                xs={{ span: 24 }}
-                sm={{ span: 24 }}
-                md={{ span: 24 }}
-                lg={{ span: 24 }}
-                xl={{ span: 24 }}
-              >
-                <Form.Item
-                  label="Şifrə"
-                  name="password"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your password!",
-                    },
-                  ]}
-                >
-                  <Input.Password
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="login-text-input"
-                    style={{ borderRadius: "8px" }}
-                    placeholder="*******"
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            {errorMessage && (
-              <div className="error-message">{errorMessage}</div>
-            )}
-            <Form.Item>
-              <div className="login-button">
-                <Button
-                  onClick={login}
-                  type="submit"
-                  style={{
-                    color: "#fff",
-                    backgroundColor: "#2b2676",
-                    fontSize: 16,
-                    // fontFamily: "Inter",
-                    fontWeight: "400",
-                    wordWrap: "break-word",
-                  }}
-                  loading={loading}
-                  icon={
-                    loading ? (
-                      <LoadingOutlined style={{ fontSize: 24 }} />
-                    ) : null
-                  }
-                >
-                  {loading ? "Daxil olunur..." : "Daxil ol"}
-                </Button>
-              </div>
-            </Form.Item>
-          </Form>
+    <Grid container justifyContent="center" alignItems="center" className="login-container">
+    <Grid item xs={10} sm={10} md={10} lg={4} xl={4} >
 
+        <Paper elevation={3} className="login-frame">
+          <Typography variant="h4" component="h4" className="login-heading"         
+        style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(3) }}>
+            Daxil ol
+          </Typography>
+          <form className="loginForm">
+            <TextField
+              label="İstifadəçi adı"
+              variant="outlined"
+              margin="normal"
+              value={username}
+              sx={{ width: "90%", "& fieldset": { borderColor: "#2b2676" } }}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="sample@jestdili.az"
+            />
+            <TextField
+              label="Şifrə"
+              type="password"
+              variant="outlined"
+              InputProps={{ style: { color: "#2b2676" } }}
+              sx={{ width: "90%", "& fieldset": { borderColor: "#2b2676" } }}
+              margin="normal"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="*******"
+            />
+            {errorMessage && (
+              <Typography color="error" className="error-message">
+                {errorMessage}
+              </Typography>
+            )}
+            <Button
+              onClick={login}
+              variant="contained"
+              color="primary"
+              size="large"
+              style={{ marginTop: 46 }}
+              disabled={loading}
+              startIcon={loading ? <CircularProgress size={24} /> : null}
+            >
+              {loading ? "Daxil olunur..." : "Daxil ol"}
+            </Button>
+          </form>
           <div className="login-checkbox-row">
-            <div className="login-check-remember">
-              <Checkbox
-                className="rememberCheckbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-              >
-                Məni xatırla
-              </Checkbox>
-            </div>
-            <p className="forgot-password">
-              {/* <Link to="/forgot-password"> */}
+            <Grid container alignItems="center" className="login-check">
+              <Grid item>
+                <Checkbox
+                  className="login-rememberCheckbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+              </Grid>
+              <Grid item>
+                <Typography variant="body1" className="login-term">
+                  Məni xatırla
+                </Typography>
+              </Grid>
+            </Grid>
+
+            <Typography className="forgot-password">
               Şifrəni unutmusan?
-              {/* </Link> */}
-            </p>
+            </Typography>
           </div>
 
+          {/* <div className="login-checkbox-row">
+  <Grid container alignItems="center" className="check">
+    <Grid item>
+      <Checkbox
+        className="rememberCheckbox"
+        checked={rememberMe}
+        onChange={(e) => setRememberMe(e.target.checked)}
+      />
+    </Grid>
+    <Grid item>
+      <Typography variant="body1" className="signUp-term">
+        Məni xatırla
+      </Typography>
+    </Grid>
+  </Grid>
+
+  <Grid container alignItems="center" className="forgot-password">
+    <Typography variant="body1">
+      Şifrəni unutmusan?
+    </Typography>
+  </Grid>
+</div> */}
+
           <hr />
-          <p>Ya da</p>
-          <p className="forgot-password">
+          <Typography>Ya da</Typography>
+          <Typography className="forgot-password">
             <Link to="/signup">Yeni istifadəçisən? Qeydiyyatdan keçin</Link>
-          </p>
-        </div>
-      </div>
+          </Typography>
+        </Paper>
+        </Grid>
+
+      </Grid>
     </Layout>
   );
 };
