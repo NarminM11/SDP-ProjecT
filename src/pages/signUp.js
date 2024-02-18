@@ -208,31 +208,31 @@ const Register = () => {
                 </div>
               )}
             </Grid>
-
             <Grid item xs={12} className="mb-4">
-              <TextField
-                className="signUp-text-input"
-                label="Şifrəni Təsdiqləyin"
-                variant="outlined"
-                sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
-                type="password"
-                value={confirm_password}
-                onChange={(e) => setPassword(e.target.value)}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={togglePasswordVisibility}
-                        edge="end"
-                        style={{ color: "#2b2676" }}
-                      >
-                        {passwordVisible ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
+  <TextField
+    className="signUp-text-input"
+    label="Şifrəni Təsdiqləyin"
+    variant="outlined"
+    sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
+    type="password"
+    value={confirm_password}
+    onChange={(e) => setConfirm_Password(e.target.value)} 
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="end">
+          <IconButton
+            onClick={togglePasswordVisibility}
+            edge="end"
+            style={{ color: "#2b2676" }}
+          >
+            {passwordVisible ? <VisibilityOff /> : <Visibility />}
+          </IconButton>
+        </InputAdornment>
+      ),
+    }}
+  />
+</Grid>
+
 
             <Grid container alignItems="center" className="check">
               <Grid item>
