@@ -15,7 +15,7 @@
   word-wrap: break-word;
 }
 .signUp-frame {
-  margin-top: 50px; 
+  margin-top: 50px;
   padding: 20px;
 
   display: flex;
@@ -27,9 +27,7 @@
   max-width: 600px;
   background-color: #f9f9f9;
   box-shadow: 0 0 10px #2b2676;
-
 }
-
 
 .signUp-form-group {
   margin-bottom: 20px;
@@ -51,23 +49,16 @@
   font-weight: bold;
 }
 
-/* .signUp-checkbox-row {
-  display: flex;
-  align-items: center;
-} */
 .signUp-term {
-  display: inline; 
+  display: inline;
   color: #2b2676;
-
 }
-.check{
+.check {
   margin-top: 18px;
-  margin-left: 5px; 
-
+  margin-left: 5px;
 }
-.box{
-    color: #2b2676;
-
+.box {
+  color: #2b2676;
 }
 
 @media screen and (max-width: 600px) {
@@ -98,8 +89,6 @@
   text-align: center;
 }
 
-
-
 .signUp-user {
   text-decoration: none;
   color: #2b2676;
@@ -115,4 +104,3 @@
 .MuiIconButton-label {
   position: relative;
 }
-

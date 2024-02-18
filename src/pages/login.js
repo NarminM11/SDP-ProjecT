@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useTheme } from '@mui/system';
+import { useTheme } from "@mui/system";
 
 import {
   Grid,
@@ -20,7 +20,7 @@ const LogIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
-  const theme = useTheme(); 
+  const theme = useTheme();
 
   useEffect(() => {
     const storedCredentials = localStorage.getItem("user-credentials");
@@ -83,85 +83,92 @@ const LogIn = () => {
 
   return (
     <Layout>
-    <Grid container justifyContent="center" alignItems="center" className="login-container">
-    <Grid item xs={10} sm={10} md={10} lg={4} xl={4} >
-
-        <Paper elevation={3} className="login-frame">
-          <Typography variant="h4" component="h4" className="login-heading"         
-        style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(3) }}>
-            Daxil ol
-          </Typography>
-          <form className="loginForm">
-            
-            <TextField
-            className="mb-4"
-              label="İstifadəçi adı"
-              variant="outlined"
-              margin="normal"
-              value={username}
-              sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="sample@jestdili.az"
-            />
-            <TextField
-              label="Şifrə"
-              type="password"
-              variant="outlined"
-              InputProps={{ style: { color: "#2b2676" } }}
-              sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
-              margin="normal"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="*******"
-            />
-            {errorMessage && (
-              <Typography color="error" className="error-message">
-                {errorMessage}
-              </Typography>
-            )}
-            <Button
-              onClick={login}
-              variant="contained"
-              color="primary"
-              size="large"
-              style={{ marginTop: 46 }}
-              disabled={loading}
-              startIcon={loading ? <CircularProgress size={24} /> : null}
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        className="login-container"
+      >
+        <Grid item xs={10} sm={10} md={10} lg={4} xl={4}>
+          <Paper elevation={3} className="login-frame">
+            <Typography
+              variant="h4"
+              component="h4"
+              className="login-heading"
+              style={{
+                marginTop: theme.spacing(3),
+                marginBottom: theme.spacing(3),
+              }}
             >
-              {loading ? "Daxil olunur..." : "Daxil ol"}
-            </Button>
-          </form>
-          <div className="login-checkbox-row">
-            <Grid container alignItems="center" className="login-check">
-              <Grid item>
-                <Checkbox
-                  className="login-rememberCheckbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                />
-              </Grid>
-              <Grid item>
-                <Typography variant="body1" className="login-term">
-                  Məni xatırla
-                </Typography>
-              </Grid>
-            </Grid>
-
-            <Typography className="forgot-password">
-              Şifrəni unutmusan?
+              Daxil ol
             </Typography>
-          </div>
+            <form className="loginForm">
+              <TextField
+                className="mb-4"
+                label="İstifadəçi adı"
+                variant="outlined"
+                margin="normal"
+                value={username}
+                sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="sample@jestdili.az"
+              />
+              <TextField
+                label="Şifrə"
+                type="password"
+                variant="outlined"
+                InputProps={{ style: { color: "#2b2676" } }}
+                sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
+                margin="normal"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="*******"
+              />
+              {errorMessage && (
+                <Typography color="error" className="error-message">
+                  {errorMessage}
+                </Typography>
+              )}
+              <Button
+                onClick={login}
+                variant="contained"
+                color="primary"
+                size="large"
+                style={{ marginTop: 46 }}
+                disabled={loading}
+                startIcon={loading ? <CircularProgress size={24} /> : null}
+              >
+                {loading ? "Daxil olunur..." : "Daxil ol"}
+              </Button>
+            </form>
+            <div className="login-checkbox-row">
+              <Grid container alignItems="center" className="login-check">
+                <Grid item>
+                  <Checkbox
+                    className="login-rememberCheckbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                  />
+                </Grid>
+                <Grid item>
+                  <Typography variant="body1" className="login-term">
+                    Məni xatırla
+                  </Typography>
+                </Grid>
+              </Grid>
 
-   
+              <Typography className="forgot-password">
+                Şifrəni unutmusan?
+              </Typography>
+            </div>
 
-          <hr />
-          <Typography className="mb-4">Ya da</Typography>
-          <Typography className="forgot-password">
-            <Link to="/signup">Yeni istifadəçisən? Qeydiyyatdan keçin</Link>
-          </Typography>
-        </Paper>
+            <hr />
+            <Typography className="mb-4">Ya da</Typography>
+            <Typography className="forgot-password">
+              <Link to="/signup">Yeni istifadəçisən? Qeydiyyatdan keçin</Link>
+            </Typography>
+          </Paper>
         </Grid>
-
       </Grid>
     </Layout>
   );
