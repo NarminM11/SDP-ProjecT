@@ -30,7 +30,7 @@ const LogIn = () => {
     setPasswordVisible(!passwordVisible);
   };
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       login(event);
     }
   };
@@ -115,45 +115,48 @@ const LogIn = () => {
             >
               Daxil ol
             </Typography>
-            <form className="loginForm"  onSubmit={login} onKeyDown={handleKeyDown}>
+            <form
+              className="loginForm"
+              onSubmit={login}
+              onKeyDown={handleKeyDown}
+            >
+              {/* <Grid item xs={12} className="mb-4"> */}
               <TextField
                 className="mb-4"
                 label="İstifadəçi adı"
                 variant="outlined"
-                margin="normal"
+                InputProps={{ style: { color: "#2b2676" } }}
+                // Assuming you have a state variable for username
                 value={username}
                 sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="sample@jestdili.az"
-                InputLabelProps={{ shrink: true }}  // Add this line
-
-                
+                // placeholder="sample@jestdili.az"
+                // InputLabelProps={{ shrink: true }}
               />
-             <TextField
-  label="Şifrə"
-  type={passwordVisible ? "text" : "password"}
-  variant="outlined"
-  InputProps={{
-    endAdornment: (
-      <InputAdornment position="end">
-        <IconButton
-          onClick={togglePasswordVisibility}
-          edge="end"
-        >
-          {passwordVisible ? <VisibilityOff /> : <Visibility />}
-        </IconButton>
-      </InputAdornment>
-    ),
-  }}
-  sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
-  margin="normal"
-  value={password}
-  onChange={(e) => setPassword(e.target.value)}
-  placeholder="*******"
-  InputLabelProps={{ shrink: true }}  // Add this line
+              {/* </Grid> */}
 
-/>
-
+              {/* <Grid item xs={12} className="mb-4"> */}
+              <TextField
+                className="mb-4"
+                label="Şifrə"
+                variant="outlined"
+                type={passwordVisible ? "text" : "password"}
+                // Assuming you have a state variable for password
+                value={password}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={togglePasswordVisibility} edge="end">
+                        {passwordVisible ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
+                margin="normal"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {/* </Grid> */}
               {errorMessage && (
                 <Typography color="error" className="error-message">
                   {errorMessage}

@@ -115,7 +115,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
         localStorage.setItem("user-token", token);
       }
 
-      setMessage("Qeydiyyat uğurlu oldu!");
+      // setMessage("Qeydiyyat uğurlu oldu!");
       window.location.href = "/login";
     } catch (error) {
       console.error("Error during signup:", error);
