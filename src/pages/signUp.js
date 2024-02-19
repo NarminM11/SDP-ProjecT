@@ -30,11 +30,19 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [termsChecked, setTermsChecked] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
   const theme = useTheme();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+
+  const toggleConfirmPasswordVisibility = () => {
+    setConfirmPasswordVisible(!confirmPasswordVisible);
+  };
+
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
   const validatePassword = (value) => {
@@ -194,7 +202,7 @@ const Register = () => {
                       <IconButton
                         onClick={togglePasswordVisibility}
                         edge="end"
-                        style={{ color: "#2b2676" }}
+                        // style={{ color: "#2b2676" }}
                       >
                         {passwordVisible ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
@@ -209,28 +217,28 @@ const Register = () => {
               )}
             </Grid>
             <Grid item xs={12} className="mb-4">
-  <TextField
-    className="signUp-text-input"
-    label="Şifrəni Təsdiqləyin"
-    variant="outlined"
-    sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
-    type="password"
-    value={confirm_password}
-    onChange={(e) => setConfirm_Password(e.target.value)} 
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <IconButton
-            onClick={togglePasswordVisibility}
-            edge="end"
-            style={{ color: "#2b2676" }}
-          >
-            {passwordVisible ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
-        </InputAdornment>
-      ),
-    }}
-  />
+            <TextField
+          className="signUp-text-input"
+          label="Şifrəni Təsdiqləyin"
+          variant="outlined"
+          sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
+          type={confirmPasswordVisible ? "text" : "password"}
+          value={confirm_password}
+          onChange={(e) => setConfirm_Password(e.target.value)} 
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={toggleConfirmPasswordVisibility}
+                  edge="end"
+                  // style={{ color: "#2b2676" }}
+                >
+                  {confirmPasswordVisible ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
 </Grid>
 
 

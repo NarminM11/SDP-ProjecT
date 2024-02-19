@@ -18,8 +18,8 @@
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f5f5f5;
-  box-shadow: 0 0 10px #2b2676;
+  background-color: #f9f9f9;
+  /* box-shadow: 0 0 10px #2b2676; */
 }
 
 .login-heading {
@@ -64,6 +64,7 @@
 }
 
 .login-checkbox-row {
+  margin-top: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -98,4 +99,9 @@ hr {
 .login-term {
   display: inline;
   color: #2b2676;
+}
+
+
+.mb-4{
+  color:#2b2676;
 }

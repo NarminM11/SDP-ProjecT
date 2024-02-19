@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "@mui/system";
-
+import { InputAdornment, IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Grid,
   Paper,
@@ -22,6 +23,13 @@ const LogIn = () => {
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
 
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    console.log("Visibility button clicked");
+    setPasswordVisible(!passwordVisible);
+  };
+  
   useEffect(() => {
     const storedCredentials = localStorage.getItem("user-credentials");
     if (storedCredentials) {
@@ -113,17 +121,29 @@ const LogIn = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="sample@jestdili.az"
               />
-              <TextField
-                label="Şifrə"
-                type="password"
-                variant="outlined"
-                InputProps={{ style: { color: "#2b2676" } }}
-                sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
-                margin="normal"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="*******"
-              />
+             <TextField
+  label="Şifrə"
+  type={passwordVisible ? "text" : "password"}
+  variant="outlined"
+  InputProps={{
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton
+          onClick={togglePasswordVisibility}
+          edge="end"
+        >
+          {passwordVisible ? <VisibilityOff /> : <Visibility />}
+        </IconButton>
+      </InputAdornment>
+    ),
+  }}
+  sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
+  margin="normal"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+  placeholder="*******"
+/>
+
               {errorMessage && (
                 <Typography color="error" className="error-message">
                   {errorMessage}
