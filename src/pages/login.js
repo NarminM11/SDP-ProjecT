@@ -29,7 +29,11 @@ const LogIn = () => {
     console.log("Visibility button clicked");
     setPasswordVisible(!passwordVisible);
   };
-  
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      login(event);
+    }
+  };
   useEffect(() => {
     const storedCredentials = localStorage.getItem("user-credentials");
     if (storedCredentials) {
@@ -39,7 +43,8 @@ const LogIn = () => {
     }
   }, []);
 
-  const login = async () => {
+  const login = async (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
     if (!username || !password) {
       setErrorMessage("İstifadəçi adı və şifrəni daxil edin");
       return;
@@ -110,7 +115,7 @@ const LogIn = () => {
             >
               Daxil ol
             </Typography>
-            <form className="loginForm">
+            <form className="loginForm"  onSubmit={login} onKeyDown={handleKeyDown}>
               <TextField
                 className="mb-4"
                 label="İstifadəçi adı"
@@ -120,6 +125,9 @@ const LogIn = () => {
                 sx={{ width: "100%", "& fieldset": { borderColor: "#2b2676" } }}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="sample@jestdili.az"
+                InputLabelProps={{ shrink: true }}  // Add this line
+
+                
               />
              <TextField
   label="Şifrə"
@@ -142,6 +150,8 @@ const LogIn = () => {
   value={password}
   onChange={(e) => setPassword(e.target.value)}
   placeholder="*******"
+  InputLabelProps={{ shrink: true }}  // Add this line
+
 />
 
               {errorMessage && (

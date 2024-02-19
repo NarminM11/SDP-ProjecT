@@ -26,6 +26,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirm_password, setConfirm_Password] = useState("");
   const [message, setMessage] = useState("");
+  const [password_message, setPasswordMessage] = useState("");
+
   const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
   const [termsChecked, setTermsChecked] = useState(false);
@@ -43,6 +45,12 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      signUp(event);
+    }
+  };
+  
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
   const validatePassword = (value) => {
@@ -72,7 +80,18 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
         return;
       }
 
-      const isPasswordRequired = true;
+      const passwordValidationError = validatePassword(password);
+      if (passwordValidationError) {
+        setPasswordMessage(passwordValidationError);
+        return;
+      }
+
+      if (password !== confirm_password) {
+        setMessage("Şifrə və şifrəni təsdiqlə sahələri eyni olmalıdır.");
+        return;
+      }
+      
+      // const isPasswordRequired = true;
 
       let item = { name, username, email, password, confirm_password };
       console.log("Payload being sent:", item);
@@ -134,7 +153,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   return (
     <Layout>
       <div className="signUp-container d-flex align-items-center justify-content-center">
-        <form onSubmit={signUp}>
+        <form onSubmit={signUp} onKeyDown={handleKeyDown}>
           <Grid
             container
             justifyContent="center"
@@ -210,7 +229,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                   ),
                 }}
               />
-              {passwordError && (
+             {passwordError && (
                 <div className="signUp-error-message">
                   <p>{passwordError}</p>
                 </div>
