@@ -152,24 +152,21 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   return (
     <Layout>
-      <div className="signUp-container d-flex align-items-center justify-content-center">
-        <form onSubmit={signUp} onKeyDown={handleKeyDown}>
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            className="signUp-frame mt-5"
-          >
+      <div className="signUp-container w-100 d-flex align-items-center justify-content-center">
+        <form onSubmit={signUp} onKeyDown={handleKeyDown}
+        className="w-100 d-flex align-items-center justify-content-center">
+          <Grid item xs={10} sm={10} md={10} lg={4} xl={4}
+      container
+      justifyContent="center" // Center the content horizontally
+      alignItems="center"    // Center the content vertically
+      className="signUp-frame mt-5"
+    >
             <Grid item xs={12} className="sign-heading">
-              <Typography
-                variant="h4"
-                style={{
-                  marginTop: theme.spacing(3),
-                  marginBottom: theme.spacing(3),
-                }}
+              <p className="sign-head-text"
+                
               >
-                Qeydiyyatdan keç
-              </Typography>
+                Qeydiyyatdan <span>keç</span>
+              </p>
             </Grid>
 
             <Grid item xs={12} className="mb-4">

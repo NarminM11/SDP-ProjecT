@@ -8,8 +8,9 @@
 
 .login-frame {
   width: 100%;
-  max-width: 600px;
-  padding: 20px;
+  max-width: 550px;
+  padding: 40px;
+  height: 700px;
   text-align: center;
   font-size: 16px;
   display: flex;
@@ -104,4 +105,23 @@ hr {
 
 .mb-4{
   color:#2b2676;
+}
+@media only screen and (max-width: 600px){
+  .login-frame{
+    height: 600px;
+  }
+}
+
+@media only screen and (max-width: 460px){
+  .login-frame{
+    height: 650px;
+  } 
+  .login-checkbox-row{
+    display: flex;
+    flex-direction: column;
+  }
+  .forgot-password{
+    display: flex;
+    flex-direction: column;
+  }
 }

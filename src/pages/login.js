@@ -183,6 +183,7 @@ const LogIn = () => {
                     onChange={(e) => setRememberMe(e.target.checked)}
                   />
                 </Grid>
+
                 <Grid item>
                   <Typography variant="body1" className="login-term">
                     Məni xatırla
@@ -198,7 +199,8 @@ const LogIn = () => {
             <hr />
             <Typography className="mb-4">Ya da</Typography>
             <Typography className="forgot-password">
-              <Link to="/signup">Yeni istifadəçisən? Qeydiyyatdan keçin</Link>
+              <Link to="/signup">Yeni istifadəçisən?</Link>
+              <Link to="/signup">Qeydiyyatdan keçin</Link>
             </Typography>
           </Paper>
         </Grid>

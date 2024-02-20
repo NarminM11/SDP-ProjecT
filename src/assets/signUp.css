@@ -10,7 +10,7 @@
 .sign-heading {
   text-align: center;
   color: #2b2676;
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 400px;
   word-wrap: break-word;
 }
@@ -23,7 +23,7 @@
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 8px;
-  max-width: 600px;
+  max-width: 500px;
   background-color: #f9f9f9;
   /* box-shadow: 0 0 10px #2b2676; */
 }
@@ -60,9 +60,16 @@
   color: #2b2676;
 }
 
-@media screen and (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   .signUp-form-container {
-    max-width: 100%;
+    max-width: 90%;
+  }
+  .sign-head-text{
+    display: flex;
+    flex-direction: column;
+  }
+  .sign-heading{
+    font-size: 30px;
   }
 }
 
