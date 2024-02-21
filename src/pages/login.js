@@ -245,7 +245,7 @@ const LoginForm = () => {
                   <Typography className="mb-2">Ya da</Typography>
                   <Typography className="new-user">
                     <Link to="/signup" style={{ color: "white" }}>
-                      Yeni istifadəçisən? Qeydiyyatdan keç
+                      Yeni istifadəçisiniz? Qeydiyyatdan keç
                     </Link>
                     {/* <Link to="/signup" style={{ color: "white" }}>
                     Qeydiyyatdan keç

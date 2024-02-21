@@ -146,68 +146,12 @@ const LoginForm = () => {
   };
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      login(event);
+      signUp(event);
     }
   };
-  useEffect(() => {
-    const storedCredentials = localStorage.getItem("user-credentials");
-    if (storedCredentials) {
-      const { username, password } = JSON.parse(storedCredentials);
-      setUsername(username);
-      setPassword(password);
-    }
-  }, []);
+ 
 
-  const login = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    if (!username || !password) {
-      setErrorMessage("İstifadəçi adı və şifrəni daxil edin");
-      return;
-    }
-
-    setLoading(true);
-    let item = { username, password };
-
-    try {
-      let response = await fetch(
-        "https://morning-plains-82582-f0e7c891044c.herokuapp.com/user/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(item),
-        }
-      );
-
-      if (response.status === 401) {
-        setErrorMessage(
-          "Yanlış istifadəçi adı və ya şifrə. Zəhmət olmasa bir daha cəhd edin"
-        );
-      } else if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      } else {
-        let result = await response.json();
-
-        if (rememberMe) {
-          localStorage.setItem(
-            "user-credentials",
-            JSON.stringify({ username, password })
-          );
-        } else {
-          localStorage.removeItem("user-credentials");
-        }
-
-        localStorage.setItem("user-info", JSON.stringify(result));
-        window.location.href = "/profile";
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+ 
 
   return (
     <Layout>
