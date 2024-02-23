@@ -1,20 +1,139 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Raleway, sans-serif;
+.signUp-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
-/* body {
-  color:lightblue;
-} */
+
+.sign-heading {
+  text-align: center;
+  color: #2b2676;
+  font-size: 36px;
+  font-weight: 400px;
+  word-wrap: break-word;
+}
+.signUp-frame {
+  margin-top: 50px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 500px;
+  background-color: #FFF;
+}
+
+.signUp-form-group {
+  margin-bottom: 20px;
+}
+
+.signUp-text-input {
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  border: 1px solid #2b2676;
+}
+
+.signUp-label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.signUp-term {
+  display: inline;
+  color: #2b2676;
+}
+.check {
+  margin-top: 18px;
+  margin-left: 16px;
+
+}
+.box {
+  color: #2b2676;
+}
+
+@media only screen and (max-width: 600px) {
+  .signUp-form-container {
+    max-width: 90%;
+  }
+  .sign-head-text{
+    display: flex;
+    flex-direction: column;
+  }
+  .sign-heading{
+    font-size: 30px;
+  }
+}
+
+.login-option {
+  text-align: center;
+}
+
+.sign-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 16px;
+  padding: 30px;
+}
+
+.signUp-error-message {
+  color: red;
+  font-family: "Inter";
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.signUp-user {
+  text-decoration: none;
+  color: #2b2676;
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.MuiCheckbox-root {
+  padding: 0;
+}
+
+.MuiIconButton-label {
+  position: relative;
+}
+
+.mt-4{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* 
 .register_container {
   color:lightblue;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  /* width: 100%; */
   width: 700px;
 }
 .register_screen {
@@ -87,16 +206,11 @@
   border-radius: 60px;
 }
 .register {
-  /* width: 320px; */
   padding: 30px;
   padding-top: 156px;
 }
 .register__field {
-  /* width: 100%; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
+
   padding: 20px 0px;
   position: relative;
 }
@@ -122,19 +236,15 @@
   border-bottom-color: #6A679E;
 }
 .register__submit {
-  /* background: #fff; */
-  /* font-size: 14px; */
+
   margin-top: 30px;
   padding: 16px 20px;
   border-radius: 26px;
   border: 1px solid #D4D3E8;
-  /* text-transform: uppercase; */
   font-weight: 700;
   display: flex;
   align-items: center;
-  /* width: 100%; */
   color: white;
-  /* box-shadow: 0px 2px 2px #5C5696; */
   cursor: pointer;
   transition: .2s;
 }
@@ -198,7 +308,6 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
-  /* box-shadow: 0 0 10px #2b2676; */
 }
 
 .login-heading {
@@ -228,21 +337,15 @@
   cursor: pointer;
 }
 
-.login__submit{
-  width: 60%;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  margin-right: 150px;
+.register__submit{
+  width: 35%;
+
 }
 .login-button {
-  width: 60%;
-  /* height: 50%; */
-  /* margin: 0 auto; */
+
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-bottom: 40px; */
 }
 
 .signUp-user{
@@ -266,7 +369,6 @@
 }
 
 .login-rememberCheckbox {
-  /* color: red; */
   word-wrap: break-word;
 }
 
@@ -306,12 +408,6 @@ hr {
   color: white;
 }
 
-.login__submit{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 .mb-2{
   display: flex;
@@ -348,7 +444,6 @@ hr {
   border-radius: 8px;
   max-width: 500px;
   background-color: #f9f9f9;
-  /* box-shadow: 0 0 10px #2b2676; */
 }
 
 .signUp-form-group {
@@ -437,14 +532,9 @@ hr {
   .register_screen{
     height: 100%;
     width: 400px;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
+
   }
-  /* .register__submit{
-width: 60%; 
- } */
+ 
  .register__field{
   width: 80%;
 
@@ -477,4 +567,4 @@ width: 60%;
 
 
 
-
+ */

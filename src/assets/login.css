@@ -1,20 +1,175 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+.login-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-frame {
+  width: 100%;
+  max-width: 550px;
+  padding: 40px;
+  height: 700px;
+  text-align: center;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+element.style{
+  display: flex !important;
+  flex-direction: column !important;
+  /* justify-content: space-between !important; */
+  align-items: center !important;
+}
+
+
+.login-heading {
+  color: #2b2676;
+  font-size: 32px;
+  font-weight: 400px;
+  word-wrap: break-word;
+  margin-bottom: 40px;
+}
+
+.login-text-input {
+  padding: 8px;
+  width: 100%;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  border: 1px solid #2b2676;
+}
+
+.signIn-button button,
+.login-button button {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.login-button {
+  width: 40%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.signIn-button button:hover,
+.login-button button:hover {
+  background-color: #2980b9;
+}
+
+.login-checkbox-row {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+.login-rememberCheckbox {
+  color: #2b2676;
+  word-wrap: break-word;
+}
+
+hr {
+  border: 1px solid #ccc;
+  width: 70%;
+  margin: 10px 0;
+}
+
+.forgot-password {
+  cursor: pointer;
+  color: #2b2676;
+  white-space: nowrap;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.login-term {
+  display: inline;
+  color: #2b2676;
+}
+
+
+.mb-4{
+  color:#2b2676;
+}
+@media only screen and (max-width: 600px){
+  .login-frame{
+    height: 600px;
+  }
+}
+
+@media only screen and (max-width: 460px){
+  .login-frame{
+    height: 650px;
+  } 
+  .login-checkbox-row{
+    display: flex;
+    flex-direction: column;
+  }
+  .forgot-password{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: Raleway, sans-serif;
 }
-/* body {
-  color:lightblue;
-} */
+
 .login_container {
   color:lightblue;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  /* width: 100%; */
   width: 700px;
 }
 .login_screen {
@@ -77,16 +232,11 @@
   border-radius: 60px;
 }
 .login {
-  /* width: 320px; */
   padding: 30px;
   padding-top: 156px;
 }
 .login__field {
-  /* width: 100%; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
+
   padding: 20px 0px;
   position: relative;
 }
@@ -111,20 +261,16 @@
   outline: none;
   border-bottom-color: #6A679E;
 }
-.login__submit {
-  /* background: #fff; */
-  /* font-size: 14px; */
+.login__submit  {
   margin-top: 30px;
   padding: 16px 20px;
   border-radius: 26px;
   border: 1px solid #D4D3E8;
-  /* text-transform: uppercase; */
   font-weight: 700;
   display: flex;
   align-items: center;
-  /* width: 100%; */
+  width: 30%;
   color: white;
-  /* box-shadow: 0px 2px 2px #5C5696; */
   cursor: pointer;
   transition: .2s;
 }
@@ -188,7 +334,6 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
-  /* box-shadow: 0 0 10px #2b2676; */
 }
 
 .login-heading {
@@ -219,20 +364,15 @@
 }
 
 .login__submit{
-  /* width: 20%; */
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  /* margin-right: 150px; */
+
+  margin-right: 150px;
 }
 .login-button {
   width: 60%;
-  /* height: 50%; */
-  /* margin: 0 auto; */
+ 
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-bottom: 40px; */
 }
 
 .signIn-button button:hover,
@@ -249,7 +389,6 @@
 }
 
 .login-rememberCheckbox {
-  /* color: red; */
   word-wrap: break-word;
 }
 
@@ -289,8 +428,7 @@ hr {
   color: white;
 }
 
-.login__submit{
-  width: 30%;
+.login__submit {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -316,6 +454,11 @@ width: 100px;
   width: 90%;
 
  }
+ .screen__background__shape6 {
+  width: 420px;
+  top: -160px;
+  right: 30px; 
+  }
 }
 
 @media only screen and (max-width: 460px){
@@ -335,8 +478,9 @@ width: 100px;
     display: flex;
     flex-direction: column;
   }
+
 }
 
 
 
-
+ */
