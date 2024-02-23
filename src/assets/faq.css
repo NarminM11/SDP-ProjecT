@@ -1,9 +1,17 @@
+.container-for-all{
+    height: 400px;
+}
+
+/* .faq-col{
+    height: 200px;
+} */
 .faq-accordion-containe {
     padding: 50px;
     background-color: red;
   }
   
   .ant-collapse {
+    /* height: 200px; */
     border: none;
   }
   
@@ -16,6 +24,7 @@
   }
   
   .head-faq {
+    color: #2b2676;
     text-align: center;
   }
   
@@ -49,3 +58,9 @@
     color: #2b2676;
 }
 
+@media only screen and (max-width: 600px) {
+    .ant-collapse-header {
+        height: 90px;
+    }
+      
+  }

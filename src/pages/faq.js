@@ -67,7 +67,7 @@ const Faq = () => {
           <div className="faqPage">
             <div className="faq-accordion-container">
               <Row>
-                <Col span={12}>
+                <Col span={12} className="faq-col">
                   <Collapse
                     accordion
                     activeKey={activeKey}
