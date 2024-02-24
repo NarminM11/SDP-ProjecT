@@ -321,7 +321,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                 {loading ? "Qeydiyyatdan keçilir..." : "Qeydiyyatdan keç"}
               </Button>
             </Grid>
-
+            {/* <hr /> */}
             <Grid item xs={12}>
               <Typography variant="body1">
                 <a href="/login" className="signUp-user">

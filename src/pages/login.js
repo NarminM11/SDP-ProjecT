@@ -271,6 +271,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useTheme } from "@mui/system";
+import { useMediaQuery } from "@mui/material";
 import { InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
@@ -293,7 +294,32 @@ const LogIn = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
+  // const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  // const isMediumScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
+  // const isSmallHeightScreen = useMediaQuery("(max-height: 40px)");
 
+  
+  const inlineStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '40px', // Default padding
+
+    // Add more styles as needed
+  };
+  
+  // Add styles based on screen size
+  // if (isSmallScreen) {
+  //   inlineStyles.padding = '20px';
+  // } else if (isMediumScreen) {
+  //   inlineStyles.padding = '30px';
+  // } else {
+  //   inlineStyles.padding = '40px';
+  // }if (isSmallHeightScreen) {
+  //   inlineStyles.height = '90vh'; // Adjust the height as needed
+  // }
+  
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -364,13 +390,7 @@ const LogIn = () => {
       setLoading(false);
     }
   };
-  const inlineStyles = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    // Add more styles as needed
-  };
+
   return (
     <Layout>
     <div style={inlineStyles}>
@@ -470,12 +490,15 @@ const LogIn = () => {
                     className="login-rememberCheckbox"
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
+                    style={{ color: " #2b2676" }} 
+
                   />
                 </Grid>
 
                 <Grid item>
-                  <Typography variant="body1" className="login-term">
+                  <Typography variant="body1" className="login-term" >
                     Məni xatırla
+
                   </Typography>
                 </Grid>
               </Grid>
