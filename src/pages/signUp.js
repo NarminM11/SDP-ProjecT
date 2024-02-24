@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { useTheme } from "@mui/system";
 import {
@@ -20,7 +18,6 @@ import "../assets/signUp.css";
 import Layout from "../components/Layout/layout";
 import { Link } from "react-router-dom";
 
-
 const Register = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -34,7 +31,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [termsChecked, setTermsChecked] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   const theme = useTheme();
 
@@ -42,17 +39,16 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
     setPasswordVisible(!passwordVisible);
   };
 
-
   const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       signUp(event);
     }
   };
-  
+
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
   const validatePassword = (value) => {
@@ -92,7 +88,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
         setMessage("Şifrə və şifrəni təsdiqlə sahələri eyni olmalıdır.");
         return;
       }
-      
+
       // const isPasswordRequired = true;
 
       let item = { name, username, email, password, confirm_password };
@@ -152,21 +148,40 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
     }
   }
 
+  const inlineStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '40px', 
+    height: '100vh',
+    width: '100%',
+  };
+  
+
   return (
     <Layout>
-      <div className="signUp-container w-100 d-flex align-items-center justify-content-center">
-        <form onSubmit={signUp} onKeyDown={handleKeyDown}
-        className="w-100 d-flex align-items-center justify-content-center">
-          <Grid item xs={10} sm={10} md={10} lg={4} xl={4}
-      container
-      justifyContent="center" 
-      alignItems="center"    
-      className="signUp-frame mt-5"
-    >
+    <div style={inlineStyles}>
+      <div className="signUp-container d-flex align-items-center justify-content-center">
+        <form
+          onSubmit={signUp}
+          onKeyDown={handleKeyDown}
+          className="d-flex align-items-center justify-content-center"
+        >
+          <Grid
+            item
+            xs={10}
+            sm={10}
+            md={8}
+            lg={6}
+            xl={4}
+            container
+            justifyContent="center"
+            alignItems="center"
+            className="signUp-frame mt-5"
+          >
             <Grid item xs={12} className="sign-heading mt-4">
-              <p className="sign-head-text"
-                
-              >
+              <p className="sign-head-text">
                 Qeydiyyatdan <span>keç</span>
               </p>
             </Grid>
@@ -176,13 +191,14 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                 className="signUp-text-input"
                 label="Ad Soyad"
                 variant="outlined"
-                sx={{ width: "90%",
-                //  "& fieldset": { borderColor: "#2b2676" } 
-              }}
+                sx={{
+                  width: "90%",
+                  //  "& fieldset": { borderColor: "#2b2676" }
+                }}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 InputLabelProps={{
-                  style: { color: "#2b2676" } 
+                  style: { color: "#2b2676" },
                 }}
               />
             </Grid>
@@ -193,13 +209,14 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                 label="İstifadəçi adı"
                 variant="outlined"
                 InputProps={{ style: { color: "#2b2676" } }}
-                sx={{ width: "90%", 
-                // "& fieldset": { borderColor: "#2b2676" } 
-              }}
+                sx={{
+                  width: "90%",
+                  // "& fieldset": { borderColor: "#2b2676" }
+                }}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 InputLabelProps={{
-                  style: { color: "#2b2676" } 
+                  style: { color: "#2b2676" },
                 }}
               />
             </Grid>
@@ -209,13 +226,14 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                 className="signUp-text-input"
                 label="Epoçt adressi"
                 variant="outlined"
-                sx={{ width: "90%", 
-                // "& fieldset": { borderColor: "#2b2676" }
-               }}
+                sx={{
+                  width: "90%",
+                  // "& fieldset": { borderColor: "#2b2676" }
+                }}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 InputLabelProps={{
-                  style: { color: "#2b2676" } 
+                  style: { color: "#2b2676" },
                 }}
               />
             </Grid>
@@ -225,11 +243,12 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                 className="signUp-text-input"
                 label="Şifrə"
                 variant="outlined"
-                sx={{ width: "90%", 
-                // "& fieldset": { borderColor: "#2b2676" }
-               }}
+                sx={{
+                  width: "90%",
+                  // "& fieldset": { borderColor: "#2b2676" }
+                }}
                 InputLabelProps={{
-                  style: { color: "#2b2676" } 
+                  style: { color: "#2b2676" },
                 }}
                 type={passwordVisible ? "text" : "password"}
                 value={password}
@@ -248,42 +267,46 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                   ),
                 }}
               />
-             {passwordError && (
+              {passwordError && (
                 <div className="signUp-error-message">
                   <p>{passwordError}</p>
                 </div>
               )}
             </Grid>
             <Grid item xs={12} className="mt-4">
-            <TextField
-          className="signUp-text-input"
-          label="Şifrəni Təsdiqləyin"
-          variant="outlined"
-          sx={{ width: "90%", 
-          // "& fieldset": { borderColor: "#2b2676" } 
-        }}
-          InputLabelProps={{
-            style: { color: "#2b2676" } 
-          }}
-          type={confirmPasswordVisible ? "text" : "password"}
-          value={confirm_password}
-          onChange={(e) => setConfirm_Password(e.target.value)} 
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={toggleConfirmPasswordVisibility}
-                  edge="end"
-                  // style={{ color: "#2b2676" }}
-                >
-                  {confirmPasswordVisible ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-</Grid>
-
+              <TextField
+                className="signUp-text-input"
+                label="Şifrəni Təsdiqləyin"
+                variant="outlined"
+                sx={{
+                  width: "90%",
+                  // "& fieldset": { borderColor: "#2b2676" }
+                }}
+                InputLabelProps={{
+                  style: { color: "#2b2676" },
+                }}
+                type={confirmPasswordVisible ? "text" : "password"}
+                value={confirm_password}
+                onChange={(e) => setConfirm_Password(e.target.value)}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={toggleConfirmPasswordVisibility}
+                        edge="end"
+                        // style={{ color: "#2b2676" }}
+                      >
+                        {confirmPasswordVisible ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
 
             <Grid container alignItems="center" className="check">
               <Grid item>
@@ -315,6 +338,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                 className="signUp-button"
                 variant="contained"
                 color="primary"
+                style={{  backgroundColor:"#2b2676" }}
                 disabled={loading}
               >
                 {loading ? "Qeydiyyatdan keçilir..." : "Qeydiyyatdan keç"}
@@ -330,6 +354,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
             </Grid>
           </Grid>
         </form>
+      </div>
       </div>
     </Layout>
   );
@@ -487,9 +512,6 @@ export default Register;
 //       signUp(event);
 //     }
 //   };
- 
-
- 
 
 //   return (
 //     <Layout>
@@ -687,7 +709,7 @@ export default Register;
 //                     <Grid item xs={12}  className="signUp-user mt-6"
 //                     >
 //                       <Typography variant="body1" >
-//                         <a href="/login"                      
+//                         <a href="/login"
 //                              style={{ color: "white",
 //                              }}
 // >

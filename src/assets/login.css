@@ -10,23 +10,31 @@
 .login-frame {
   width: 100%;
   max-width: 550px;
-  padding: 40px;
-  /* height: 700px; */
+  padding: 20px;
   text-align: center;
   font-size: 16px;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  align-items: center; */
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #FFF;
+
+}
+
+.loginForm{
+  /* width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  padding:15px
 }
 
 element.style{
   display: flex !important;
   flex-direction: column !important;
-  /* justify-content: space-between !important; */
   align-items: center !important;
 }
 
@@ -77,17 +85,17 @@ element.style{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 100%;
 }
 
 .login-rememberCheckbox {
   color: #2b2676;
-  word-wrap: break-word;
+  /* word-wrap: break-word; */
 }
 
 hr {
   border: 1px solid #ccc;
-  width: 70%;
+  width: 100%;
   margin: 10px 0;
 }
 

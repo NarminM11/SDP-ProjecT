@@ -301,10 +301,9 @@ const LogIn = () => {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '40px', // Default padding
+    padding: '40px', 
     height: '100vh',
-    width: '100%', // Assuming you want the frame to take the full width
-    // Add more styles as needed
+    width: '100%',
   };
   
  
@@ -331,7 +330,7 @@ const LogIn = () => {
   }, []);
 
   const login = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    event.preventDefault(); 
     if (!username || !password) {
       setErrorMessage("İstifadəçi adı və şifrəni daxil edin");
       return;
@@ -390,10 +389,17 @@ const LogIn = () => {
         justifyContent="center"
         alignItems="center"
         className="login-container "
-
       >
-        <Grid item xs={10} sm={10} md={10} lg={4} xl={4}>
-          <Paper elevation={3} className="login-frame">
+<Grid
+ item xs={10} sm={10} md={8} lg={4} xl={4}
+  container
+  display = "flex"
+  flex-direction= "column"
+  justifyContent="center" 
+  alignItems="center"    
+  className="login-frame"
+>
+          <div>
             <Typography
               variant="h4"
               component="h4"
@@ -406,7 +412,7 @@ const LogIn = () => {
             >
               Daxil ol
             </Typography>
-            <form
+            <form 
               className="loginForm"
               onSubmit={login}
               onKeyDown={handleKeyDown}
@@ -466,7 +472,7 @@ const LogIn = () => {
                 variant="contained"
                 color="primary"
                 size="large"
-                style={{ marginTop: 46 }}
+                style={{ marginTop: 46, backgroundColor:"#2b2676" }}
                 disabled={loading}
                 startIcon={loading ? <CircularProgress size={24} /> : null}
               >
@@ -499,12 +505,14 @@ const LogIn = () => {
             </div>
 
             <hr />
+            <>
             <Typography className="mb-4">Ya da</Typography>
+            </>
             <Typography className="forgot-password">
               <Link to="/signup">Yeni istifadəçisən?</Link>
               <Link to="/signup">Qeydiyyatdan keç</Link>
             </Typography>
-          </Paper>
+          </div>
         </Grid>
 
       </Grid>
