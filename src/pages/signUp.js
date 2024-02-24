@@ -19,7 +19,6 @@ import axios from "axios";
 import "../assets/signUp.css";
 import Layout from "../components/Layout/layout";
 import { Link } from "react-router-dom";
-import "../assets/signUp.css";
 
 
 const Register = () => {
@@ -160,8 +159,8 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
         className="w-100 d-flex align-items-center justify-content-center">
           <Grid item xs={10} sm={10} md={10} lg={4} xl={4}
       container
-      justifyContent="center" // Center the content horizontally
-      alignItems="center"    // Center the content vertically
+      justifyContent="center" 
+      alignItems="center"    
       className="signUp-frame mt-5"
     >
             <Grid item xs={12} className="sign-heading mt-4">
@@ -183,7 +182,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 InputLabelProps={{
-                  style: { color: "#2b2676" } // Set the color of the label here
+                  style: { color: "#2b2676" } 
                 }}
               />
             </Grid>
@@ -200,7 +199,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 InputLabelProps={{
-                  style: { color: "#2b2676" } // Set the color of the label here
+                  style: { color: "#2b2676" } 
                 }}
               />
             </Grid>
@@ -216,7 +215,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 InputLabelProps={{
-                  style: { color: "#2b2676" } // Set the color of the label here
+                  style: { color: "#2b2676" } 
                 }}
               />
             </Grid>
@@ -230,7 +229,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
                 // "& fieldset": { borderColor: "#2b2676" }
                }}
                 InputLabelProps={{
-                  style: { color: "#2b2676" } // Set the color of the label here
+                  style: { color: "#2b2676" } 
                 }}
                 type={passwordVisible ? "text" : "password"}
                 value={password}
@@ -264,7 +263,7 @@ const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
           // "& fieldset": { borderColor: "#2b2676" } 
         }}
           InputLabelProps={{
-            style: { color: "#2b2676" } // Set the color of the label here
+            style: { color: "#2b2676" } 
           }}
           type={confirmPasswordVisible ? "text" : "password"}
           value={confirm_password}

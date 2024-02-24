@@ -1,5 +1,5 @@
 .signUp-container {
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,6 +15,7 @@
   word-wrap: break-word;
 }
 .signUp-frame {
+  width: 80%;
   margin-top: 50px;
   padding: 20px;
   display: flex;
@@ -23,7 +24,7 @@
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 8px;
-  max-width: 500px;
+  /* max-width: 500px; */
   background-color: #FFF;
 }
 

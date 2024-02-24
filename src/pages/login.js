@@ -294,31 +294,21 @@ const LogIn = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
-  // const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  // const isMediumScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
-  // const isSmallHeightScreen = useMediaQuery("(max-height: 40px)");
 
   
   const inlineStyles = {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     padding: '40px', // Default padding
-
+    height: '100vh',
+    width: '100%', // Assuming you want the frame to take the full width
     // Add more styles as needed
   };
   
-  // Add styles based on screen size
-  // if (isSmallScreen) {
-  //   inlineStyles.padding = '20px';
-  // } else if (isMediumScreen) {
-  //   inlineStyles.padding = '30px';
-  // } else {
-  //   inlineStyles.padding = '40px';
-  // }if (isSmallHeightScreen) {
-  //   inlineStyles.height = '90vh'; // Adjust the height as needed
-  // }
+ 
+ 
   
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -399,7 +389,7 @@ const LogIn = () => {
         container
         justifyContent="center"
         alignItems="center"
-        className="login-container"
+        className="login-container "
 
       >
         <Grid item xs={10} sm={10} md={10} lg={4} xl={4}>
