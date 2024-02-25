@@ -186,7 +186,7 @@ const Register = () => {
               </p>
             </Grid>
 
-            <Grid item xs={12} className="mt-4">
+            <Grid item xs={12} className="textfield mt-4">
               <TextField
                 className="signUp-text-input"
                 label="Ad Soyad"
@@ -203,7 +203,7 @@ const Register = () => {
               />
             </Grid>
 
-            <Grid item xs={12} className="mt-4">
+            <Grid item xs={12} className="textfield mt-4">
               <TextField
                 className="signUp-text-input"
                 label="İstifadəçi adı"
@@ -221,7 +221,7 @@ const Register = () => {
               />
             </Grid>
 
-            <Grid item xs={12} className="mt-4">
+            <Grid item xs={12} className="textfield mt-4">
               <TextField
                 className="signUp-text-input"
                 label="Epoçt adressi"
@@ -238,7 +238,7 @@ const Register = () => {
               />
             </Grid>
 
-            <Grid item xs={12} className="mt-4">
+            <Grid item xs={12} className="textfield mt-4">
               <TextField
                 className="signUp-text-input"
                 label="Şifrə"
@@ -273,7 +273,7 @@ const Register = () => {
                 </div>
               )}
             </Grid>
-            <Grid item xs={12} className="mt-4">
+            <Grid item xs={12} className="textfield mt-4">
               <TextField
                 className="signUp-text-input"
                 label="Şifrəni Təsdiqləyin"

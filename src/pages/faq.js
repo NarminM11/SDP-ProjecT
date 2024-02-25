@@ -54,7 +54,7 @@ const Faq = () => {
   return (
     <Layout>
       <>
-      <div className="container-for-all">
+      <div className="faq-container-for-all">
       <div className="head-faq">
           <h1 className="title-faq mt-5">Tez-tez soruşulan suallar</h1>
           {/* <p className="mt-4">

@@ -383,7 +383,6 @@ const LogIn = () => {
   return (
     <Layout>
     <div style={inlineStyles}>
-
       <Grid
         container
         justifyContent="center"
@@ -463,7 +462,7 @@ const LogIn = () => {
               />
               {/* </Grid> */}
               {errorMessage && (
-                <Typography color="error" className="error-message">
+                <Typography color="error" className="login-error-message">
                   {errorMessage}
                 </Typography>
               )}
@@ -504,7 +503,7 @@ const LogIn = () => {
               </Typography>
             </div>
 
-            <hr />
+            <hr className="login-hr"/>
             <>
             <Typography className="mb-4">Ya da</Typography>
             </>
